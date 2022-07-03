@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/Admin', [\App\Http\Controllers\AdminController::class, ('dashboard')]);
+
+
+Route::get('/test', [\App\Http\Controllers\BannerController::class, ('test')]);
+
+Route::resource('products',\App\Http\Controllers\ProductController::class);
