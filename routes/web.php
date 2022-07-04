@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
+Route::get('/',[\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/Admin', [\App\Http\Controllers\AdminController::class, ('dashboard')]);
 
 
