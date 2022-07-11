@@ -7,7 +7,7 @@
                 <img src="{{asset('backend')}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>Mytomga</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -31,19 +31,31 @@
             <!--                </a>-->
             <!--            </li>-->
             <li>
-                <a href="/index.php">
+                <a href="{{asset('/Admin')}}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
 
-            <li>
-                <a href="/?controller=banner&action=create">
+{{--            <li>--}}
+{{--                <a href="{{route('banner.create')}}">--}}
+{{--                    <i class="fa fa-th"></i> <span>Banner</span>--}}
+{{--                    <span class="pull-right-container">--}}
+{{--            </span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+            <li class="treeview menu-open" style="height: auto;">
+                <a href="{{route('banner.create')}}">
                     <i class="fa fa-th"></i> <span>Banner</span>
                     <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
+                <ul class="treeview-menu" style="display: block;">
+                    <li><a href="{{route('banner.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Banner</a></li>
+                    <li><a href="{{route('banner.create')}}"><i class="fa fa-circle-o"></i> Tạo Mới Banner</a></li>
+                </ul>
             </li>
-
 
             <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             <li class="header">LABELS</li>

@@ -107,5 +107,9 @@
 <script src="{{asset('backend')}}/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend')}}/dist/js/demo.js"></script>
+
+<!-- CKEDITOR -->
+<script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+<script type="text/javascript"> CKEDITOR.replace('description'); </script>
 </body>
 </html>

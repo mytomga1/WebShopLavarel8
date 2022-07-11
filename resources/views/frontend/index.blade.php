@@ -3,94 +3,7 @@
 @section('content')
 
     <!-- slider-area-start -->
-    <div class="slider-area light-bg-s pt-60">
-        <div class="container custom-conatiner">
-            <div class="row">
-                <div class="col-xl-7">
-                    <div class="swiper-container slider__active pb-30">
-                        <div class="slider-wrapper swiper-wrapper">
-                            <div class="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center" data-background="{{asset('frontend')}}/img/slider/02-slide-1.jpg">
-                                <div class="slider-content slider-content-2">
-                                    <h2 data-animation="fadeInLeft" data-delay="1.7s" class="pt-15 slider-title pb-5">Gaming Headset<br> Brilliant Lighting Effect</h2>
-                                    <p class="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.9s">Discount 40% On Products & Free Shipping</p>
-                                    <div class="slider-bottom-btn mt-65">
-                                        <a data-animation="fadeInUp" data-delay="1.15s" href="shop.html" class="st-btn-border b-radius-2">Discover now</a>
-                                    </div>
-                                </div>
-                            </div><!-- /single-slider -->
-                            <div class="single-slider swiper-slide b-radius-2 slider-height-2 d-flex align-items-center" data-background="{{asset('frontend')}}/img/slider/02-slide-2.jpg">
-                                <div class="slider-content slider-content-2">
-                                    <h2 data-animation="fadeInLeft" data-delay="1.5s" class="pt-15 slider-title pb-5">SALE 20% OFF<br> SAMSUNG GALAXY BUDS </h2>
-                                    <p class="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.7s">Discount 30% On Products & Free Shipping</p>
-                                    <div class="slider-bottom-btn mt-65">
-                                        <a data-animation="fadeInUp" data-delay="1.9s" href="shop.html" class="st-btn-border b-radius-2">Discover now</a>
-                                    </div>
-                                </div>
-                            </div><!-- /single-slider -->
-                            <div class="single-slider b-radius-2 swiper-slide slider-height-2 d-flex align-items-center" data-background="{{asset('frontend')}}/img/slider/02-slide-3.jpg">
-                                <div class="slider-content slider-content-2">
-                                    <h2 data-animation="fadeInLeft" data-delay="1.5s" class="pt-15 slider-title pb-5">Sport Edition<br> Red Special Edition</h2>
-                                    <p class="pr-20 slider_text" data-animation="fadeInLeft" data-delay="1.8s">Wireless Connection With TV, Computer, Laptop... </p>
-                                    <div class="slider-bottom-btn mt-65">
-                                        <a data-animation="fadeInUp" data-delay="1.10s" href="shop.html" class="st-btn-border b-radius-2">Discover now</a>
-                                    </div>
-                                </div>
-                            </div><!-- /single-slider -->
-                            <div class="main-slider-paginations"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-5">
-                    <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="banner__item p-relative w-img mb-30">
-                                <div class="banner__img b-radius-2">
-                                    <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-10.jpg" alt=""></a>
-                                </div>
-                                <div class="banner__content banner__content-2">
-                                    <h6><a href="product-details.html">Canyon <br> Star Raider</a></h6>
-                                    <p>Headphone & Audio</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="banner__item p-relative w-img mb-30">
-                                <div class="banner__img b-radius-2">
-                                    <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-11.jpg" alt=""></a>
-                                </div>
-                                <div class="banner__content banner__content-2">
-                                    <h6><a href="product-details.html">Phone <br> Galaxy S20</a></h6>
-                                    <p>Cellphone & Tablets</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="banner__item p-relative w-img mb-30">
-                                <div class="banner__img b-radius-2">
-                                    <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-13.jpg" alt=""></a>
-                                </div>
-                                <div class="banner__content banner__content-2">
-                                    <h6><a href="product-details.html">Galaxy <br> Buds Plus</a></h6>
-                                    <p>Headphone & Audio</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6">
-                            <div class="banner__item p-relative w-img mb-30">
-                                <div class="banner__img b-radius-2">
-                                    <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-12.jpg" alt=""></a>
-                                </div>
-                                <div class="banner__content banner__content-2">
-                                    <h6><a href="product-details.html">Chair <br>Swoon Lounge</a></h6>
-                                    <p>Headphone & Audio</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('frontend.layouts.slider')
     <!-- slider-area-end -->
 
     <!-- trending-product-area-start -->
@@ -397,90 +310,7 @@
     <!-- trending-product-area-end -->
 
     <!-- banner__area-start -->
-    <section class="categories__area light-bg-s pt-20 pb-10">
-        <div class="container custom-conatiner">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="section__head d-flex justify-content-between mb-30">
-                        <div class="section__title section__title-2">
-                            <h5 class="st-titile">Popular Categories</h5>
-                        </div>
-                        <div class="button-wrap button-wrap-2">
-                            <a href="product.html">See All Product <i class="fal fa-chevron-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-2 col-lg-3 col-md-4">
-                    <div class="categories__item p-relative w-img mb-30">
-                        <div class="categories__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/categorie/cat-1.jpg" alt=""></a>
-                        </div>
-                        <div class="categories__content">
-                            <h6><a href="product-details.html">Decor & Furniture</a></h6>
-                            <p>(7 Products)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4">
-                    <div class="categories__item p-relative w-img mb-30">
-                        <div class="categories__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/categorie/cat-2.jpg" alt=""></a>
-                        </div>
-                        <div class="categories__content">
-                            <h6><a href="product-details.html">Smart Phones</a></h6>
-                            <p>(12 Products)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4">
-                    <div class="categories__item p-relative w-img mb-30">
-                        <div class="categories__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/categorie/cat-3.jpg" alt=""></a>
-                        </div>
-                        <div class="categories__content">
-                            <h6><a href="product-details.html">Fashion & Clothing</a></h6>
-                            <p>(5 Products)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4">
-                    <div class="categories__item p-relative w-img mb-30">
-                        <div class="categories__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/categorie/cat-4.jpg" alt=""></a>
-                        </div>
-                        <div class="categories__content">
-                            <h6><a href="product-details.html">Home Kitchen</a></h6>
-                            <p>(9 Products)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4">
-                    <div class="categories__item p-relative w-img mb-30">
-                        <div class="categories__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/categorie/cat-5.jpg" alt=""></a>
-                        </div>
-                        <div class="categories__content">
-                            <h6><a href="product-details.html">Camera & Photos</a></h6>
-                            <p>(7 Products)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-3 col-md-4">
-                    <div class="categories__item p-relative w-img mb-30">
-                        <div class="categories__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/categorie/cat-6.jpg" alt=""></a>
-                        </div>
-                        <div class="categories__content">
-                            <h6><a href="product-details.html">Speaker & Audio</a></h6>
-                            <p>(15 Products)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('frontend.layouts.bannerPopularCategories')
     <!-- banner__area-end -->
 
     <!-- topsell__area-start -->
@@ -1217,6 +1047,5 @@
     <!-- blog-area-start ========================================================================-->
     @include('frontend.layouts.blognew')
     <!-- blog-area-end -->
-
 
 @endsection

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Duka Market - Clean, Minimal E-commerce HTML5 Template </title>
+    <title>Shopbee</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
@@ -134,6 +134,8 @@
     <!-- NavBar-end -->
 </header>
 <!-- header-end -->
+
+
 
 <!-- offcanvas area start -->
 <div class="offcanvas__area">
