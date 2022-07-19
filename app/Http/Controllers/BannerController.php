@@ -62,6 +62,20 @@ class BannerController extends Controller
         * ==> sử dụng hàm dd(); thay cho 3 thằng trên
        */
 
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'title' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'target' => 'required',
+            'description' => 'required',
+        ],[
+            'title.required' => 'Bạn cần phải nhập vào tiêu đề',
+            'image.required' => 'Bạn chưa chọn file ảnh',
+            'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
+            'target.required' => 'Bạn cần phải target',
+            'description.required' => 'Bạn cần phải nhập vào mô tả',
+        ]);
+
         $banner = new Banner();
         $banner->title = $request->input('title');
 
@@ -100,7 +114,7 @@ class BannerController extends Controller
 
         //sau khi thêm dữ liệu banner vào db thành công chuyển hướng về trang danh sách
         // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang
-        return redirect()->route('banner.index');
+        return redirect()->route('admin.banner.index');
     }
 
     /**
@@ -122,7 +136,10 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Banner::findOrFail($id);
+
+        // sau khi tìm dữ liệu thành công, bắt đầu chuyên dữ liệu đó sang view edit
+        return view('backend.banner.edit', ['model'=>$model]);
     }
 
     /**
@@ -134,7 +151,47 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $banner = Banner::findOrFail($id);
+        $banner->title = $request->input('title');
+
+        //  Trong laravel sử dụng <use Illuminate\Support\Str;> để chuyển đổi tiêu đề thành dạng slug
+        //  :: trong laravel tượng trưng cho hàm static
+        $banner->slug = Str::slug($request->input('title'));
+
+        if($request->hasFile('image')){// kiểm tra xem có ảnh dc chọn ko
+            // Sử Dụng Hàm unlink() để xoá file ảnh củ khi thực hiện upload ảnh mới
+            @unlink(public_path($banner->image));
+
+            // get file - tạo ra 1 biến file đại diện cho file ảnh dc up lên
+            $file = $request->file('image');
+
+            // đặt tên cho file ảnh (thời gian tạo + tên ảnh)
+            $filename = time().'_'.$file->getClientOriginalName();
+
+            // định nghĩa đường dẫn lưu trữ file ảnh
+            $path_upload = 'frontend/img/banner/';
+
+            // thực hiện chuyển file ảnh (thông qua hàm move()) vào thư mục đã cấu hình
+            $file->move($path_upload,$filename);
+
+            //lưu lại trên
+            $banner->image = $path_upload.$filename;
+        }
+
+        $banner->url = $request->input('url');
+        $banner->target = $request->input('target');
+        $banner->type = $request->input('type');
+        $banner->position = $request->input('position');
+        $banner->is_active = $request->input('is_active');
+        $banner->description = $request->input('description');
+
+        $banner->updated_at = date('Y-m-d H:i:s');
+
+        $banner->save();
+
+        //sau khi thêm dữ liệu banner vào db thành công chuyển hướng về trang danh sách
+        // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang
+        return redirect()->route('admin.banner.index');
     }
 
     /**
@@ -145,6 +202,12 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $banner = Banner::findOrFail($id);
+        // xóa ảnh cũ
+        @unlink(public_path($banner->image));
+
+        Banner::destroy($id);
+
+        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
     }
 }

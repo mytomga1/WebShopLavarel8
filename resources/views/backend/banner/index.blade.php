@@ -12,7 +12,7 @@
             <small>Preview</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{asset('/Admin')}}"><i class="fa fa-dashboard"></i> Trang Chủ</a></li>
+            <li><a href="{{asset('/admin/banner')}}"><i class="fa fa-dashboard"></i> Trang Chủ</a></li>
             <li class="active">Quản lý Banner</li>
         </ol>
     </section>
@@ -23,21 +23,25 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
-
                     <!-- /.box-header -->
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <tbody>
+                    <div class="box-body no-padding">
+                        <div class="box-header">
+                        </div>
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <th style="width: 10px">Id</th>
-                                <th >Hình Ảnh</th>
-                                <th >Tên</th>
-                                <th>Loại</th>
-                                <th>Hành Động</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Hình Ảnh</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Loại</th>
+                                <th scope="col">#</th>
                             </tr>
+                            </thead>
+
+                            <tbody class="table-group-divider table-divider-color">
                             @foreach($data as $key => $item)
-                                <tr>
-                                    <td>{{$item->id}}</td>
+                                <tr class="item-{{ $item->id }}">
+                                    <th scope="row">{{$item->id}}</th>
 
                                     <td>
                                         {{-- kiểm tra hình ảnh có tồn tại hay ko--}}
@@ -50,32 +54,34 @@
 
                                     <td>{{$item->title}}</td>
 
-                                    <td><span class="badge bg-red">
-                                            @if($item->type == 1)
-                                                Banner bên phải
-                                            @elseif($item->type == 2)
-                                                Banner bên trái
-                                            @elseif($item->type == 3)
-                                                Banner phía trên
-                                            @else($item->type == 4)
-                                                Banner phía dưới
-                                            @endif
-                                        </span>
+                                    <td>
+                                    <span class="badge bg-green-gradient">
+                                        @if($item->type == null)
+                                            Chưa Chọn
+                                        @elseif($item->type == 1)
+                                            Banner bên phải
+                                        @elseif($item->type == 2)
+                                            Banner bên trái
+                                        @elseif($item->type == 3)
+                                            Banner phía trên
+                                        @else($item->type == 4)
+                                            Banner phía dưới
+                                        @endif
+                                    </span>
                                     </td>
 
                                     <td>
-                                        <a href="">
+                                        <a href="{{route('admin.banner.edit', ['banner' => $item->id])}}">
                                             <span title="Chỉnh Sửa" type="button" class="btn btn-flat btn-primary">
                                                 <i class="fa fa-edit"></i>
                                             </span>
                                         </a>
 
-                                        <span onclick="" title="Xoá" class="btn btn-flat btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
+                                        <span data-id="{{ $item->id }}" title="Xóa" type="button" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>
                                     </td>
                                 </tr>
                             @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -95,3 +101,60 @@
     </section>
     <!-- /.content -->
 @endsection
+
+@section('js')
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            $('.deleteItem').click(function () {
+                var id = $(this).attr('data-id');
+                Swal.fire({
+                    title: 'Bạn Có Chắc Muốn Xoá ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url : '/admin/banner/'+id,
+                            type: 'DELETE',
+                            data: {},
+                            success: function (res) {
+                                if(res.status) {
+                                    $('.item-'+id).remove();
+                                }
+                            },
+                            error: function (res) {
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+
+{{--@section('js')--}}
+{{--    <script type="text/javascript">--}}
+{{--        $( document ).ready(function() {--}}
+{{--            $('.deleteItem').click(function () {--}}
+{{--                var id = $(this).attr('data-id');--}}
+
+{{--                $.ajax({--}}
+{{--                    url : '/admin/banner/'+id,--}}
+{{--                    type : 'DELETE',--}}
+{{--                    data : {},--}}
+{{--                    success : function (res){--}}
+{{--                        if(res.status){--}}
+{{--                            $('.item-'+id).remove();--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    error: function (res){--}}
+
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}

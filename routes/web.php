@@ -19,5 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\HomeController::class, 'index']);
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, ('dashboard')]);
-Route::resource('/banner',\App\Http\Controllers\BannerController::class);
+//[Admin Route]
+Route::prefix('admin')->name('admin.')->group(function () {
+    // sử dụng Route::prefix để có thể cấu hình dường dẫn theo format http://webshop.local/admin/....
+    // (VD: http://webshop.local/admin/banner -> ra trang banner bình thường phải sử dụng format http://webshop.local/banner)
+
+    Route::get('', [\App\Http\Controllers\AdminController::class, ('dashboard')])->name('dashboard');
+    Route::resource('/banner',\App\Http\Controllers\BannerController::class);
+});

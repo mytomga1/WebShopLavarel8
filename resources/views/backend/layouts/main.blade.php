@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Admin Shopbee | Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}"><!-- Khai Báo  csrf-token -->
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -52,7 +53,7 @@
 
     <div class="content-wrapper">
         <!-- ============[ Main content ]================= -->
-        @yield('content') {{-- kích hoạt @section('content') bên dashboard.blade--}}
+        @yield('content') {{-- kích hoạt @section('content') bên index.blade--}}
 
     </div><!-- /end dashboard content -->
 
@@ -110,6 +111,21 @@
 
 <!-- CKEDITOR -->
 <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
-<script type="text/javascript"> CKEDITOR.replace('description'); </script>
+{{--<script type="text/javascript"> CKEDITOR.replace('description'); </script>--}}
+<!-- notify -->
+<script src="{{asset('backend')}}/dist/js/notify.min.js"></script>
+<!-- sweetalert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    })
+</script>
+
+@yield('js') {{-- kích hoạt @section('validate') bên create.blade--}}
+
 </body>
 </html>

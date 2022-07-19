@@ -31,7 +31,7 @@
             <!--                </a>-->
             <!--            </li>-->
             <li>
-                <a href="{{asset('/Admin')}}">
+                <a href="{{asset('/admin')}}">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
@@ -45,15 +45,15 @@
 {{--            </li>--}}
 
             <li class="treeview menu-open" style="height: auto;">
-                <a href="{{route('banner.create')}}">
+                <a href="{{route('admin.banner.create')}}">
                     <i class="fa fa-th"></i> <span>Banner</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu" style="display: block;">
-                    <li><a href="{{route('banner.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Banner</a></li>
-                    <li><a href="{{route('banner.create')}}"><i class="fa fa-circle-o"></i> Tạo Mới Banner</a></li>
+                    <li><a href="{{route('admin.banner.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Banner</a></li>
+                    <li><a href="{{route('admin.banner.create')}}"><i class="fa fa-circle-o"></i> Tạo Mới Banner</a></li>
                 </ul>
             </li>
 
