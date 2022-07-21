@@ -2,18 +2,18 @@
 
 {{--Create: Lê Thành Trung--}}
 {{--Date : 11/7/2022--}}
-{{--BannerController--}}
+{{--Quản lý bài viết--}}
 
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            QUẢN LÝ BANNER
+            QUẢN LÝ BÀI VIẾT
             <small>Preview</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{asset('/admin')}}"><i class="fa fa-dashboard"></i> Trang Chủ</a></li>
-            <li class="active">Quản lý Banner</li>
+            <li class="active">Quản lý bài viết</li>
         </ol>
     </section>
     <!-- end Content Header (Page header) -->
@@ -32,52 +32,41 @@
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Hình Ảnh</th>
-                                <th scope="col">Tên</th>
+                                <th scope="col">Tên Bài Viết</th>
                                 <th scope="col">Loại</th>
+                                <th scope="col">Trạng Thái</th>
                                 <th scope="col">#</th>
                             </tr>
                             </thead>
 
                             <tbody class="table-group-divider table-divider-color">
                             @foreach($data as $key => $item)
+                                @php
+                                    @endphp
                                 <tr class="item-{{ $item->id }}">
-                                    <th scope="row">{{$item->id}}</th>
+                                    <td>{{ $item->id }}</td>
 
                                     <td>
-                                        {{-- kiểm tra hình ảnh có tồn tại hay ko--}}
                                         @if($item->image && file_exists(public_path($item->image)))
-                                            <img src="{{asset($item->image)}}" width="100" height="75" alt="">
+                                            <img src="{{ asset($item->image) }}" width="100" height="75" alt="">
                                         @else
-                                            <img src="{{asset('frontend\Img404.png')}}" width="100" height="75" alt="">
+                                            <img src="{{ asset('upload/404.png') }}" width="100" height="75" alt="">
                                         @endif
                                     </td>
 
-                                    <td>{{$item->title}}</td>
+                                    <td>{{ $item->title }}</td>
 
                                     <td>
-                                    <span class="badge bg-green-gradient">
-                                        @if($item->type == null)
-                                            Chưa Chọn
-                                        @elseif($item->type == 1)
-                                            Banner bên phải
-                                        @elseif($item->type == 2)
-                                            Banner bên trái
-                                        @elseif($item->type == 3)
-                                            Banner phía trên
-                                        @else($item->type == 4)
-                                            Banner phía dưới
-                                        @endif
-                                    </span>
+                                        {{ !empty($item->Article_Category->name) ? $item->Article_Category->name : '' }}
                                     </td>
 
                                     <td>
-                                        <a href="{{route('admin.banner.edit', ['banner' => $item->id])}}">
-                                            <span title="Chỉnh Sửa" type="button" class="btn btn-flat btn-primary">
-                                                <i class="fa fa-edit"></i>
-                                            </span>
-                                        </a>
+                                        {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}
+                                    </td>
 
-                                        <span data-id="{{ $item->id }}" title="Xóa" type="button" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>
+                                    <td>
+                                        <a href="{{ route('admin.article.edit', ['article' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
+                                        <span data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>
                                     </td>
                                 </tr>
                             @endforeach
@@ -117,7 +106,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : '/admin/banner/'+id,
+                            url : '/admin/article/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {
@@ -134,27 +123,3 @@
         });
     </script>
 @endsection
-
-{{--@section('js')--}}
-{{--    <script type="text/javascript">--}}
-{{--        $( document ).ready(function() {--}}
-{{--            $('.deleteItem').click(function () {--}}
-{{--                var id = $(this).attr('data-id');--}}
-
-{{--                $.ajax({--}}
-{{--                    url : '/admin/banner/'+id,--}}
-{{--                    type : 'DELETE',--}}
-{{--                    data : {},--}}
-{{--                    success : function (res){--}}
-{{--                        if(res.status){--}}
-{{--                            $('.item-'+id).remove();--}}
-{{--                        }--}}
-{{--                    },--}}
-{{--                    error: function (res){--}}
-
-{{--                    }--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}
