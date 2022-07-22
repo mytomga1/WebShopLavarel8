@@ -74,6 +74,18 @@
                 </ul>
             </li>
 
+            <li class="treeview" style="height: auto;">
+                <a href="#">
+                    <i class="fa fa-table"></i> <span>Quản Lý Hệ Thống</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{{route('admin.setting.index')}}"><i class="fa fa-circle-o"></i> Thay đổi Thông Tin</a></li>
+                </ul>
+            </li>
+
             <li>
                 <a href="pages/mailbox/mailbox.html">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>
