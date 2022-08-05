@@ -203,5 +203,20 @@
 <script src="{{asset('frontend')}}/js/imagesloaded-pkgd.js"></script>
 <script src="{{asset('frontend')}}/js/ajax-form.js"></script>
 <script src="{{asset('frontend')}}/js/main.js"></script>
+
+<!-- notify -->
+<script src="{{asset('backend')}}/dist/js/notify.min.js"></script>
+<!-- sweetalert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    })
+</script>
+
+@yield('js') {{-- kích hoạt @section('validate') bên create.blade--}}
 </body>
 </html>

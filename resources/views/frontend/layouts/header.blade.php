@@ -39,7 +39,7 @@
                             <ul>
                                 <li><a href="about.html">About Us</a></li>
                                 <li><a href="contact.html">Order Tracking</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="{{route('contact')}}">Contact Us</a></li>
                                 <li><a href="faq.html">FAQs</a></li>
                             </ul>
                         </div>

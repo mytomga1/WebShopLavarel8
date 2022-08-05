@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -13,7 +18,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+        $data = Product::latest()->paginate(10);
+
+        //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
+        //$data = Vendor::paginate(10);
+
+        //kiểm tra dữ liệu
+        //dd($data);
+
+        //Cách 3: lấy toàn bộ dữ liệu
+        //$data = Vendor::all(); // tương đương với câu lệnh SELECT * FORM Vendors
+
+        // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
+        return view('backend.product.index', ['data' => $data]);
     }
 
     /**
@@ -23,7 +41,15 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::all();
+        $vendor = Vendor::all();
+        $brand = Brand::all();
+
+        $Ven_Bra = [
+            'vendor' => $vendor,
+            'brand' => $brand
+        ];
+        return view('backend.product.create', ['category' => $category], ['Ven_Bra' => $Ven_Bra] );
     }
 
     /**
@@ -34,7 +60,89 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'category_id' => 'required',
+            'vendor_id' => 'required',
+            'brand_id' => 'required',
+            'summary' => 'required',
+            'description' => 'required',
+        ],[
+            'name.required' => 'Bạn cần phải nhập vào tiêu đề',
+            'image.required' => 'Bạn chưa chọn file ảnh',
+            'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
+            'category_id.required' => 'Bạn cần phải chọn danh mục',
+            'vendor_id.required' => 'Bạn cần phải chọn nhà cung cấp',
+            'brand_id.required' => 'Bạn cần phải chọn thương hiệu',
+            'summary.required' => 'Bạn cần phải nhập vào tóm tắt',
+            'description.required' => 'Bạn cần phải nhập vào mô tả',
+        ]);
+
+        $product = new Product();
+        $product->name = $request->input('name');
+        //  Trong laravel sử dụng <use Illuminate\Support\Str;> để chuyển đổi tiêu đề thành dạng slug
+        //  :: trong laravel tượng trưng cho hàm static
+        $product->slug = Str::slug($request->input('name')); //slug
+
+        if($request->hasFile('image')){// kiểm tra xem có ảnh dc chọn ko
+
+            // get file - tạo ra 1 biến file đại diện cho file ảnh dc up lên
+            $file = $request->file('image');
+
+            // đặt tên cho file ảnh (thời gian tạo + tên ảnh)
+            $filename = time().'_'.$file->getClientOriginalName();
+
+            // định nghĩa đường dẫn lưu trữ file ảnh
+            $path_upload = 'frontend/img/product/';
+
+            // thực hiện chuyển file ảnh (thông qua hàm move()) vào thư mục đã cấu hình
+            $file->move($path_upload,$filename);
+
+            //lưu lại trên
+            $product->image = $path_upload.$filename;
+        }
+
+        $product->url = $request->input('url');
+        $product->category_id = $request->input('category_id');
+        $product->brand_id = $request->input('brand_id');
+        $product->vendor_id = $request->input('vendor_id');
+        $product->user_id = $request->user()->id;
+
+        // Loai
+        //$product->type = $request->input('type') ?? 0;
+        //Trang thai
+        $is_active = 0;
+        if($request->has('is_active')) { //Kiem tra xem is_active co ton tai khong
+            $is_active = $request->input('is_active');
+        }
+        //Trang thai
+        $product->is_active = $is_active;
+        $is_hot = 0;
+        if($request->has('is_hot')) { //Kiem tra xem is_active co ton tai khong
+            $is_hot = $request->input('is_hot');
+        }
+        //Trang thai
+        $product->is_hot = $is_hot;
+        //Vi tri
+        $position=0;
+        if($request->has('position')){
+            $position = $request->input('position');
+        }
+        $product->position = $position;
+        //Mo ta
+
+        $product->summary = $request->input('summary');
+        $product->description = $request->input('description');
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_description = $request->input('meta_description');
+        $product->created_at = date('Y-m-d H:i:s');
+        //Luu
+        $product->save();
+
+        //sau khi thêm dữ liệu product vào db thành công chuyển hướng về trang danh sách
+        // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -56,7 +164,16 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $category = Category::all();
+        $vendor = Vendor::all();
+        $brand = Brand::all();
+        $Ven_Bra = [
+            'category' => $category,
+            'vendor' => $vendor,
+            'brand' => $brand
+        ];
+        return view('backend.product.edit', ['product' => $product], ['Ven_Bra' => $Ven_Bra] );
     }
 
     /**
@@ -68,7 +185,72 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::findOrFail($id);
+
+        $product->name = $request->input('name');
+        //  Trong laravel sử dụng <use Illuminate\Support\Str;> để chuyển đổi tiêu đề thành dạng slug
+        //  :: trong laravel tượng trưng cho hàm static
+        $product->slug = Str::slug($request->input('name')); //slug
+
+        if($request->hasFile('image')){// kiểm tra xem có ảnh dc chọn ko
+
+            // get file - tạo ra 1 biến file đại diện cho file ảnh dc up lên
+            $file = $request->file('image');
+
+            // đặt tên cho file ảnh (thời gian tạo + tên ảnh)
+            $filename = time().'_'.$file->getClientOriginalName();
+
+            // định nghĩa đường dẫn lưu trữ file ảnh
+            $path_upload = 'frontend/img/product/';
+
+            // thực hiện chuyển file ảnh (thông qua hàm move()) vào thư mục đã cấu hình
+            $file->move($path_upload,$filename);
+
+            //lưu lại trên
+            $product->image = $path_upload.$filename;
+        }
+        $product->stock = $request->input('stock');
+        $product->price = $request->input('price');
+        $product->sale = $request->input('sale');
+        $product->url = $request->input('url');
+        $product->category_id = $request->input('category_id');
+        $product->brand_id = $request->input('brand_id');
+        $product->vendor_id = $request->input('vendor_id');
+
+        //Trang thai
+        $is_active = 0;
+        if($request->has('is_active')) { //Kiem tra xem is_active co ton tai khong
+            $is_active = $request->input('is_active');
+        }
+        $product->is_active = $is_active;
+
+        //is_HOT
+        $is_hot = 0;
+        if($request->has('is_hot')) { //Kiem tra xem is_active co ton tai khong
+            $is_hot = $request->input('is_hot');
+        }
+        $product->is_hot = $is_hot;
+
+        //Vi tri
+        $position=0;
+        if($request->has('position')){
+            $position = $request->input('position');
+        }
+        $product->position = $position;
+
+        $product->summary = $request->input('summary');
+        $product->description = $request->input('description');
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_description = $request->input('meta_description');
+        $product->updated_at = date('Y-m-d H:i:s');
+        $product->user_id = $request->user()->id;
+        //Luu
+        $product->save();
+
+        //sau khi thêm dữ liệu product vào db thành công chuyển hướng về trang danh sách
+        // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang
+        return redirect()->route('admin.product.index');
     }
 
     /**
@@ -79,6 +261,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        // xóa ảnh cũ
+        @unlink(public_path($product->image));
+
+        Product::destroy($id);
+
+        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
     }
 }

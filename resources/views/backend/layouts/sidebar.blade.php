@@ -46,7 +46,7 @@
 
             <li class="treeview" style="height: auto;">
                 <a href="#">
-                    <i class="fa fa-th"></i> <span>Banner</span>
+                    <i class="fa fa-map-o"></i> <span>Banner</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -57,13 +57,26 @@
                 </ul>
             </li>
 
-            <li><a href="{{route('admin.category.index')}}"><i class="fa fa-book"></i> <span>Quản Lý Danh mục</span></a></li>
-
-            <li class="header">Other</li>
+            <li><a href="{{route('admin.category.index')}}"><i class="fa fa-list"></i> <span>Quản Lý Danh mục</span></a></li>
 
             <li class="treeview" style="height: auto;">
                 <a href="#">
-                    <i class="fa fa-table"></i> <span>Quản Lý Bài Viết</span>
+                    <i class="fa fa-mobile"></i> <span>Sản Phẩm</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{{route('admin.product.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Sản Phẩm</a></li>
+                    <li><a href="{{route('admin.brand.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Nhãn Hiệu</a></li>
+                    <li><a href="{{route('admin.vendor.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Nhà Cung Cấp</a></li>
+                </ul>
+            </li>
+
+
+            <li class="treeview" style="height: auto;">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i> <span>Quản Lý Bài Viết</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -76,13 +89,14 @@
 
             <li class="treeview" style="height: auto;">
                 <a href="#">
-                    <i class="fa fa-table"></i> <span>Quản Lý Hệ Thống</span>
+                    <i class="fa fa-address-book-o"></i> <span>Quản Lý Tài Khoản</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li><a href="{{route('admin.setting.index')}}"><i class="fa fa-circle-o"></i> Thay đổi Thông Tin</a></li>
+                    <li><a href="{{route('admin.user.index')}}"><i class="fa fa-circle-o"></i> Danh Sách Tài Khoản</a></li>
+                    <li><a href="{{route('admin.user.create')}}"><i class="fa fa-circle-o"></i> Tạo Mới Tài Khoản</a></li>
                 </ul>
             </li>
 
@@ -97,7 +111,20 @@
                 </a>
             </li>
 
-            <li><a href="{{route('admin.category.index')}}"><i class="fa fa-book"></i> <span>Quản Lý Cấu Hình</span></a></li>
+            <li class="header">Other</li>
+
+            <li class="treeview" style="height: auto;">
+                <a href="#">
+                    <i class="fa fa-cog"></i> <span>Quản Lý Hệ Thống</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="{{route('admin.setting.index')}}"><i class="fa fa-info-circle"></i> Thay đổi Thông Tin</a></li>
+                </ul>
+            </li>
+            <li><a href="{{route('admin.contact.index')}}"><i class="fa fa-envelope"></i> <span>Liên Hệ</span></a></li>
 
 {{--            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>--}}
 {{--            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>--}}
