@@ -1,9 +1,19 @@
 @extends('frontend.layouts.main')
 
 @section('content')
+    <link href="https://cdn01.jotfor.ms/static/formCss.css?3.3.34988" rel="stylesheet" type="text/css" />
+    <style type="text/css">@media print{.form-section{display:inline!important}.form-pagebreak{display:none!important}.form-section-closed{height:auto!important}.page-section{position:initial!important}}</style>
+    <link type="text/css" rel="stylesheet" href="https://cdn02.jotfor.ms/css/styles/nova.css?3.3.34988" />
+    <link type="text/css" rel="stylesheet" href="https://cdn03.jotfor.ms/themes/CSS/566a91c2977cdfcd478b4567.css?themeRevisionID=58c6459d9a11c7136a8b4567"/>
+    <link type="text/css" rel="stylesheet" href="https://cdn01.jotfor.ms/css/styles/payment/payment_feature.css?3.3.34988" />
+    <link rel="stylesheet" href="{{asset('frontend')}}/css/contractUS.css">
+    <script src="https://cdn02.jotfor.ms/static/prototype.forms.js?3.3.34988" type="text/javascript"></script>
+    <script src="https://cdn03.jotfor.ms/static/jotform.forms.js?3.3.34988" type="text/javascript"></script>
+    <script src="{{asset('frontend')}}/js/contractUS.js"></script>
+
     <main>
         <!-- page-banner-area-start -->
-        <div class="page-banner-area page-banner-height" data-background="assets/img/banner/page-banner-3.jpg">
+        <div class="page-banner-area page-banner-height" data-background="{{asset('frontend')}}/img/banner/page-banner-3.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -29,6 +39,153 @@
             </div>
         </div>
         <!-- page-banner-area-end -->
+
+
+
+        <!-- Contact Form Begin -->
+{{--         <div class="contact-form spad">--}}
+{{--                    <div class="container">--}}
+
+{{--                        @if (session('msgContact'))--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-lg-12">--}}
+{{--                                    <div class="contact__form__title">--}}
+{{--                                        <h3 style="color: green">{{ session('msgContact') }}</h3>--}}
+{{--                                    </div>--}}
+{{--                                    <a href="/"><i class="fa fa-backward" aria-hidden="true"></i> Quay về trang chủ</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
+{{--                            <div class="row" id="form">--}}
+{{--                                <div class="col-lg-12">--}}
+{{--                                    <div class="contact__form__title">--}}
+{{--                                        <h2>Gửi thông tin liên hệ</h2>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            <form action="{{ route('contactPost') }}" method="POST" id="contact">--}}
+{{--                                @csrf--}}
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-lg-6 col-md-6">--}}
+{{--                                        <input value="{{ old('name') }}" class="" name="name" id="name" type="text" placeholder="Tên">--}}
+{{--                                        @error('name')--}}
+{{--                                        <p style="color: red;">{{ $message }}</p>--}}
+{{--                                        @enderror--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-lg-6 col-md-6">--}}
+{{--                                        <input value="{{ old('email') }}" name="email" id="email" type="email" placeholder="Email">--}}
+{{--                                        @error('email')--}}
+{{--                                        <p style="color: red;">{{ $message }}</p>--}}
+{{--                                        @enderror--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-lg-6 col-md-6">--}}
+{{--                                        <input value="{{ old('phone') }}" name="phone" id="phone" type="text" placeholder="SĐT">--}}
+{{--                                        @error('phone')--}}
+{{--                                        <p style="color: red;">{{ $message }}</p>--}}
+{{--                                        @enderror--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-lg-12 text-center">--}}
+{{--                                        <textarea name="content" id="content" placeholder="Tin nhắn">{{ old('content') }}</textarea>--}}
+{{--                                        @error('content')--}}
+{{--                                        <p style="color: red;">{{ $message }}</p>--}}
+{{--                                        @enderror--}}
+{{--                                        <button type="submit" class="site-btn btnSend">GỬi</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+        <!-- Contact Form end -->
+        <!-- Contract us-area-start -->
+        <div class="container">
+            @if (session('msgContact'))
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="contact__form__title">
+                            <h3 style="color: green">{{ session('msgContact') }}</h3>
+                        </div>
+                        <a href="/"><i class="fa fa-backward" aria-hidden="true"></i> Quay về trang chủ</a>
+                    </div>
+                </div>
+            @else
+            <form class="jotform-form" action="{{ route('contactPost') }}" method="POST" id="contact" accept-charset="utf-8">
+            @csrf
+                <input type="hidden" name="formID" value="222183629415456" />
+                <input type="hidden" id="JWTContainer" value="" />
+                <input type="hidden" id="cardinalOrderNumber" value="" />
+                <div role="main" class="form-all">
+                    <ul class="form-section page-section">
+                        <li id="cid_9" class="form-input-wide" data-type="control_head">
+                            <div class="form-header-group  header-default">
+                                <div class="header-text httal htvam">
+                                    <h2 id="header_9" class="form-header" data-component="header" >
+                                        Thông tin liên hệ
+                                    </h2>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="form-line jf-required" data-type="control_textbox" id="id_1">
+                            <label class="form-label form-label-top" id="label_1" for="name" >Name: <span class="form-required">*</span></label>
+
+                            <div id="cid_1" class="form-input-wide jf-required">
+                                <input type="text" name="name" id="name" value="{{ old('name') }}" data-type="input-textbox" class="form-textbox validate[required]" data-defaultvalue="" size="20"  placeholder=" " data-component="textbox" aria-labelledby="label_1" required="" />
+                                @error('name')
+                                <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </li>
+                        <li class="form-line jf-required" data-type="control_textbox" id="id_3">
+                            <label class="form-label form-label-top" id="label_3" for="email">E-mail: <span class="form-required">*</span></label>
+
+                            <div id="cid_3" class="form-input-wide jf-required">
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" data-type="input-textbox" class="form-textbox validate[required, Email]" data-defaultvalue="" size="20"  placeholder=" " data-component="textbox" aria-labelledby="label_3" required="" />
+                                @error('email')
+                                <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </li>
+                        <li class="form-line jf-required" data-type="control_textbox" id="id_11">
+                            <label class="form-label form-label-top" id="label_11" for="phone">phone: <span class="form-required">*</span></label>
+
+                            <div id="cid_11" class="form-input-wide jf-required">
+                                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" data-type="input-textbox" class="form-textbox validate[required, Email]" data-defaultvalue="" size="20"  placeholder=" " data-component="textbox" aria-labelledby="label_11" required="" />
+                                @error('phone')
+                                <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </li>
+                        <li class="form-line jf-required" data-type="control_textarea" id="id_5">
+                            <label class="form-label form-label-top" id="label_5" for="content">Message:<span class="form-required">*</span></label>
+
+                            <div id="cid_5" class="form-input-wide jf-required">
+                                <textarea class="form-textarea validate[required]" name="content" id="content" cols="31" rows="13" data-component="textarea" required="" aria-labelledby="label_5">{{ old('content') }}</textarea>
+                                @error('content')
+                                <p style="color: red;">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </li>
+                        <li class="form-line" data-type="control_button" id="id_2">
+                            <div id="cid_2" class="form-input-wide">
+                                <div style="text-align:center" data-align="center" class="form-buttons-wrapper form-buttons-center   jsTest-button-wrapperField">
+                                    <button id="input_2" type="submit" class="site-btn btnSend" data-component="button" data-content="">
+                                        <img src="https://cms.jotform.com/uploads/image_upload/image_upload/global/7020_6145_button.png" alt="Submit" />
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                        <li style="display:none">
+                            Should be Empty:
+                            <input type="text" name="website" value="" />
+                        </li>
+                    </ul>
+                </div>
+            </form>
+            @endif
+        </div>
+        <!-- account-area-end -->
 
         <!-- location-area-start -->
         <div class="location-area pt-70 pb-25">
@@ -187,62 +344,6 @@
             </div>
         </div>
         <!-- location-area-end -->
-
-        <!-- Contact Form Begin -->
-        <div class="contact-form spad">
-            <div class="container">
-
-                @if (session('msgContact'))
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="contact__form__title">
-                                <h3 style="color: green">{{ session('msgContact') }}</h3>
-                            </div>
-                            <a href="/"><i class="fa fa-backward" aria-hidden="true"></i> Quay về trang chủ</a>
-                        </div>
-                    </div>
-                @else
-                    <div class="row" id="form">
-                        <div class="col-lg-12">
-                            <div class="contact__form__title">
-                                <h2>Gửi thông tin liên hệ</h2>
-                            </div>
-                        </div>
-                    </div>
-
-                    <form action="{{ route('contactPost') }}" method="POST" id="contact">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6">
-                                <input value="{{ old('name') }}" class="" name="name" id="name" type="text" placeholder="Tên">
-                                @error('name')
-                                <p style="color: red;">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <input value="{{ old('email') }}" name="email" id="email" type="email" placeholder="Email">
-                                @error('email')
-                                <p style="color: red;">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <input value="{{ old('phone') }}" name="phone" id="phone" type="text" placeholder="SĐT">
-                                @error('phone')
-                                <p style="color: red;">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            <div class="col-lg-12 text-center">
-                                <textarea name="content" id="content" placeholder="Tin nhắn">{{ old('content') }}</textarea>
-                                @error('content')
-                                <p style="color: red;">{{ $message }}</p>
-                                @enderror
-                                <button type="submit" class="site-btn btnSend">GỬi</button>
-                            </div>
-                        </div>
-                    </form>
-                @endif
-            </div>
-        </div>
 
         <!-- cmamps-area-start -->
         <div class="cmamps-area">
