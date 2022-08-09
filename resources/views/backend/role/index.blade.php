@@ -1,16 +1,16 @@
 @extends('backend.layouts.main')
 
 {{--Create: Lê Thành Trung--}}
-{{--Date : 1/8/2022--}}
+{{--Date : 8/8/2022--}}
 
 @section('content')
     <section class="content-header">
         <h1>
-            Danh Sách Thành Viên
+            Danh Sách Vai Trò Tài Khoản
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
-            <li class="active">Danh Sách Thành Viên</li>
+            <li class="active">Danh Sách Vai Trò Tài Khoản</li>
         </ol>
     </section>
 
@@ -20,34 +20,28 @@
             <div class="col-xs-12 table-responsive">
                 <div class="box">
                     <div class="box-header with-border">
-                        <a href="{{ route('admin.user.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <a href="{{ route('admin.role.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table class="table table-striped">
                             <tr>
                                 <th style="width: 10px">TT</th>
-                                <th>Avatar</th>
                                 <th>Tên</th>
-                                <th>Email</th>
-                                <th>Vai trò</th>
+                                <th>Mô Tả</th>
+                                <th>Trạng Thái</th>
                                 <th>Hành động</th>
                             </tr>
                             @foreach($data as $key => $item)
                                 <tr class="item-{{ $item->id }}">
                                     <td>{{ $key + 1 }}</td>
-                                    <td>
-                                        @if($item->avatar && file_exists(public_path($item->avatar)))
-                                            <img src="{{ asset($item->avatar) }}" width="100" height="75" alt="">
-                                        @else
-                                            <img src="{{ asset('upload/404.png') }}" width="100" height="75" alt="">
-                                        @endif
-                                    </td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td> {{ !empty($item->role->name) ? $item->role->name : '' }}</td> {{-- kiểm tra nếu role ko null thì show ra role name còn ko (?) hiển thị ''--}}
+                                    <td>{{ $item->description }}</td>
                                     <td>
-                                        <a href="{{ route('admin.user.edit', ['user' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
+                                        {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.role.edit', ['role' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
                                         <span data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>
                                     </td>
                                 </tr>
@@ -83,7 +77,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : '/admin/user/'+id,
+                            url : '/admin/role/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {

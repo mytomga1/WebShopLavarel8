@@ -14,7 +14,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12 table-responsive">
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Danh sách Sản phẩm</h3>
@@ -22,11 +22,12 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-bordered table-data">
+                        <table class="table table-striped">
                             <tr>
                                 <th style="width: 10px">TT</th>
                                 <th>Hình ảnh</th>
                                 <th>Tên</th>
+                                <th>Danh Mục</th>
                                 <th>Số lượng</th>
                                 <th>Trạng thái</th>
                                 <th>Hành động</th>
@@ -44,6 +45,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $item->name }}</td>
+                                    <td> {{ !empty($item->category->name) ? $item->category->name : '' }}</td> {{-- kiểm tra nếu category ko null thì show ra category name còn ko (?) hiển thị ''--}}
                                     <td>{{ $item->stock }}</td>
                                     <td>
                                         {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}
@@ -56,6 +58,9 @@
                             @endforeach
                         </table>
                     </div>
+
+
+
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">

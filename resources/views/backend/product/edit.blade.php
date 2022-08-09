@@ -35,12 +35,12 @@
                         @method('PUT')
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="name">Tên sản phẩm</label>
+                                <label for="name">Tên sản phẩm :</label>
                                 <input value="{{ $product->name }}" id="name" name="name" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputFile">Chọn ảnh</label>
+                                <label for="exampleInputFile">Chọn ảnh :</label>
                                 <input type="file" name="image" id="image">
                             </div>
                             @if($product->image && file_exists(public_path($product->image)))
@@ -50,27 +50,35 @@
                             @endif
 
                             <div class="form-group">
-                                <label for="stock">Số lượng</label>
+                                <label for="stock">Số lượng :</label>
                                 <input value="{{ $product->stock }}" id="stock" name="stock" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="price">Giá</label>
-                                <input value="{{ $product->price }}" id="price" name="price" type="text" class="form-control" placeholder="">
+                                <label for="price">Giá :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input value="{{ $product->price }}" id="price" name="price" type="text" class="form-control" placeholder="">
+                                    <span class="input-group-addon">VNĐ</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="sale">Giá sale</label>
-                                <input value="{{ $product->sale }}" id="sale" name="sale" type="text" class="form-control" placeholder="">
+                                <label for="sale">Giá sale :</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                    <input value="{{ $product->sale }}" id="sale" name="sale" type="text" class="form-control" placeholder="">
+                                    <span class="input-group-addon">VNĐ</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="url">Liên kết</label>
+                                <label for="url">Liên kết :</label>
                                 <input value="{{ $product->url }}" type="text" class="form-control" id="url" name="url" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="category_id">Danh mục</label>
+                                <label for="category_id">Danh mục :</label>
                                 <select class="form-control" name="category_id" id="category_id">
                                     <option value="0">---Chọn---</option>
                                     @foreach($Ven_Bra['category'] as $item)
@@ -80,7 +88,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="vendor_id">Nhà cung cấp</label>
+                                <label for="vendor_id">Nhà cung cấp :</label>
                                 <select class="form-control" name="vendor_id" id="vendor_id">
                                     <option value="0">---Chọn Nhà cung cấp---</option>
                                     @foreach($Ven_Bra['vendor'] as $item)
@@ -90,7 +98,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="brand_id">nhãn hiệu</label>
+                                <label for="brand_id">nhãn hiệu :</label>
                                 <select class="form-control" name="brand_id" id="brand_id">
                                     <option value="0">---Chọn nhãn hiệu---</option>
                                     @foreach($Ven_Bra['brand']  as $item)
@@ -100,12 +108,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="position">Vị trí</label>
+                                <label for="position">Vị trí :</label>
                                 <input value="{{ $product->position }}" min="0" type="number" class="form-control" id="position" name="position" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="is_active">Trạng Thái Kích Hoạt: </label>
+                                <label for="is_active">Trạng Thái Kích Hoạt :</label>
                                 <select id="is_active" name="is_active" class="form-control">
                                     <option @if($product->is_active == 0) selected @endif value="0">Tắt</option>
                                     <option @if($product->is_active == 1) selected @endif value="1">Kích Hoạt</option>
@@ -113,7 +121,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="is_hot">Sản phẩm hot / Flash Sale: </label>
+                                <label for="is_hot">Sản phẩm hot / Flash Sale :</label>
                                 <select id="is_hot" name="is_hot" class="form-control">
                                     <option @if($product->is_hot == 0) selected @endif value="0">Tắt</option>
                                     <option @if($product->is_hot == 1) selected @endif value="1">Kích Hoạt</option>
@@ -121,22 +129,22 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="summary" id="label-summary">Tóm tắt</label>
+                                <label for="summary" id="label-summary">Tóm tắt :</label>
                                 <textarea id="summary" name="summary" class="form-control" rows="3" placeholder="Enter ...">{{ $product->summary }}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="description" id="label-description">Mô tả</label>
+                                <label for="description" id="label-description">Mô tả :</label>
                                 <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter ...">{{ $product->description }}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="metaTitle" id="label-meta-title">Meta Title</label>
+                                <label for="metaTitle" id="label-meta-title">Meta Title :</label>
                                 <textarea id="metaTitle" name="metaTitle" class="form-control" rows="3" placeholder="Enter ...">{{ $product->meta_title }}</textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="metaDescription" id="label-meta-description">Meta Description</label>
+                                <label for="metaDescription" id="label-meta-description">Meta Description :</label>
                                 <textarea id="metaDescription" name="metaDescription" class="form-control" rows="3" placeholder="Enter ...">{{ $product->meta_descprition }}</textarea>
                             </div>
 

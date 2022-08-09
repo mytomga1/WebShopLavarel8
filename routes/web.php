@@ -40,5 +40,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () { 
     Route::resource('/product',\App\Http\Controllers\ProductController::class);
     Route::resource('/setting',\App\Http\Controllers\SettingController::class);
     Route::resource('/user', \App\Http\Controllers\UserController::class);
+    Route::resource('/role', \App\Http\Controllers\RoleController::class);
     Route::resource('/vendor', \App\Http\Controllers\VendorController::class);
 });
