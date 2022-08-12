@@ -44,32 +44,32 @@
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tên</label>
+                                <label for="name">Tên hiển thị: </label>
                                 <input id="name" name="name" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputFile">Avatar</label>
+                                <label for="avatar">Avatar: </label>
                                 <input type="file" name="avatar" id="avatar">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Email</label>
+                                <label for="email">Email: </label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Mật khẩu</label>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="">
+                                <label for="password">Mật khẩu: </label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label>Vai trò</label>
+                                <label for="role_id">Vai trò: </label>
                                 <select class="form-control" name="role_id" id="role_id">
-                                    <option value="">-- chọn --</option>
-                                    <option value="1">Administrator</option>
-                                    <option value="2">Member</option>
-                                    <option value="3">Customer</option>
+                                    <option value="0">-- chọn --</option>
+                                    @foreach($role as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

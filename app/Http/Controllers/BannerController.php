@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
@@ -19,10 +20,26 @@ class BannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        //$data = Banner::latest()->paginate(10);
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
+
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = Banner::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = Banner::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = Banner::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
+
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
+
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = Banner::latest()->paginate(10);
+        }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
         //$data = Banner::paginate(10);
@@ -31,10 +48,10 @@ class BannerController extends Controller
         //dd($data);
 
         //Cách 3: lấy toàn bộ dữ liệu
-        $data = Banner::all(); // tương đương với câu lệnh SELECT * FORM Banners
+        //$data = Banner::all(); // tương đương với câu lệnh SELECT * FORM Banners
 
         // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
-        return view('backend.banner.index', ['data' => $data]);
+        return view('backend.banner.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -202,12 +219,23 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $banner = Banner::findOrFail($id);
-        // xóa ảnh cũ
-        @unlink(public_path($banner->image));
-
         Banner::destroy($id);
 
-        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
+    }
+
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $Banner = Banner::onlyTrashed()->findOrFail($id);
+        $Banner->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
+        ]);
     }
 }

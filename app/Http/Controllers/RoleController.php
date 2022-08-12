@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -12,16 +14,38 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //Cách 1: Lấy toàn bộ dữ liệu
-        //$data = User::all(); // SELECT * FROM Roles
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
 
-        //Cách 2: Lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = Role::latest()->paginate(10);
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = Role::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = Role::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = Role::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
 
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
 
-        return view('backend.role.index', ['data' => $data]);
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = Role::latest()->paginate(10);
+        }
+
+        //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
+        //$data = Category::paginate(10);
+
+        //kiểm tra dữ liệu
+        //dd($data);
+
+        //Cách 3: lấy toàn bộ dữ liệu
+        //$data = Category::all(); // tương đương với câu lệnh SELECT * FORM Categorys
+
+        // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
+        return view('backend.role.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -130,13 +154,32 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $Role = Role::findOrFail($id);
+        $checkExitsAccount = User::where('role_id', $id)->first(); // kiểm tra id role muốn xoá có chứa dữ liệu account nào ko ?
+
+        if ($checkExitsAccount != null){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Xóa không thành công, do danh mục này tồn tại một hoặc nhiều bài viết !!!'
+            ]);
+        }
 
         Role::destroy($id);
 
         return response()->json([
             'status' => true,
             'msg' => 'Xóa thành công'
+        ]);
+    }
+
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $Role = Role::onlyTrashed()->findOrFail($id);
+        $Role->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
         ]);
     }
 }

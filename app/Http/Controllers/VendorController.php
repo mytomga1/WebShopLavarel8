@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class VendorController extends Controller
@@ -13,10 +16,26 @@ class VendorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = Vendor::latest()->paginate(10);
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
+
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = Vendor::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = Vendor::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = Vendor::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
+
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
+
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = Vendor::latest()->paginate(10);
+        }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
         //$data = Vendor::paginate(10);
@@ -28,7 +47,7 @@ class VendorController extends Controller
         //$data = Vendor::all(); // tương đương với câu lệnh SELECT * FORM Vendors
 
         // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
-        return view('backend.vendor.index', ['data' => $data]);
+        return view('backend.vendor.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -205,12 +224,32 @@ class VendorController extends Controller
      */
     public function destroy($id)
     {
-        $Vendor = Vendor::findOrFail($id);
-        // xóa ảnh cũ
-        @unlink(public_path($Vendor->image));
+        $checkExitsProduct = Product::where('vendor_id', $id)->first(); // kiểm tra vendor id muốn xoá có chứa dữ liệu Product nào ko ?
+
+        if ($checkExitsProduct != null){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Xóa không thành công, do nhà cung cấp này đang tồn tại một hoặc nhiều sản phẩm !!!'
+            ]);
+        }
 
         Vendor::destroy($id);
 
-        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
+    }
+
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $Vendor = Vendor::onlyTrashed()->findOrFail($id);
+        $Vendor->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
+        ]);
     }
 }

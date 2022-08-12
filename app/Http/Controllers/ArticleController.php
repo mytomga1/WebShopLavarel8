@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -14,10 +15,26 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = Articles::latest()->paginate(10);
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
+
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = Articles::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = Articles::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = Articles::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
+
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
+
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = Articles::latest()->paginate(10);
+        }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
         //$data = Articles::paginate(10);
@@ -29,7 +46,7 @@ class ArticleController extends Controller
         //$data = article::all(); // tương đương với câu lệnh SELECT * FORM articles
 
         // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
-        return view('backend.article.index', ['data' => $data]);
+        return view('backend.article.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -203,12 +220,23 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        $Articles = Articles::findOrFail($id);
-        // xóa ảnh cũ
-        @unlink(public_path($Articles->image));
+        Articles::destroy($id);
 
-        $Articles::destroy($id); // => DELETE * FORM Articles Where id = $id
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
+    }
 
-        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $Article = Articles::onlyTrashed()->findOrFail($id);
+        $Article->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
+        ]);
     }
 }

@@ -152,7 +152,7 @@
                             @if($user->avatar && file_exists(public_path($user->avatar)))
                                 <img src="{{ asset($user->avatar) }}" class="img-circle" height="25px" width="25px" alt="">
                             @else
-                                <img src="{{ asset('upload/user-404.png') }}" class="img-circle" height="25px" width="25px"  alt="">
+                                <img src="{{ asset('frontend\Img404.png') }}" class="img-circle" height="25px" width="25px"  alt="">
                             @endif
 
                             <span class="hidden-xs">{{ $user->name }}</span>
@@ -163,7 +163,7 @@
                                 @if($user->avatar && file_exists(public_path($user->avatar)))
                                     <img src="{{ asset($user->avatar) }}" class="img-circle" alt="">
                                 @else
-                                    <img src="{{ asset('upload/user-404.png') }}" class="img-circle" alt="">
+                                    <img src="{{ asset('frontend\Img404.png') }}" class="img-circle" alt="">
                                 @endif
 
                                 <p>

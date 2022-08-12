@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Articles extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes; // add SoftDeletes vào model
 
     //tạo mối quan hệ bài viết và Danh mục
     public function Article_Category(){

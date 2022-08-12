@@ -86,20 +86,20 @@
                     <li><a href="{{route('admin.article.create')}}"><i class="fa fa-circle-o"></i> Thêm Mới Bài Viết</a></li>
                 </ul>
             </li>
-
-            <li class="treeview" style="height: auto;">
-                <a href="#">
-                    <i class="fa fa-address-book-o"></i> <span>Quản Lý Tài Khoản</span>
-                    <span class="pull-right-container">
+            @if(\Auth::user()->role_id == 1)
+                <li class="treeview" style="height: auto;">
+                    <a href="#">
+                        <i class="fa fa-address-book-o"></i> <span>Quản Lý Tài Khoản</span>
+                        <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="{{route('admin.user.index')}}"><i class="fa fa-circle-o"></i> Danh Sách Tài Khoản</a></li>
-                    <li><a href="{{route('admin.user.create')}}"><i class="fa fa-circle-o"></i> Tạo Mới Tài Khoản</a></li>
-                    <li><a href="{{route('admin.role.index')}}"><i class="fa fa-circle-o"></i> Danh Sách Vai Trò Tài Khoản</a></li>
-                </ul>
-            </li>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="{{route('admin.user.index')}}"><i class="fa fa-circle-o"></i> Danh Sách Tài Khoản</a></li>
+                        <li><a href="{{route('admin.role.index')}}"><i class="fa fa-circle-o"></i> Danh Sách Vai Trò Tài Khoản</a></li>
+                    </ul>
+                </li>
+            @endif
 
             <li>
                 <a href="pages/mailbox/mailbox.html">

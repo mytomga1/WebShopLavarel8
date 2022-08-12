@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class BrandController extends Controller
@@ -13,10 +16,26 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = Brand::latest()->paginate(10);
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
+
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = Brand::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = Brand::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = Brand::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
+
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
+
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = Brand::latest()->paginate(10);
+        }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
         //$data = Brand::paginate(10);
@@ -28,7 +47,7 @@ class BrandController extends Controller
         //$data = Brand::all(); // tương đương với câu lệnh SELECT * FORM Brands
 
         // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
-        return view('backend.brand.index', ['data' => $data]);
+        return view('backend.brand.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -183,12 +202,32 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $Brand = Brand::findOrFail($id);
-        // xóa ảnh cũ
-        @unlink(public_path($Brand->image));
+        $checkExitsProduct = Product::where('brand_id', $id)->first(); // kiểm tra id brand muốn xoá có chứa dữ liệu sản phẩm nào ko ?
+
+        if ($checkExitsProduct != null){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Xóa không thành công, do nhãn hiệu này đang tồn tại một hoặc nhiều sản phẩm !!!'
+            ]);
+        }
 
         Brand::destroy($id);
 
-        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
+    }
+
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $Brand = Brand::onlyTrashed()->findOrFail($id);
+        $Brand->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
+        ]);
     }
 }

@@ -57,7 +57,7 @@
                             @if($model->avatar && file_exists(public_path($model->avatar)))
                                 <img src="{{ asset($model->avatar) }}" width="100" height="75" alt="">
                             @else
-                                <img src="{{ asset('upload/404.png') }}" width="100" height="75" alt="">
+                                <img src="{{ asset('frontend\Img404.png') }}" width="100" height="75" alt="">
                             @endif
 
                             <div class="form-group">

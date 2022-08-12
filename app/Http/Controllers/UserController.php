@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -13,16 +15,38 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(request $request)
     {
-        //Cách 1: Lấy toàn bộ dữ liệu
-        //$data = User::all(); // SELECT * FROM Users
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
 
-        //Cách 2: Lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = User::latest()->paginate(10);
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = User::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = User::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = User::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
 
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
 
-        return view('backend.user.index', ['data' => $data]);
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = User::latest()->paginate(10);
+        }
+
+        //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
+        //$data = User::paginate(10);
+
+        //kiểm tra dữ liệu
+        //dd($data);
+
+        //Cách 3: lấy toàn bộ dữ liệu
+        //$data = User::all(); // tương đương với câu lệnh SELECT * FORM Users
+
+        // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
+        return view('backend.user.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -32,7 +56,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('backend.user.create');
+        $role = Role::all(); // lấy tất cả data của bản role
+
+        return view('backend.user.create',['role' => $role]); // truyền data của bản role đã lấy dc sang trang create user
     }
 
     /**
@@ -155,15 +181,27 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $User = User::findOrFail($id);
+        //$User = User::findOrFail($id);
         // xóa ảnh cũ
-        @unlink(public_path($User->avatar));
+        //@unlink(public_path($User->avatar));
 
         User::destroy($id);
 
         return response()->json([
             'status' => true,
             'msg' => 'Xóa thành công'
+        ]);
+    }
+
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $User = User::onlyTrashed()->findOrFail($id);
+        $User->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
         ]);
     }
 }

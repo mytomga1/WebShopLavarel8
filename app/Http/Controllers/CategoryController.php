@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
@@ -19,10 +22,26 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-        $data = Category::latest()->paginate(10);
+        $params = $request->all();
+        $filter_type = $params['filter_type'] ?? 2;
+
+        // if check admin
+        if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
+            if ($filter_type == 1) {
+                $data = Category::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+            } elseif ($filter_type == 2) {
+                $data = Category::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+            } else {
+                $data = Category::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+            }
+
+        } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
+
+            // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
+            $data = Category::latest()->paginate(10);
+        }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
         //$data = Category::paginate(10);
@@ -34,7 +53,7 @@ class CategoryController extends Controller
         //$data = Category::all(); // tương đương với câu lệnh SELECT * FORM Categorys
 
         // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
-        return view('backend.category.index', ['data' => $data]);
+        return view('backend.category.index', ['data' => $data, 'filter_type' => $filter_type]);
     }
 
     /**
@@ -198,12 +217,43 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $Category = Category::findOrFail($id);
+        //$Category = Category::findOrFail($id);
+
+        $checkExitsProduct = Product::where('category_id', $id)->first(); // kiểm tra id danh mục muốn xoá có chứa dữ liệu sản phẩm nào ko ?
+        $checkExitsArticles = Articles::where('category_id', $id)->first(); // kiểm tra id danh mục muốn xoá có chứa dữ liệu sản phẩm nào ko ?
+
+        if ($checkExitsProduct != null) { // kiểm tra dc danh mục muốn xoá có chứa dữ liệu thì trả về 'status' => false và truyền mesage phản hồi user
+            return response()->json([
+                'status' => false,
+                'msg' => 'Xóa không thành công, do danh mục này tồn tại một hoặc nhiều sản phẩm !!!'
+            ]);
+        }else if ($checkExitsArticles != null){
+            return response()->json([
+                'status' => false,
+                'msg' => 'Xóa không thành công, do danh mục này tồn tại một hoặc nhiều bài viết !!!'
+            ]);
+        }
+
         // xóa ảnh cũ
-        @unlink(public_path($Category->image));
+        //@unlink(public_path($Category->image));
 
         Category::destroy($id);
 
-        return response()->json(['status' => true, 'msg' => 'Xóa thành công']);
+        return response()->json([
+            'status' => true,
+            'msg' => 'Xóa thành công'
+        ]);
+    }
+
+    // Hàm Khôi phục dữ liệu bị softDelete
+    public function restore($id)
+    {
+        $Category = Category::onlyTrashed()->findOrFail($id);
+        $Category->restore(); // truyền id đã bị xoá vào hàm khôi phục
+
+        return response()->json([
+            'status' => true,
+            'msg' => 'Khôi phục thành công'
+        ]);
     }
 }
