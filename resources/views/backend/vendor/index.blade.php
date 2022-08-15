@@ -113,6 +113,9 @@
                             success: function (res) {
                                 if(res.status) {
                                     $('.item-'+id).remove();
+
+                                    var filter_type = $('#filter_type').val();
+                                    window.location.href = "{{ route('admin.vendor.index') }}?filter_type="+filter_type;
                                 } else {
                                     Swal.fire(
                                         'Thông báo !',
@@ -152,6 +155,9 @@
                                         'Khôi phục thành công',
                                         'success'
                                     )
+
+                                    var filter_type = $('#filter_type').val();
+                                    window.location.href = "{{ route('admin.vendor.index') }}?filter_type="+filter_type;
 
                                 } else {
                                     Swal.fire(

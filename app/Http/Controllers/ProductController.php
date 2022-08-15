@@ -276,9 +276,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //$product = Product::findOrFail($id);
-        // xóa ảnh cũ
-        //@unlink(public_path($product->image));
+//        $data = Product::where('deleted_at', !null)->get;
+//        // xóa ảnh cũ
+//        if ($data){
+//            @unlink(public_path($data->image));
+//        }
+
 
         Product::destroy($id);
 
