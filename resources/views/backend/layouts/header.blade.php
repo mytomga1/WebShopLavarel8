@@ -15,7 +15,7 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                @if(\Illuminate\Support\Facades\Auth::check())
+                @if(\Illuminate\Support\Facades\Auth::check()) {{-- kiểm tra user login chưa--}}
                     @php
                         $user = \Illuminate\Support\Facades\Auth::user();
                     @endphp

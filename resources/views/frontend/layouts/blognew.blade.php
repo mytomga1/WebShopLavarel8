@@ -139,6 +139,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-4">
                 <div class="single-smblog mb-30">
                     <div class="smblog-thum">

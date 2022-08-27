@@ -189,9 +189,9 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="index.html" class="active">Home <i class="far fa-angle-down"></i></a>
+                                    <a href="{{route('index')}}" class="active">Home <i class="far fa-angle-down"></i></a>
                                     <ul class="megamenu-1">
-                                        <li><a href="index.html">Home Pages</a>
+                                        <li><a href="{{route('index')}}">Home Pages</a>
                                             <ul class="mega-item">
                                                 <li><a href="index.html">Home One</a></li>
                                                 <li><a href="index-2.html" class="active">Home Two</a></li>
@@ -236,7 +236,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a href="about.html">About Us</a></li>
+
                                 <li class="has-mega"><a href="shop.html">Shop <i class="far fa-angle-down"></i></a>
                                     <div class="mega-menu">
                                         <div class="container container-mega">
@@ -307,16 +307,12 @@
                                             </ul>
                                         </div>
                                         <div class="offer mt-40">
-                                            <p><b>30% OFF</b> the shipping of your first order with the code: <b>DUKA-SALE30</b></p>
+                                            <p><b>Giảm 50%</b> phí vận chuyển cho đơn đặt hàng đầu tiên của bạn với mã: <b>SBEE-SALE30</b></p>
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="blog.html">Blog <i class="far fa-angle-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{route('articles')}}">Blog</a></li>
+                                <li><a href="{{route('contact')}}">About Us</a></li>
                                 <li>
                                     <a href="about.html">Pages <i class="far fa-angle-down"></i></a>
                                     <ul class="submenu">
@@ -337,7 +333,7 @@
             </div>
             <div class="col-lg-3 col-md-6 col-9">
                 <div class="shopeing-text text-sm-end">
-                    <p>Spend $120 more and get free shipping!</p>
+                    <p>Miễn phí vận chuyển Cho tất cả đơn hàng từ 3tr</p>
                 </div>
             </div>
         </div>

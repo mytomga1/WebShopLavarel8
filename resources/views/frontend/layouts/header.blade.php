@@ -7,29 +7,24 @@
                     <div class="header-inner-start">
                         <div class="header__currency border-right">
                             <div class="s-name">
-                                <span>Language: </span>
+                                <span>Language : &nbsp</span>
                             </div>
                             <select>
+                                <option>Tiếng Việt</option>
                                 <option>English</option>
-                                <option>Deutsch</option>
-                                <option>Français</option>
-                                <option>Espanol</option>
                             </select>
                         </div>
                         <div class="header__lang border-right">
                             <div class="s-name">
-                                <span>Currency: </span>
+                                <span>Currency : &nbsp</span>
                             </div>
                             <select>
+                                <option> VNĐ</option>
                                 <option> USD</option>
-                                <option>EUR</option>
-                                <option>INR</option>
-                                <option>BDT</option>
-                                <option>BGD</option>
                             </select>
                         </div>
                         <div class="support d-none d-sm-block">
-                            <p>Need Help? <a href="tel:+001123456789">+001 123 456 789</a></p>
+                            <p>Need Help? &nbsp<a href="đt : +84{{$setting -> phone}}"> (+84) {{$setting -> phone}}</a></p>
                         </div>
                     </div>
                 </div>
@@ -37,9 +32,7 @@
                     <div class="header-inner-end text-md-end">
                         <div class="ovic-menu-wrapper ovic-menu-wrapper-2">
                             <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="contact.html">Order Tracking</a></li>
-                                <li><a href="{{route('contact')}}">Contact Us</a></li>
+                                <li><a href="{{route('contact')}}">Liên Hệ</a></li>
                                 <li><a href="faq.html">FAQs</a></li>
                             </ul>
                         </div>
@@ -56,7 +49,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4">
                     <div class="header__info">
                         <div class="logo">
-                            <a href="index.html" class="logo-image"><img src="{{asset('frontend')}}/img/logo/logo1.svg" alt="logo"></a>
+                            <a href="{{route('index')}}" class="logo-image"><img src="{{ asset($setting->image) }}" alt="logo"></a>
                         </div>
                     </div>
                 </div>
@@ -92,8 +85,8 @@
                             <a class="icon-link icon-link-2" href="my-account.html">
                                 <i class="flaticon-user"></i>
                                 <span class="text">
-                                    <span class="sub">Login </span>
-                                    My Account </span>
+                                    <span class="sub">Đăng Nhập </span>
+                                    Tài khoản của tôi </span>
                             </a>
                         </div>
                         <div class="block-wishlist action">
@@ -102,7 +95,7 @@
                                 <span class="count count-2">0</span>
                                 <span class="text">
                                     <span class="sub">Favorite</span>
-                                    My Wishlist </span>
+                                    Danh sách yêu thích </span>
                             </a>
                         </div>
                         <div class="block-cart action">
@@ -110,7 +103,7 @@
                                 <i class="flaticon-shopping-bag"></i>
                                 <span class="count count-2">1</span>
                                 <span class="text">
-                                    <span class="sub">Your Cart:</span>
+                                    <span class="sub">Giỏ Hàng:</span>
                                     $00.00 </span>
                             </a>
                             <div class="cart">

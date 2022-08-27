@@ -73,11 +73,11 @@ class ArticleController extends Controller
     {
         // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
         $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'required|max:1000',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
             'category_id' => 'required',
-            'summary' => 'required|max:255',
-            'description' => 'required|max:5000',
+            'summary' => 'required|min:173|max:1000',
+            'description' => 'required|max:50000',
         ],[
             'name.required' => 'Bạn cần phải nhập vào tiêu đề bài viết',
             'image.required' => 'Bạn chưa chọn file ảnh',
@@ -121,6 +121,8 @@ class ArticleController extends Controller
         $Articles->description = $request->input('description');
 
         $Articles->created_at = date('Y-m-d H:i:s');
+
+        $Articles->user_id = Auth::user()->id;
 
         $Articles->save();
 
@@ -168,6 +170,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'title' => 'required|max:1000',
+            'category_id' => 'required',
+            'summary' => 'required|min:173|max:1000',
+            'description' => 'required|max:50000',
+        ],[
+            'name.required' => 'Bạn cần phải nhập vào tiêu đề bài viết',
+            'category_id.category_id' => 'Bạn chưa chọn danh mục bài viết',
+            'summary.summary' => 'Bạn chưa nhập nội dung',
+            'description.description' => 'Bạn chưa nhập nội dung bài viết',
+        ]);
+
         $Articles = Articles::findOrFail($id);
         $Articles->title = $request->input('title');
 

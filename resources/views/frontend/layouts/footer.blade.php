@@ -10,8 +10,8 @@
                                 <i class="fal fa-truck"></i>
                             </div>
                             <div class="features-2__content">
-                                <h6>FREE DELIVERY</h6>
-                                <p>For all orders over $120</p>
+                                <h6>Miễn phí Vận Chuyển</h6>
+                                <p>Cho tất cả đơn hàng từ 3tr</p>
                             </div>
                         </div>
                     </div>
@@ -32,8 +32,8 @@
                                 <i class="fal fa-comments-alt"></i>
                             </div>
                             <div class="features-2__content">
-                                <h6>24/7 HELP CENTER</h6>
-                                <p>Delicated 24/7 support</p>
+                                    <h6>TRUNG TÂM TRỢ GIÚP 24/7</h6>
+                                <p>Hỗ trợ tận tình 24/7</p>
                             </div>
                         </div>
                     </div>
@@ -43,8 +43,8 @@
                                 <i class="fal fa-hand-holding-usd"></i>
                             </div>
                             <div class="features-2__content">
-                                <h6>SHOP WITH CONFIDENCE</h6>
-                                <p>If goods have problems</p>
+                                <h6>Chính Sách Đổi Trả</h6>
+                                <p>Nếu sản phẩm gặp lỗi</p>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="features-2__content">
                                 <h6>FRIENDLY SERVICES</h6>
-                                <p>30 day satisfaction guarantee</p>
+                                <p>Đảm bảo sự hài lòng trong 30 ngày</p>
                             </div>
                         </div>
                     </div>
@@ -72,10 +72,10 @@
                     <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-8">
                         <div class="footer__widget">
                             <div class="footer__widget-title mb-20">
-                                <h4>Download App</h4>
+                                <h4>Tải App</h4>
                             </div>
                             <div class="footer__widget-content">
-                                <p class="footer-text mb-25">DukaMarket App is now available on App Store & Google Play. Get it now.</p>
+                                <p class="footer-text mb-25">Shopbee App hiện tại có trên App Store & Google Play. Tải nhanh thôi.</p>
                                 <div class="apps-store mb-20">
                                     <a href="#"><img src="{{asset('frontend')}}/img/brand/app_ios.png" alt=""></a>
                                     <a href="#"><img src="{{asset('frontend')}}/img/brand/app_android.png" alt=""></a>
@@ -84,9 +84,7 @@
                                     <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
                                     <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
                                     <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
-                                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
                                     <a href="#" class="rss"><i class="fas fa-rss"></i></a>
-                                    <a href="#" class="dribbble"><i class="fab fa-dribbble"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -94,17 +92,15 @@
                     <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <div class="footer__widget footer-col-2">
                             <div class="footer__widget-title">
-                                <h4>My Account</h4>
+                                <h4>Tài Khoản của tôi</h4>
                             </div>
                             <div class="footer__widget-content">
                                 <div class="footer__link footer__link-2">
                                     <ul>
-                                        <li><a href="contact.html">Product Support</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="faq.html">Terms &amp; Conditions &amp;</a></li>
-                                        <li><a href="faq.html">Redeem Voucher</a></li>
+                                        <li><a href="contact.html">Hỗ trợ sản phẩm</a></li>
+                                        <li><a href="checkout.html">thanh toán</a></li>
+                                        <li><a href="cart.html">Giỏ hàng</a></li>
+                                        <li><a href="wishlist.html">Danh Sách yêu thích</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -118,12 +114,9 @@
                             <div class="footer__widget-content">
                                 <div class="footer__link footer__link-2">
                                     <ul>
-                                        <li><a href="faq.html">New Customers</a></li>
-                                        <li><a href="faq.html">How to use Account</a></li>
-                                        <li><a href="faq.html">Placing an Order</a></li>
-                                        <li><a href="faq.html">Payment Methods</a></li>
-                                        <li><a href="faq.html">Delivery &amp; Dispatch</a></li>
-                                        <li><a href="faq.html">Problems with Order</a></li>
+                                        <li><a href="faq.html">Phương thức thanh toán</a></li>
+                                        <li><a href="faq.html">Giao hàng & Nhận Hàng</a></li>
+                                        <li><a href="faq.html">Gặp vấn đề với đơn hàng</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -137,11 +130,10 @@
                             <div class="footer__widget-content">
                                 <div class="footer__link footer__link-2">
                                     <ul>
-                                        <li><a href="faq.html">Help Center</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="faq.html">Report Abuse</a></li>
-                                        <li><a href="faq.html">Submit a Dispute</a></li>
-                                        <li><a href="faq.html">Policies &amp; Rules</a></li>
+                                        <li><a href="faq.html">Trung tâm hỗ trợ</a></li>
+                                        <li><a href="{{route('contact')}}">Liên hệ</a></li>
+                                        <li><a href="faq.html">Báo cáo</a></li>
+                                        <li><a href="faq.html">Chính sách & Điều khoản</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -150,17 +142,17 @@
                     <div class="col-xxl-3 col-xl-4 col-lg-5 col-md-6">
                         <div class="footer__widget">
                             <div class="footer__widget-title mb-20">
-                                <h4>Sign Up To Newsletter</h4>
+                                <h4>Đăng ký nhận thông tin khuyến mãi</h4>
                             </div>
                             <div class="footer__widget-content">
-                                <p class="footer-text mb-25">Join 60.000+ subscribers and get a new discount coupon  on every Saturday.</p>
+                                <p class="footer-text mb-25">Tham gia cùng hơn 60.000 người đăng ký và nhận phiếu giảm giá mới vào thứ Bảy hàng tuần.</p>
                                 <div class="footer__newsletter-form">
                                     <form action="#">
-                                        <input class="ft-newsl b-radius" type="email" placeholder="Enter your email ...">
+                                        <input class="ft-newsl b-radius" type="email" placeholder="Nhập email ...">
                                         <button class="ft-newsl-btn" type="submit">subscribe</button>
                                     </form>
                                 </div>
-                                <p class="provide-text mt-20">By providing your email address, you agree to our <br> <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> .</p>
+                                <p class="provide-text mt-20">Bằng cách cung cấp địa chỉ email của bạn, bạn đồng ý với<br> <a href="#">Chính sách bảo mật</a> và <a href="#">Điều khoản dịch vụ</a> .</p>
                             </div>
                         </div>
                     </div>
@@ -174,12 +166,12 @@
                         <div class="col-xl-12">
                             <div class="footer__links footer__links-d text-center mb-25">
                                 <p>
-                                    <a href="about.html">About Us</a>
-                                    <a href="contact.html">Delivery & Return</a>
-                                    <a href="faq.html">Privacy Policy</a>
+                                    <a href="{{route('contact')}}">About Us</a>
+                                    <a href="{{route('contact')}}l">Giao hàng & Trả hàng</a>
+                                    <a href="faq.html">Chính sách bảo mật</a>
                                     <a href="faq.html">Help</a>
-                                    <a href="contact.html">Order Tracking</a>
-                                    <a href="contact.html">Contact Us</a>
+                                    <a href="contact.html">Theo dõi đơn hàng</a>
+                                    <a href="{{route('contact')}}">Liên Hệ</a>
                                     <a href="faq.html">FAQs </a>
                                 </p>
                             </div>
@@ -187,7 +179,7 @@
                                 <a href="#"><img src="{{asset('frontend')}}/img/payment/payment.png" alt=""></a>
                             </div>
                             <div class="copy-right-area copy-right-area-2 text-center">
-                                <p>Copyright © <span>DukaMarket.</span> All Rights Reserved. Powered by <a href="#"><span class="main-color">Theme_Pure.</span></a></p>
+                                <p>Copyright © <span>Shopbee.</span> Đã đăng ký Bản quyền. Được cung cấp bởi <a href="#"><span class="main-color">Theme_Pure.</span></a></p>
                             </div>
                         </div>
                     </div>

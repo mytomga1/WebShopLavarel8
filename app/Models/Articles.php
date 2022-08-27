@@ -14,4 +14,9 @@ class Articles extends Model
     public function Article_Category(){
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    //tạo mối quan hệ bài viết và user
+    public function Article_User(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

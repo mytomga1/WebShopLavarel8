@@ -46,7 +46,7 @@ class SettingController extends Controller
             // Dat ten cho file image
             $filename = time().'_'.$file->getClientOriginalName();  //$file->getClientOriginalName() == ten anh
             //Dinh nghia duong dan se upload file len
-            $path_upload = 'frontend/img/setting/';  //upload/brand; upload/vendor
+            $path_upload = 'frontend/img/logo/';  //upload/brand; upload/vendor
             // Thuc hien upload file
             $file->move($path_upload,$filename);
             // Luu lai ten

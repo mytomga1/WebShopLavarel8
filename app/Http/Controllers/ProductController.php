@@ -151,7 +151,10 @@ class ProductController extends Controller
         $product->meta_description = $request->input('meta_description');
 
         $product->created_at = date('Y-m-d H:i:s');
+
         $product->user_id = $request->user()->id;
+
+        //$Articles->user_id = Auth::user()->id;
 
         $product->save();
 
@@ -200,6 +203,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'name' => 'required|max:255',
+            'stock' => 'required|max:255',
+            'price' => 'required|max:255',
+            'sale' => 'required|max:255',
+            'category_id' => 'required|max:255',
+            'brand_id' => 'required|max:255',
+            'vendor_id' => 'required|max:255',
+            'summary' => 'required|max:255',
+            'description' => 'required|max:255',
+        ],[
+            'name.required' => 'Bạn cần phải nhập tên sản phẩm',
+            'stock' => 'Bạn cần phải nhập số lượng sản phẩm',
+            'price' => 'Bạn cần phải nhập giá sản phẩm',
+            'sale' => 'Bạn cần phải nhập giá khuyến mãi sản phẩm',
+            'category_id' => 'Bạn cần phải chọn danh mục',
+            'brand_id' => 'Bạn cần phải chọn nhãn hiệu',
+            'vendor_id' => 'Bạn cần phải chọn nhà cung cấp',
+            'summary' => 'Bạn cần phải nhập tóm tắt sp',
+            'description' => 'Bạn cần phải nhập mô tả chi tiết sp',
+        ]);
 
         $product = Product::findOrFail($id);
 
