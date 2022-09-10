@@ -116,12 +116,24 @@
                             <div class="product-stock mb-20">
                                 <h5>Tình trạng : <span> {{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}</span></h5>
                             </div>
-                            <div class="cart-option mb-15">
-                                <div class="product-quantity mr-20">
-                                    <div class="cart-plus-minus p-relative"><input type="text" value="1"><div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></div>
+
+                            <!-- khu vực chức năng giỏ hàng -start -->
+                            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" value="{{ $product->id }}" name="id">
+                                <input type="hidden" value="{{ $product->name }}" name="name">
+                                <input type="hidden" value="{{ $product->sale }}" name="price">
+                                <input type="hidden" value="{{ $product->image }}"  name="image">
+
+                                <div class="cart-option mb-15">
+                                    <div class="product-quantity mr-20">
+                                        <div class="cart-plus-minus p-relative"><input name="quantity" type="text" value="1"><div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></div>
+                                    </div>
+                                    <button class="cart-btn" type="submit">Thêm vào giỏ hàng</button>
                                 </div>
-                                <a href="cart.html" class="cart-btn">Thêm vào giỏ hàng</a>
-                            </div>
+                            </form><!-- khu vực chức năng giỏ hàng -end -->
+
+
                             <div class="details-meta">
                                 <div class="d-meta-left">
                                     <div class="dm-item mr-20">

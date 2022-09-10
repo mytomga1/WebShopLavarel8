@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Settings;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -113,6 +114,32 @@ class HomeController extends Controller
         ]);
     }
 
+    public function cart()
+    {
+        $cartItems = \Cart::getContent();
+
+        $total = \Cart::getTotal();
+
+        return view('frontend.cart', compact('cartItems', 'total'));
+    }
+
+    public function addToCart(Request $request)
+    {
+        //dd($request);
+        \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'attributes' => array(
+                'image' => $request->image,
+            )
+        ]);
+
+        session()->flash('success', 'Thêm vào giỏ hàng thành công');
+
+        return redirect()->route('cart.list');
+    }
 
     // Controller Trang liên hệ
     public function contact()

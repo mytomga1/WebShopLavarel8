@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Elasticquent\ElasticquentServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class
 
     ],
 
@@ -231,7 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ],
 
 ];

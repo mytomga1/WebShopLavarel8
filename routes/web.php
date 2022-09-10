@@ -22,6 +22,12 @@ Route::get('/tim-kiem', [\App\Http\Controllers\HomeController::class, 'search'])
 Route::get('/danh-muc/{category}', [\App\Http\Controllers\HomeController::class, 'category'])->name('category');
 Route::get('/chi-tiet-san-pham/{product}', [\App\Http\Controllers\HomeController::class, 'product'])->name('product');
 
+Route::get('cart', [\App\Http\Controllers\HomeController::class, 'cart'])->name('cart.list');
+Route::post('cart', [\App\Http\Controllers\HomeController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [\App\Http\Controllers\HomeController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [\App\Http\Controllers\HomeController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [\App\Http\Controllers\HomeController::class, 'clearAllCart'])->name('cart.clear');
+
 Route::get('/banner/{slug}', [\App\Http\Controllers\HomeController::class, 'bannerDetail'])->name('banner-detail');
 Route::get('/tin-tuc', [\App\Http\Controllers\HomeController::class, 'articles'])->name('articles');
 Route::get('/tin-tuc/{slug}', [\App\Http\Controllers\HomeController::class, 'ArticleDetail'])->name('article-detail');

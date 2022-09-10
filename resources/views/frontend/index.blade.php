@@ -73,7 +73,11 @@
                                 <!-- chức năng ratting-product-area-end -->
 
                                 <div class="price">
-                                    <span style="color: red">{{ number_format($product->sale,0,",",".") }} đ</span>
+                                    @if($product->sale < $product->price)
+                                        <span style="color: red">{{ number_format($product->sale,0,",",".") }} đ</span><span> - <del> {{ number_format($product->price,0,",",".") }} đ</del></span>
+                                    @else
+                                        <span style="color: red">{{ number_format($product->price,0,",",".") }} đ</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="product__add-cart text-center">
