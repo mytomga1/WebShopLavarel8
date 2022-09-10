@@ -127,8 +127,9 @@
                     document.getElementById('title').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
                         return false;
                 }
-                if ($('#description').val() === '') {
-                    $('#label-description').notify('Bạn nhập chưa nhập mô tả','error',{ position:"right" });
+                var description = CKEDITOR.instances['description'].getData();
+                if (description === '') {
+                    $('#label-description').notify('Bạn nhập chưa nhập Nội Dung Bài Viết','error',{ position:"right" });
                     document.getElementById('label-description').scrollIntoView();
                     return false;
                 }

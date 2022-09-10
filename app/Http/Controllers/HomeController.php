@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -22,15 +23,96 @@ class HomeController extends Controller
         // Lấy dữ liệu - Danh mục, có trạng thái là hiển thị
         $this->categories = Category::where(['is_active' => 1])->get();
 
+        $banners = Banner::where(['is_active' => 1])
+            // where('type', 5)
+            //->orderBy('created_at')
+            ->orderBy('id')
+            ->get();
+
+        $articles = Articles::where(['is_active' => 1])
+            // where('type', 5)
+            //->orderBy('created_at')
+            ->orderBy('id')
+            ->limit(6)
+            ->get();
+
 
         View::share('categories', $this->categories);
+        View::share('banners', $banners);
+        View::share('articles', $articles);
         View::share('setting', $setting);
     }
 
     public function index()
     {
-        return view('frontend.index');
+        $list = []; // chứa danh sách sản phẩm  theo danh mục
+
+        foreach($this->categories as $key => $parent) {
+            if ($parent->parent_id == 0) { // check danh mục cha
+                $ids = []; // tạo chứa các id của danh cha + danh mục con trực thuộc / danh mục con
+
+                $ids[] = $parent->id; // id danh mục cha
+
+                $sub_menu = [];
+                foreach ($this->categories as $child) {
+                    if ($child->parent_id == $parent->id) {
+                        $sub_menu[] = $child;
+                        $ids[] = $child->id; // thêm phần tử vào mảng
+                    }
+                } // ids = [1,7,8,9,..]
+
+                $list[$key]['category'] = $parent; // điện thoại, tablet
+                $list[$key]['sub_category'] = $sub_menu; // điện thoại, tablet
+
+                // SELECT * FROM `products` WHERE is_active = 1 AND is_hot = 0 AND category_id IN (1,7,9,11) ORDER BY id DESC LIMIT 10
+                $list[$key]['products'] = Product::where(['is_active' => 1, 'is_hot' => 0])
+                    ->whereIn('category_id', $ids)
+                    ->limit(6)
+                    ->orderBy('id', 'desc')
+                    ->get();
+
+
+            }
+        }
+
+        return view('frontend.index', ['list' => $list]);
     }
+
+    // Controller chức năng search
+    public function search(Request $request)
+    {
+
+        $keyword = $request->input('kwd');
+
+        //$slug = Str::slug($keyword);
+
+        //$sql = "SELECT * FROM products WHERE is_active = 1 AND slug like '%$keyword%'";
+
+        //$products = Product::where([
+        //['slug', 'like', '%' . $slug . '%'],
+        //['is_active', '=', 1]
+        //])->orderByDesc('id')->paginate(5);
+
+        //$totalResult = $products->total(); // số lượng kết quả tìm kiếm
+
+        $page = $request->input('page', 1);
+        $paginate = 10;
+
+        $products = Product::searchByQuery(['match' => ['name' => $keyword]], null, null, $paginate, $page);
+        $totalResult = $products->totalHits();
+        $totalResult = $totalResult['value'];
+        // $offSet = ($page * $paginate) - $paginate;
+        $itemsForCurrentPage = $products->toArray();
+        $products = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, $totalResult, $paginate, $page);
+        $products->setPath('tim-kiem');
+
+        return view('frontend.search', [
+            'products' => $products,
+            'totalResult' => $totalResult ?? 0,
+            'keyword' => $keyword ? $keyword : ''
+        ]);
+    }
+
 
     // Controller Trang liên hệ
     public function contact()
@@ -85,6 +167,19 @@ class HomeController extends Controller
         return view('frontend.article-detail',['article'=>$article]);
     }
 
+    // Controller Trang Chi tiết Banner
+    public  function bannerDetail($slug){
+
+        // select * form Articles where slug = slug and is_active = 1
+        $banner = Banner::where('slug', $slug)->where('is_active', 1)->first();
+
+        if($banner == null){
+            return view('frontend.404');
+        }
+
+        return view('frontend.banner-detail',['banner'=>$banner]);
+    }
+
     // Tạo 1 hàm category router với mục đích lấy danh sách sản phẩm theo menu danh muc
     public function category($slug){
         $category = Category::where('slug', $slug)->where('is_active', 1)->first();
@@ -113,7 +208,7 @@ class HomeController extends Controller
         $products = Product::where('is_active', 1)
             ->whereIn('category_id' , $ids)
             ->latest() // lấy dữ liệu mới nhất
-            ->paginate(15); // phân trang (1 trang chứa 5 phần tử)
+            ->paginate(10); // phân trang (1 trang chứa 15 phần tử)
 
         return view('frontend.productList', ['category' => $category, 'products' => $products]);
     }

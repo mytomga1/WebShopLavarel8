@@ -57,7 +57,7 @@
                                         <h6><a href="{{ route('article-detail', ['slug' =>$article->slug]) }}">{{$article->title}}</a></h6> {{-- add chuyển trang chi tiết bài viết theo link slug--}}
                                         <span class="author mb-10">posted by <a href="#">{{ !empty($article->Article_user->name) ? $article->Article_user->name : '' }}</a></span>{{-- khai báo quan hệ trong model--}}
 
-                                        <p>{!! substr($article->summary,0,173)!!} ...</p>
+                                        <p>{!! substr($article->summary,0,174)!!} ...</p>
 
                                         <div class="smblog-foot pt-15">
                                             <div class="post-readmore">

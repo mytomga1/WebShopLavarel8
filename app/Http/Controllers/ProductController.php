@@ -87,8 +87,8 @@ class ProductController extends Controller
             'category_id' => 'required|max:255',
             'brand_id' => 'required|max:255',
             'vendor_id' => 'required|max:255',
-            'summary' => 'required|max:255',
-            'description' => 'required|max:255',
+            'summary' => 'required',
+            'description' => 'required',
         ],[
             'name.required' => 'Bạn cần phải nhập tên sản phẩm',
             'image.required' => 'Bạn chưa chọn file ảnh',
@@ -157,6 +157,9 @@ class ProductController extends Controller
         //$Articles->user_id = Auth::user()->id;
 
         $product->save();
+
+        // sau khi thêm dữ liệu sản phẩm mới vào database thì đánh thêm index để tiện thể cho việc search nhanh hơn
+        Product::addAllToIndex();
 
         //sau khi thêm dữ liệu vendors vào db thành công chuyển hướng về trang danh sách
         // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang

@@ -21,6 +21,9 @@
                 <div class="brand-item w-img swiper-slide">
                     <a href="#"><img src="{{asset('frontend')}}/img/brand/brand-6.jpg" alt="brand"></a>
                 </div>
+                <div class="brand-item w-img swiper-slide">
+                    <a href="#"><img src="{{asset('frontend')}}/img/brand/brand-6.jpg" alt="brand"></a>
+                </div>
             </div>
         </div>
     </div>

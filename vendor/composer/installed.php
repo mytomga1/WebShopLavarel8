@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'v8.6.12',
-        'version' => '8.6.12.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '00de68bfcd4603088e2e6d4844f0f15e5132847f',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -92,6 +92,44 @@
             'install_path' => __DIR__ . '/../egulias/email-validator',
             'aliases' => array(),
             'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
+            'dev_requirement' => false,
+        ),
+        'elasticquent/elasticquent' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../elasticquent/elasticquent',
+            'aliases' => array(
+                0 => '1.0.x-dev',
+            ),
+            'reference' => 'c8009cad9027c7f5870c43f5abdccdeb95a15cc6',
+            'dev_requirement' => false,
+        ),
+        'elasticsearch/elasticsearch' => array(
+            'pretty_version' => '6.8.x-dev',
+            'version' => '6.8.9999999.9999999-dev',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../elasticsearch/elasticsearch',
+            'aliases' => array(),
+            'reference' => '5ecee560318fbfbc439d7bd3c1ceb49a49bc2291',
+            'dev_requirement' => false,
+        ),
+        'ezimuel/guzzlestreams' => array(
+            'pretty_version' => '3.0.1',
+            'version' => '3.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ezimuel/guzzlestreams',
+            'aliases' => array(),
+            'reference' => 'abe3791d231167f14eb80d413420d1eab91163a8',
+            'dev_requirement' => false,
+        ),
+        'ezimuel/ringphp' => array(
+            'pretty_version' => '1.2.0',
+            'version' => '1.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ezimuel/ringphp',
+            'aliases' => array(),
+            'reference' => '92b8161404ab1ad84059ebed41d9f757e897ce74',
             'dev_requirement' => false,
         ),
         'facade/flare-client-php' => array(
@@ -183,6 +221,12 @@
             'aliases' => array(),
             'reference' => '13388f00956b1503577598873fffb5ae994b5737',
             'dev_requirement' => false,
+        ),
+        'guzzlehttp/ringphp' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '1.2.0',
+            ),
         ),
         'hamcrest/hamcrest-php' => array(
             'pretty_version' => 'v2.0.1',
@@ -395,12 +439,12 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'v8.6.12',
-            'version' => '8.6.12.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '00de68bfcd4603088e2e6d4844f0f15e5132847f',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -766,8 +810,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -819,6 +863,15 @@
             'install_path' => __DIR__ . '/../ramsey/uuid',
             'aliases' => array(),
             'reference' => '8505afd4fea63b81a85d3b7b53ac3cb8dc347c28',
+            'dev_requirement' => false,
+        ),
+        'react/promise' => array(
+            'pretty_version' => 'v2.9.0',
+            'version' => '2.9.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../react/promise',
+            'aliases' => array(),
+            'reference' => '234f8fd1023c9158e2314fa9d7d0e6a83db42910',
             'dev_requirement' => false,
         ),
         'rhumsaa/uuid' => array(
