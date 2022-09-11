@@ -186,7 +186,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $category = Category::all();
+        $category = Category::all()->toArray();
         $vendor = Vendor::all();
         $brand = Brand::all();
         $Ven_Bra = [
@@ -194,7 +194,7 @@ class ProductController extends Controller
             'vendor' => $vendor,
             'brand' => $brand
         ];
-        return view('backend.product.edit', ['product' => $product], ['Ven_Bra' => $Ven_Bra] );
+        return view('backend.product.edit', ['product' => $product, 'data'=>$category], ['Ven_Bra' => $Ven_Bra] );
     }
 
     /**

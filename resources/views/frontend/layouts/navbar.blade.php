@@ -10,7 +10,7 @@
                             <nav id="mobile-menu" style="display: block;">
                                 <ul>
                                     <li>
-                                        <a href="product.html">Tất Cả Danh Mục <i class="far fa-angle-down"></i></a>
+                                        <a>Tất Cả Danh Mục <i class="far fa-angle-down"></i></a>
                                         <ul class="mega-menu">
                                             @foreach($categories as $category)
                                                 <li><a href="{{ route('category', ['category' => $category->slug ]) }}">{{$category->name}}</a></li>

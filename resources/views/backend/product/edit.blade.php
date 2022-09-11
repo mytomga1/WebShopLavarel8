@@ -81,9 +81,22 @@
                                 <label for="category_id">Danh mục :</label>
                                 <select class="form-control" name="category_id" id="category_id">
                                     <option value="0">---Chọn---</option>
-                                    @foreach($Ven_Bra['category'] as $item)
-                                        <option @if($product->category_id == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
+                                    @php
+                                        function showCategories($categories, $parent_id = 0, $char = '' , $selectedId) {
+                                            foreach ($categories as $key => $item) {
+                                                if ($item['parent_id'] == $parent_id)
+                                                {
+                                                    echo '<option '.($item['id'] == $selectedId ? 'selected' : '').' value="'.$item['id'].'">';
+                                                        echo $char . $item['name'];
+                                                    echo '</option>';
+
+                                                    unset($categories[$key]);
+                                                    showCategories($categories, $item['id'], $char.'|---', $selectedId);
+                                                }
+                                            }
+                                        }
+                                        showCategories($data, 0, '', $product->category_id);
+                                    @endphp
                                 </select>
                             </div>
 

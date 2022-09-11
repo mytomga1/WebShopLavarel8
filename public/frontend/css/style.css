@@ -3234,7 +3234,8 @@ input {
   color: #fcbe00;
 }
 .product__content-d {
-  padding-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 10px;
 }
 @media (max-width: 479px) {
   .product__content-d .rating ul {

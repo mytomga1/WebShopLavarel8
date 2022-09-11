@@ -46,6 +46,9 @@ class HomeController extends Controller
 
     public function index()
     {
+        // khu vuc show sp cua Top Featured Products
+        $hotProduct = Product::where('is_hot', 1)->where('is_active', 1)->limit(2)->orderBy('id', 'desc')->get();
+
         $list = []; // chứa danh sách sản phẩm  theo danh mục
 
         foreach($this->categories as $key => $parent) {
@@ -66,7 +69,7 @@ class HomeController extends Controller
                 $list[$key]['sub_category'] = $sub_menu; // điện thoại, tablet
 
                 // SELECT * FROM `products` WHERE is_active = 1 AND is_hot = 0 AND category_id IN (1,7,9,11) ORDER BY id DESC LIMIT 10
-                $list[$key]['products'] = Product::where(['is_active' => 1, 'is_hot' => 0])
+                $list[$key]['products'] = Product::where(['is_active' => 1]) //, 'is_hot' => 0
                     ->whereIn('category_id', $ids)
                     ->limit(6)
                     ->orderBy('id', 'desc')
@@ -75,8 +78,7 @@ class HomeController extends Controller
 
             }
         }
-
-        return view('frontend.index', ['list' => $list]);
+        return view('frontend.index', ['list' => $list])->with('hotProduct', $hotProduct);
     }
 
     // Controller chức năng search
@@ -114,6 +116,7 @@ class HomeController extends Controller
         ]);
     }
 
+    //Controller giỏ hàng
     public function cart()
     {
         $cartItems = \Cart::getContent();
@@ -123,6 +126,7 @@ class HomeController extends Controller
         return view('frontend.cart', compact('cartItems', 'total'));
     }
 
+    //Controller function thêm sản phảm ra khỏi giỏ hàng
     public function addToCart(Request $request)
     {
         //dd($request);
@@ -137,6 +141,15 @@ class HomeController extends Controller
         ]);
 
         session()->flash('success', 'Thêm vào giỏ hàng thành công');
+
+        return redirect()->route('cart.list');
+    }
+
+    //Controller function xoá sản phảm ra khỏi giỏ hàng
+    public function removeCart(Request $request)
+    {
+        \Cart::remove($request->id);
+        session()->flash('success', 'Xoá sản phẩm ra giỏ hàng thành công !');
 
         return redirect()->route('cart.list');
     }

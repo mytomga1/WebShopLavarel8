@@ -108,7 +108,7 @@
                             <!-- khu vực chức năng đánh giá sp -end -->
 
                             <div class="price mb-10">
-                                <span style="color: red">{{ number_format($product->sale,0,",",".") }} đ</span>
+                                <span style="color: red">{{ number_format($product->sale,0,",",".") }} đ</span><span> &ensp; - &ensp;<del> {{ number_format($product->price,0,",",".") }} đ</del></span>
                             </div>
                             <div class="features-des mb-20 mt-10">
                                 {!! $product->summary !!}
@@ -218,44 +218,7 @@
                     <!-- chi tiết tab cấu hình sản phẩm -start -->
                     <div class="tab-pane fade" id="aditional" role="tabpanel" aria-labelledby="aditional-tab">
                         <div class="product__desc-info">
-                            <ul>
-                                <li>
-                                    <h6>Weight</h6>
-                                    <span>2 lbs</span>
-                                </li>
-                                <li>
-                                    <h6>Dimensions</h6>
-                                    <span>12 × 16 × 19 in</span>
-                                </li>
-                                <li>
-                                    <h6>Product</h6>
-                                    <span>Purchase this product on rag-bone.com</span>
-                                </li>
-                                <li>
-                                    <h6>Color</h6>
-                                    <span>Gray, Black</span>
-                                </li>
-                                <li>
-                                    <h6>Size</h6>
-                                    <span>S, M, L, XL</span>
-                                </li>
-                                <li>
-                                    <h6>Model</h6>
-                                    <span>Model	</span>
-                                </li>
-                                <li>
-                                    <h6>Shipping</h6>
-                                    <span>Standard shipping: $5,95</span>
-                                </li>
-                                <li>
-                                    <h6>Care Info</h6>
-                                    <span>Machine Wash up to 40ºC/86ºF Gentle Cycle</span>
-                                </li>
-                                <li>
-                                    <h6>Brand</h6>
-                                    <span>Kazen</span>
-                                </li>
-                            </ul>
+                            {!! $product->summary !!}
                         </div>
                     </div>
                     <!-- chi tiết tab cấu hình sản phẩm -end -->

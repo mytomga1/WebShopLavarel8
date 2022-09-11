@@ -75,33 +75,12 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="basic-pagination text-center pt-30 pb-30">
-                                <nav>
-                                    <ul>
-                                        <li>
-                                            <a href="blog.html" class="active">1</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog.html">2</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog.html">3</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog.html">5</a>
-                                        </li>
-                                        <li>
-                                            <a href="blog.html">6</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop.html">
-                                                <i class="fal fa-angle-double-right"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                    <div class="tp-pagination text-center">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class=" pt-30 pb-30">
+                                    {!! $articles->links('vendor.pagination.custom') !!}
+                                </div>
                             </div>
                         </div>
                     </div>

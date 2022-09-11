@@ -69,7 +69,13 @@
                                                 <div class="cart-plus-minus"><input type="text" value="{{ $item->quantity }}"><div class="dec qtybutton">-</div><div class="inc qtybutton">+</div></div>
                                             </td>
                                             <td class="product-subtotal"><span class="amount">{{ number_format($item->price * $item->quantity,0,",",".") }} đ</span></td>
-                                            <td class="product-remove"><a href="#"><i class="fa fa-times"></i></a></td>
+
+                                            <form action="{{ route('cart.remove') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" value="{{ $item->id }}" name="id">
+                                                <td class="product-remove"><button class="bg-red-600" type="submit">Xoá</button></td>
+                                            </form>
+
                                         </tr>
                                     @endforeach
 

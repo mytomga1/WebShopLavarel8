@@ -46,26 +46,30 @@
                 <div class="row mb-25">
                     <div class="col-xl-12">
                         <div class="abs-section-title text-center">
-                            <span>LOCATION STORE</span>
-                            <h4>Where We Are</h4>
-                            <p>The perfect way to enjoy brewing tea on low hanging fruit to identify. Duis autem vel eum iriure dolor in hendrerit <br> in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.</p>
+                            <span>SHOPBEE STORE</span>
+                            <h4>Shopbee là nền tảng thương mại điện tử hàng đầu tại VN.</h4>
+                            <p>Ra mắt năm 2022, nền tảng thương mại Shopbee được xây dựng nhằm cung cấp cho người dùng những trải nghiệm dễ dàng, an toàn
+                                <br> nhanh chóng khi mua sắm trực tuyến thông qua hệ thống hỗ trợ thanh toán và vận hành vững mạnh
+                                <br> Chúng tôi có niềm tin mạnh mẽ rằng trải nghiệm mua sắm trực tuyến phải đơn giản, dễ dàng và mang đến cảm xúc vui thích. Niềm tin này
+                                <br> truyền cảm hứng và thúc đẩy chúng tôi mỗi ngày tại Shopee.
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="col-xl-6 col-lg-3 col-md-6">
                         <div class="location-item mb-30">
                             <div class="location-image w-img mb-20">
                                 <img src="assets/img/location/location-1.jpg" alt="">
                             </div>
-                            <h6>26 Rue Pelleport - Paris</h6>
+                            <h6>Chi Nhánh 1</h6>
                             <div class="sm-item-loc sm-item-border mb-20">
                                 <div class="sml-icon mr-20">
                                     <i class="fal fa-map-marker-alt"></i>
                                 </div>
                                 <div class="sm-content">
                                     <span>Find us</span>
-                                    <p>Rue Saint-Antoine, Paris, France  </p>
+                                    <p>{{$setting -> address}}  </p>
                                 </div>
                             </div>
                             <div class="sm-item-loc sm-item-border mb-20">
@@ -74,7 +78,7 @@
                                 </div>
                                 <div class="sm-content">
                                     <span>Call us</span>
-                                    <p><a href="tel:+8804568">(+100) 123 456 7890</a></p>
+                                    <p><a href="#">(+84) {{$setting -> phone}}</a></p>
                                 </div>
                             </div>
                             <div class="sm-item-loc mb-20">
@@ -83,24 +87,24 @@
                                 </div>
                                 <div class="sm-content">
                                     <span>Mail us</span>
-                                    <p><a href="mailto:store@company.com">store@company.com</a></p>
+                                    <p><a href="{{$setting -> email}}">{{$setting -> email}}</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="col-xl-6 col-lg-3 col-md-6">
                         <div class="location-item mb-30">
                             <div class="location-image w-img mb-20">
                                 <img src="assets/img/location/location-2.jpg" alt="">
                             </div>
-                            <h6>150 Stanley Rd - London</h6>
+                            <h6>Chi nhánh 2</h6>
                             <div class="sm-item-loc sm-item-border mb-20">
                                 <div class="sml-icon mr-20">
                                     <i class="fal fa-map-marker-alt"></i>
                                 </div>
                                 <div class="sm-content">
                                     <span>Find us</span>
-                                    <p>Brick Ln, Spitalfields, London E1, UK</p>
+                                    <p>{{$setting -> address}}</p>
                                 </div>
                             </div>
                             <div class="sm-item-loc sm-item-border mb-20">
@@ -109,7 +113,7 @@
                                 </div>
                                 <div class="sm-content">
                                     <span>Call us</span>
-                                    <p><a href="tel:+8804568">(+100) 123 456 7890</a></p>
+                                    <p><a href="#">(+84) {{$setting -> phone}}</a></p>
                                 </div>
                             </div>
                             <div class="sm-item-loc mb-20">
@@ -118,81 +122,12 @@
                                 </div>
                                 <div class="sm-content">
                                     <span>Mail us</span>
-                                    <p><a href="mailto:store@company.com">store@company.com</a></p>
+                                    <p><a href="{{$setting -> email}}">{{$setting -> email}}</a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="location-item mb-30">
-                            <div class="location-image w-img mb-20">
-                                <img src="assets/img/location/location-3.jpg" alt="">
-                            </div>
-                            <h6>1357 Prospect - New York</h6>
-                            <div class="sm-item-loc sm-item-border mb-20">
-                                <div class="sml-icon mr-20">
-                                    <i class="fal fa-map-marker-alt"></i>
-                                </div>
-                                <div class="sm-content">
-                                    <span>Find us</span>
-                                    <p>Atlantic, Brooklyn, New York, US</p>
-                                </div>
-                            </div>
-                            <div class="sm-item-loc sm-item-border mb-20">
-                                <div class="sml-icon mr-20">
-                                    <i class="fal fa-phone-alt"></i>
-                                </div>
-                                <div class="sm-content">
-                                    <span>Call us</span>
-                                    <p><a href="tel:+8804568">(+100) 123 456 7890</a></p>
-                                </div>
-                            </div>
-                            <div class="sm-item-loc mb-20">
-                                <div class="sml-icon mr-20">
-                                    <i class="fal fa-envelope"></i>
-                                </div>
-                                <div class="sm-content">
-                                    <span>Mail us</span>
-                                    <p><a href="mailto:store@company.com">store@company.com</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="location-item mb-30">
-                            <div class="location-image w-img mb-20">
-                                <img src="assets/img/location/location-4.jpg" alt="">
-                            </div>
-                            <h6>86 Georgia Rd - Mardrid</h6>
-                            <div class="sm-item-loc sm-item-border mb-20">
-                                <div class="sml-icon mr-20">
-                                    <i class="fal fa-map-marker-alt"></i>
-                                </div>
-                                <div class="sm-content">
-                                    <span>Find us</span>
-                                    <p>Calle del Correo, 4, Madrid, Spain</p>
-                                </div>
-                            </div>
-                            <div class="sm-item-loc sm-item-border mb-20">
-                                <div class="sml-icon mr-20">
-                                    <i class="fal fa-phone-alt"></i>
-                                </div>
-                                <div class="sm-content">
-                                    <span>Call us</span>
-                                    <p><a href="tel:+8804568">(+100) 123 456 7890</a></p>
-                                </div>
-                            </div>
-                            <div class="sm-item-loc mb-20">
-                                <div class="sml-icon mr-20">
-                                    <i class="fal fa-envelope"></i>
-                                </div>
-                                <div class="sm-content">
-                                    <span>Mail us</span>
-                                    <p><a href="mailto:store@company.com">store@company.com</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
