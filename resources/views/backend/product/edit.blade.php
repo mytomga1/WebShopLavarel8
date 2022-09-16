@@ -20,6 +20,24 @@
 
     <!-- Main content -->
     <section class="content">
+
+        <!-- bản thông báo lỗi từ server -->
+        <div class="row">
+            <div class="col-md-6">
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div><!-- bản thông báo lỗi từ server -end-->
+
         <div class="row">
             <!-- left column -->
             <div class="col-md-12">
@@ -151,15 +169,15 @@
                                 <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter ...">{{ $product->description }}</textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="metaTitle" id="label-meta-title">Meta Title :</label>
-                                <textarea id="metaTitle" name="metaTitle" class="form-control" rows="3" placeholder="Enter ...">{{ $product->meta_title }}</textarea>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="metaTitle" id="label-meta-title">Meta Title :</label>--}}
+{{--                                <textarea id="metaTitle" name="metaTitle" class="form-control" rows="3" placeholder="Enter ...">{{ $product->meta_title }}</textarea>--}}
+{{--                            </div>--}}
 
-                            <div class="form-group">
-                                <label for="metaDescription" id="label-meta-description">Meta Description :</label>
-                                <textarea id="metaDescription" name="metaDescription" class="form-control" rows="3" placeholder="Enter ...">{{ $product->meta_descprition }}</textarea>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="metaDescription" id="label-meta-description">Meta Description :</label>--}}
+{{--                                <textarea id="metaDescription" name="metaDescription" class="form-control" rows="3" placeholder="Enter ...">{{ $product->meta_descprition }}</textarea>--}}
+{{--                            </div>--}}
 
                         </div>
                         <!-- /.box-body -->
@@ -217,16 +235,11 @@
                 }
                 $('#price').val(price);
             }
-            $('.btnCreate').click(function () {
+            $('.btnSave').click(function () {
                 if ($('#name').val() === '') {
                     $('#name').notify('Bạn nhập chưa nhập tên sản phẩm','error');
                     document.getElementById('name').scrollIntoView();
                     return false;
-                }
-                if ($('#image').val() === '') {
-                    $('#image').notify('Bạn nhập chưa chọn ảnh ','error',{ position:"right" });
-                    document.getElementById('image').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
-                        return false;
                 }
                 if ($('#stock').val() === '') {
                     $('#stock').notify('Bạn nhập chưa nhập số lượng','error');
@@ -256,11 +269,6 @@
                 if ($('#brand_id').val() === '0') {
                     $('#brand_id').notify('Bạn nhập chưa chọn thương hiệu','error');
                     document.getElementById('vendor_id').scrollIntoView();
-                    return false;
-                }
-                if ($('#position').val() === '') {
-                    $('#position').notify('Bạn nhập chưa nhập vị trí','error');
-                    document.getElementById('price').scrollIntoView();
                     return false;
                 }
                 var summary = CKEDITOR.instances['summary'].getData();

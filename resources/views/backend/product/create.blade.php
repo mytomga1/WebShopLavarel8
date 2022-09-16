@@ -143,15 +143,15 @@
                                 <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="meta_title" id="label-meta-title">Meta title</label>
-                                <textarea id="meta_title" name="meta_title" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="meta_title" id="label-meta-title">Meta title</label>--}}
+{{--                                <textarea id="meta_title" name="meta_title" class="form-control" rows="3" placeholder="Enter ..."></textarea>--}}
+{{--                            </div>--}}
 
-                            <div class="form-group">
-                                <label for="meta_description" id="label-meta-description">Meta description</label>
-                                <textarea id="meta_description" name="meta_description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="meta_description" id="label-meta-description">Meta description</label>--}}
+{{--                                <textarea id="meta_description" name="meta_description" class="form-control" rows="3" placeholder="Enter ..."></textarea>--}}
+{{--                            </div>--}}
 
                         </div>
                         <!-- /.box-body -->

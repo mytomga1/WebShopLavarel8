@@ -206,6 +206,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'name' => 'required|max:255',
+            'stock' => 'required|max:255',
+            'price' => 'required|max:255',
+            'sale' => 'required|max:255',
+            'category_id' => 'required|max:255',
+            'brand_id' => 'required|max:255',
+            'vendor_id' => 'required|max:255',
+            'summary' => 'required',
+            'description' => 'required',
+        ],[
+            'name.required' => 'Bạn cần phải nhập tên sản phẩm',
+            'stock' => 'Bạn cần phải nhập số lượng sản phẩm',
+            'price' => 'Bạn cần phải nhập giá sản phẩm',
+            'sale' => 'Bạn cần phải nhập giá khuyến mãi sản phẩm',
+            'category_id' => 'Bạn cần phải chọn danh mục',
+            'brand_id' => 'Bạn cần phải chọn nhãn hiệu',
+            'vendor_id' => 'Bạn cần phải chọn nhà cung cấp',
+            'summary' => 'Bạn cần phải nhập tóm tắt sp',
+            'description' => 'Bạn cần phải nhập mô tả chi tiết sp',
+        ]);
 
         $product = Product::findOrFail($id);
 
@@ -243,6 +265,7 @@ class ProductController extends Controller
         $is_active = 0;
         if($request->has('is_active')) { //Kiem tra xem is_active co ton tai khong
             $is_active = $request->input('is_active');
+            if ($is_active == null) $is_active=0;
         }
         $product->is_active = $is_active;
 
@@ -250,6 +273,7 @@ class ProductController extends Controller
         $is_hot = 0;
         if($request->has('is_hot')) { //Kiem tra xem is_active co ton tai khong
             $is_hot = $request->input('is_hot');
+            if ($is_hot == null) $is_hot=0;
         }
         $product->is_hot = $is_hot;
 
@@ -257,6 +281,7 @@ class ProductController extends Controller
         $position=0;
         if($request->has('position')){
             $position = $request->input('position');
+            if ($position == null) $position=0;
         }
         $product->position = $position;
 

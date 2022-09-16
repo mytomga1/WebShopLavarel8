@@ -99,8 +99,8 @@
                         <a href="#">
                             <i class="fa fa-address-book-o"></i> <span>Quản Lý Tài Khoản</span>
                             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
                         <ul class="treeview-menu" style="display: none;">
                             <li><a href="{{route('admin.user.index')}}"><i class="fa fa-circle-o"></i> Danh Sách Tài Khoản</a></li>

@@ -68,22 +68,36 @@
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mật khẩu mới (*)</label>
                                 <input value="" type="text" class="form-control" id="password" name="password" placeholder="">
+
                             </div>
 
-                            <div class="form-group">
-                                <label>Vai trò</label>
-                                <select class="form-control" name="role_id" id="role_id">
-                                    <option value="">-- chọn --</option>
-                                    <option {{ $model->role_id == 1 ? 'selected' : '' }} value="1">Administrator</option>
-                                    <option {{ $model->role_id == 2 ? 'selected' : '' }} value="2">Member</option>
-                                </select>
-                            </div>
+                            @if(\Auth::user()->role_id == 1)
+                                <div class="form-group">
+                                    <label>Vai trò</label>
+                                    <select class="form-control" name="role_id" id="role_id">
+                                        <option value="">-- chọn --</option>
+                                        <option {{ $model->role_id == 1 ? 'selected' : '' }} value="1">Administrator</option>
+                                        <option {{ $model->role_id == 2 ? 'selected' : '' }} value="2">Member</option>
+                                    </select>
+                                </div>
 
-                            <div class="checkbox">
-                                <label>
-                                    <input {{ $model->is_active == 1 ? 'checked' : '' }} value="1" type="checkbox" name="is_active" id="is_active"> Kích hoạt
-                                </label>
-                            </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input {{ $model->is_active == 1 ? 'checked' : '' }} value="1" type="checkbox" name="is_active" id="is_active"> Kích hoạt
+                                    </label>
+                                </div>
+                            @else
+                                <div class="form-group">
+                                    <label>Vai trò :&nbsp; {!! $model->role_id == 1 ? '<span class="badge bg-danger">Quản trị viên</span>' : '<span class="badge bg-green">Nhân viên</span>' !!}</label>
+                                    <input value="{{ $model->role_id }}" id="role_id" name="role_id" hidden>
+                                </div>
+
+                                <div class="checkbox">
+                                    <label hidden>
+                                        <input {{ $model->is_active == 1 ? 'checked' : '' }} value="1" type="checkbox" name="is_active" id="is_active" hidden> Kích hoạt
+                                    </label>
+                                </div>
+                            @endif
                         </div>
                         <!-- /.box-body -->
 
@@ -103,11 +117,13 @@
 
 @section('js')
     <script type="text/javascript">
+
         $( document ).ready(function() {
             CKEDITOR.replace( 'description' );
             $('.btnCreate').click(function () {
             });
         });
+
 
     </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+    @extends('backend.layouts.main')
 {{--Create: Lê Thành Trung--}}
 {{--Date : 11/7/2022--}}
 {{--BannerController--}}
@@ -136,6 +136,13 @@
                     document.getElementById('title').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
                         return false;
                 }
+
+                if ($('#image').val() === '') {
+                    $('#image').notify('Bạn nhập chưa chọn ảnh ','error',{ position:"right" });
+                    document.getElementById('image').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
+                        return false;
+                }
+
                 var description = CKEDITOR.instances['description'].getData();
                 if (description === '') {
                     $('#label-description').notify('Bạn nhập chưa nhập mô tả','error',{ position:"right" });

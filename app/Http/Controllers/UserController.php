@@ -161,6 +161,7 @@ class UserController extends Controller
         }
 
         $User->role_id = $request->input('role_id');
+
         //Trang thai
         $is_active = 0;
         if($request->has('is_active')) { //Kiem tra xem is_active co ton tai khong
@@ -170,7 +171,8 @@ class UserController extends Controller
         $User->save();
 
         //Chuyen huong ve trang danh sach
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.dashboard');
+
     }
 
     /**

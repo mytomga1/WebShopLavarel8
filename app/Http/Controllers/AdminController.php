@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,7 +13,18 @@ class AdminController extends Controller
 {
     public function dashboard(){
 
-        return view('backend.admin.dashboard');
+        // $numOrder = Order::count();
+        $numArticle = Articles::count();
+        $numProduct = Product::count();
+        $numUser = User::count();
+        $numCategory = Category::count();
+
+        return view('backend.admin.dashboard', [
+            'numArticle' => $numArticle,
+            'numProduct' => $numProduct,
+            'numUser' => $numUser,
+            'numCategory' => $numCategory
+        ]);
     }
 
     public function login()

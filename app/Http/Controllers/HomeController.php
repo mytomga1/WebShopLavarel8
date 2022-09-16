@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Settings;
+use App\Models\Vendor;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -24,7 +26,15 @@ class HomeController extends Controller
         // Lấy dữ liệu - Danh mục, có trạng thái là hiển thị
         $this->categories = Category::where(['is_active' => 1])->get();
 
+        // Lấy dữ liệu - Banner, có trạng thái là hiển thị
         $banners = Banner::where(['is_active' => 1])
+            // where('type', 5)
+            //->orderBy('created_at')
+            ->orderBy('id')
+            ->get();
+
+        // Lấy dữ liệu - Vendor đỗ vào thanh Vendor footer, có trạng thái là hiển thị
+        $vendorFooter = Vendor::where(['is_active' => 1])
             // where('type', 5)
             //->orderBy('created_at')
             ->orderBy('id')
@@ -40,6 +50,7 @@ class HomeController extends Controller
 
         View::share('categories', $this->categories);
         View::share('banners', $banners);
+        View::share('vendorFooter', $vendorFooter);
         View::share('articles', $articles);
         View::share('setting', $setting);
     }
@@ -48,6 +59,7 @@ class HomeController extends Controller
     {
         // khu vuc show sp cua Top Featured Products
         $hotProduct = Product::where('is_hot', 1)->where('is_active', 1)->limit(2)->orderBy('id', 'desc')->get();
+        // $brandsFooter = Brand::where('is_active', 1)->get();
 
         $list = []; // chứa danh sách sản phẩm  theo danh mục
 
@@ -78,7 +90,7 @@ class HomeController extends Controller
 
             }
         }
-        return view('frontend.index', ['list' => $list])->with('hotProduct', $hotProduct);
+        return view('frontend.index', ['list' => $list])->with('hotProduct', $hotProduct);//->with('brandsFooter', $brandsFooter)
     }
 
     // Controller chức năng search
@@ -186,7 +198,7 @@ class HomeController extends Controller
         return redirect('/lien-he')->with('msgContact', 'Gửi liên hệ thành công !');
     }
 
-    // Controller Trang Danh sánh bài viết
+    // Controller Trang Danh sách bài viết
     public function articles(){
 
         $articles = Articles::latest()->paginate(6);
@@ -206,6 +218,7 @@ class HomeController extends Controller
 
         return view('frontend.article-detail',['article'=>$article]);
     }
+
 
     // Controller Trang Chi tiết Banner
     public  function bannerDetail($slug){

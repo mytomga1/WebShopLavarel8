@@ -29,6 +29,10 @@ Route::post('remove', [\App\Http\Controllers\HomeController::class, 'removeCart'
 Route::post('clear', [\App\Http\Controllers\HomeController::class, 'clearAllCart'])->name('cart.clear');
 
 Route::get('/banner/{slug}', [\App\Http\Controllers\HomeController::class, 'bannerDetail'])->name('banner-detail');
+
+//Route::get('/nha-cung-cap', [\App\Http\Controllers\HomeController::class, 'vendors'])->name('vendors');
+//Route::get('/nha-cung-cap/{slug}', [\App\Http\Controllers\HomeController::class, 'vendorDetail'])->name('vendor-detail');
+
 Route::get('/tin-tuc', [\App\Http\Controllers\HomeController::class, 'articles'])->name('articles');
 Route::get('/tin-tuc/{slug}', [\App\Http\Controllers\HomeController::class, 'ArticleDetail'])->name('article-detail');
 

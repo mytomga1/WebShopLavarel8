@@ -8,7 +8,7 @@
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{asset('/admin')}}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
         </ol>
     </section>
@@ -23,7 +23,7 @@
                     <div class="inner">
                         <h3>150</h3>
 
-                        <p>New Orders</p>
+                        <p>Đơn đặt hàng</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -32,55 +32,81 @@
                 </div>
             </div>
             <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                        <p>Bounce Rate</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-stats-bars"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3>44</h3>
-
-                        <p>User Registrations</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-            <!-- ./col -->
+            <!-- small box -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3>{{$numCategory}}</h3>
 
-                        <p>Unique Visitors</p>
+                        <p>Danh Mục</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="fa fa-list"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{route('admin.category.index')}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div><!-- ./col -->
+
+
+            <!-- small box -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{$numProduct}}</h3>
+
+                        <p>Sản phẩm</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <a href="{{route('admin.product.index')}}" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div><!-- ./col -->
+
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{$numArticle}}<sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Bài viết</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-newspaper-o"></i>
+                    </div>
+                    <a href="{{route('admin.article.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
+
+            @if(\Auth::user()->role_id == 1)
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>{{ $numUser }}</h3>
+
+                            <p>Accounts</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="{{route('admin.user.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            @endif
         </div>
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
+            
             <!-- Left col -->
             <section class="col-lg-7 connectedSortable">
                 <!-- Custom tabs (Charts with tabs)-->
@@ -99,6 +125,7 @@
                              style="position: relative; height: 300px;"></div>
                     </div>
                 </div>
+
                 <!-- /.nav-tabs-custom -->
 
 {{--                <!-- Chat box -->--}}

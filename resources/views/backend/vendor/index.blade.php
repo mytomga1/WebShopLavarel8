@@ -54,7 +54,7 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>
                                         @if($item->image && file_exists(public_path($item->image)))
-                                            <img src="{{ asset($item->image) }}" width="100" height="75" alt="">
+                                            <img src="{{ asset($item->image) }}" width="30%" height="75" alt="">
                                         @else
                                             <img src="{{ asset('frontend\Img404.png') }}" width="100" height="75" alt="">
                                         @endif
@@ -81,7 +81,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">
-                            {{ $data->links() }}
+                            {!! $data->links('vendor.pagination.custom2') !!}
                         </ul>
                     </div>
                 </div>
