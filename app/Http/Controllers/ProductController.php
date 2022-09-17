@@ -19,23 +19,28 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $category = Category::all();
         $params = $request->all();
         $filter_type = $params['filter_type'] ?? 2;
 
         // if check admin
         if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
             if ($filter_type == 1) {
-                $data = Product::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+                //$data = Product::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+                $data = Product::withTrashed()->latest()->get(); // show tất cả dữ liệu nếu $filter_type == 1
             } elseif ($filter_type == 2) {
-                $data = Product::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+                //$data = Product::latest()->paginate(100); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+                $data = Product::latest()->get(); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
             } else {
-                $data = Product::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+                //$data = Product::onlyTrashed()->latest()->paginate(100); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+                $data = Product::onlyTrashed()->latest()->get(); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
             }
 
         } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
 
             // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-            $data = Product::latest()->paginate(10);
+            //$data = Product::latest()->paginate(10);
+            $data = Product::all();
         }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi
@@ -48,7 +53,7 @@ class ProductController extends Controller
         //$data = Product::all(); // tương đương với câu lệnh SELECT * FORM Products
 
         // truyền dữ liệu sang view với 2 tham số 1 tên view và 2 là mảng dữ liệu truyền sang
-        return view('backend.product.index', ['data' => $data, 'filter_type' => $filter_type]);
+        return view('backend.product.index', ['data' => $data, 'category' => $category, 'filter_type' => $filter_type]);
     }
 
     /**

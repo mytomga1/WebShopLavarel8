@@ -429,10 +429,18 @@
                                                                 <i class="fal fa-heart"></i>
                                                                 <i class="fal fa-heart"></i>
                                                             </a>
-                                                            <a href="#" class="icon-box icon-box-1">
-                                                                <i class="fal fa-layer-group"></i>
-                                                                <i class="fal fa-layer-group"></i>
-                                                            </a>
+                                                            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <input type="hidden" value="{{ $product->id }}" name="id">
+                                                                <input type="hidden" value="{{ $product->name }}" name="name">
+                                                                <input type="hidden" value="{{ $product->sale }}" name="price">
+                                                                <input type="hidden" value="{{ $product->image }}"  name="image">
+                                                                <input type="hidden" value="1"  name="quantity">
+                                                                <button class="icon-box icon-box-1">
+                                                                    <i class="fal fa-shopping-cart"></i>
+                                                                    <i class="fal fa-shopping-cart"></i>
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </div>
 
@@ -458,10 +466,18 @@
 
 
                                                     <div class="product__add-cart-s text-center">
-                                                        <button type="button" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
-                                                            Thêm vào giỏ hàng
-                                                        </button>
-                                                        <button type="button" href="{{ route('product', ['product' => $product->slug]) }}" class="wc-checkout d-flex align-items-center justify-content-center w-100">{{-- data-bs-toggle="modal" data-bs-target="#productModalId"--}}
+                                                        <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $product->id }}" name="id">
+                                                            <input type="hidden" value="{{ $product->name }}" name="name">
+                                                            <input type="hidden" value="{{ $product->sale }}" name="price">
+                                                            <input type="hidden" value="{{ $product->image }}"  name="image">
+                                                            <input type="hidden" value="1"  name="quantity">
+                                                            <button type="submit" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
+                                                                Thêm vào giỏ hàng
+                                                            </button>
+                                                        </form>
+                                                        <button class="wc-checkout d-flex align-items-center justify-content-center w-100">{{-- data-bs-toggle="modal" data-bs-target="#productModalId"--}}
                                                             <a href="{{ route('product', ['product' => $product->slug]) }}">Chi tiết</a>
                                                         </button>
                                                     </div>
@@ -504,8 +520,8 @@
                                                                             <i class="fal fa-heart"></i>
                                                                         </a>
                                                                         <a href="#" class="icon-box icon-box-1">
-                                                                            <i class="fal fa-layer-group"></i>
-                                                                            <i class="fal fa-layer-group"></i>
+                                                                            <i class="fal fa-shopping-cart"></i>
+                                                                            <i class="fal fa-shopping-cart"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>

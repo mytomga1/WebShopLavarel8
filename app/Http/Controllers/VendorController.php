@@ -24,17 +24,21 @@ class VendorController extends Controller
         // if check admin
         if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
             if ($filter_type == 1) {
-                $data = Vendor::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+                //$data = Vendor::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+                $data = Vendor::withTrashed()->latest()->get(); // show tất cả dữ liệu nếu $filter_type == 1
             } elseif ($filter_type == 2) {
-                $data = Vendor::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+                //$data = Vendor::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
+                $data = Vendor::latest()->get(); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
             } else {
-                $data = Vendor::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+                //$data = Vendor::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+                $data = Vendor::onlyTrashed()->latest()->get(); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
             }
 
         } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
 
             // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-            $data = Vendor::latest()->paginate(10);
+            //$data = Vendor::latest()->paginate(10);
+            $data = Vendor::latest()->get();
         }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi

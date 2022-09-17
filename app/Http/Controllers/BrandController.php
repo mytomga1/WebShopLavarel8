@@ -24,17 +24,21 @@ class BrandController extends Controller
         // if check admin
         if (Auth::user()->role_id == 1) { // nếu user là admin thì show combobox filter dữ liệu
             if ($filter_type == 1) {
-                $data = Brand::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+                //$data = Brand::withTrashed()->latest()->paginate(10); // show tất cả dữ liệu nếu $filter_type == 1
+                $data = Brand::withTrashed()->latest()->get(); // show tất cả dữ liệu nếu $filter_type == 1
             } elseif ($filter_type == 2) {
+                //$data = Brand::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
                 $data = Brand::latest()->paginate(10); // ko show dữ liệu những thằng bị softDelete nếu $filter_type == 2
             } else {
-                $data = Brand::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+                //$data = Brand::onlyTrashed()->latest()->paginate(10); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
+                $data = Brand::onlyTrashed()->latest()->get(); // chỉ show dữ liệu những thằng bị softDelete nếu $filter_type == 3
             }
 
         } else { // nếu tài khoàn ko phải admin thì ko show combobox filter
 
             // Cách 1 : lấy dữ liệu mới nhất và phân trang - mỗi trang 10 bản ghi
-            $data = Brand::latest()->paginate(10);
+            //$data = Brand::latest()->paginate(10);
+            $data = Brand::latest()->get();
         }
 
         //Cách 2: Lấy dữ liệu phân trang - mỗi trang 10 bản ghi

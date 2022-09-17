@@ -14,6 +14,107 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+
+            <!-- Bảng mẫu số 1 -->
+{{--            <div class="col-xs-12 table-responsive">--}}
+{{--                <div class="box">--}}
+{{--                    <div class="box-header with-border">--}}
+{{--                        @if(\Auth::user()->role_id == 1) <!-- kiểm tra tài khoản có phải là admin ko, nếu là admin thì show combobox filter -->--}}
+{{--                        <div class="form-group" style="width: 150px;float: left;margin: 0">--}}
+{{--                            <select class="form-control" id="filter_type" name="filter_type">--}}
+{{--                                <option {{ $filter_type == 1 ? 'selected' : '' }} value="1">Tất cả</option>--}}
+{{--                                <option {{ $filter_type == 2 ? 'selected' : '' }} value="2">Đang Sử Dụng</option>--}}
+{{--                                <option {{ $filter_type == 3 ? 'selected' : '' }} value="3">Thùng rác</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                        @endif--}}
+
+{{--                            <br/>--}}
+{{--                            <br/>--}}
+{{--                            <input style="width: 500px; height: 34px;margin: 0px" value="" type='text' id='searchByName' name="searchByName" placeholder='Enter name' >--}}
+{{--                            <select  name="searchByParent_id" id='searchByParent_id'--}}
+{{--                                     style="width: 150px;float: left;margin: 0"--}}
+{{--                                     data-search="true" data-silent-initial-value-set="true"  class="form-control">--}}
+{{--                                <option value="0">-- Chọn Danh Mục --</option>--}}
+{{--                                @php--}}
+{{--                                    function showCategories($categories, $parent_id = 0, $char = '') {--}}
+{{--                                        foreach ($categories as $key => $item) {--}}
+{{--                                            if ($item['parent_id'] == $parent_id)--}}
+{{--                                            {--}}
+{{--                                                echo '<option value="'.$item['id'].'">';--}}
+{{--                                                    echo $char . $item['name'];--}}
+{{--                                                echo '</option>';--}}
+{{--                                                unset($categories[$key]);--}}
+{{--                                                showCategories($categories, $item['id'], $char.'|---');--}}
+{{--                                            }--}}
+{{--                                        }--}}
+{{--                                    }--}}
+{{--                                    showCategories($category);--}}
+{{--                                @endphp--}}
+{{--                            </select>--}}
+{{--                            <button class="btn btn-primary btn-search"><i class="fa fa-search" aria-hidden="true"></i></button>--}}
+
+{{--                        <a href="{{ route('admin.product.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>--}}
+{{--                    </div>--}}
+{{--                    <!-- /.box-header -->--}}
+{{--                    <div class="box-body">--}}
+{{--                        <table class="table table-striped">--}}
+{{--                            <tr>--}}
+{{--                                <th style="width: 10px">TT</th>--}}
+{{--                                <th>Hình ảnh</th>--}}
+{{--                                <th>Tên</th>--}}
+{{--                                <th>Danh Mục</th>--}}
+{{--                                <th>Số lượng</th>--}}
+{{--                                <th>Trạng thái</th>--}}
+{{--                                <th>Hành động</th>--}}
+{{--                            </tr>--}}
+{{--                            @foreach($data as $key => $item)--}}
+{{--                                @php--}}
+{{--                                    @endphp--}}
+{{--                                <tr class="item-{{ $item->id }}">--}}
+{{--                                    <td>{{ $key + 1 }}</td>--}}
+{{--                                    <td>--}}
+{{--                                        @if($item->image && file_exists(public_path($item->image)))--}}
+{{--                                            <img src="{{ asset($item->image) }}" width="100" height="75" alt="">--}}
+{{--                                        @else--}}
+{{--                                            <img src="{{ asset('frontend\Img404.png') }}" width="100" height="75" alt="">--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
+{{--                                    <td>{{ $item->name }}</td>--}}
+{{--                                    <td> {{ !empty($item->category->name) ? $item->category->name : '' }}</td> --}}{{-- kiểm tra nếu category ko null thì show ra category name còn ko (?) hiển thị ''--}}
+{{--                                    <td>{{ $item->stock }}</td>--}}
+{{--                                    <td>--}}
+{{--                                        {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}--}}
+{{--                                    </td>--}}
+{{--                                    <td class="action" >--}}
+{{--                                        <a href="{{ route('admin.product.edit', ['product' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>--}}
+{{--                                        @if($item->deleted_at == null)--}}
+{{--                                            <span  data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>--}}
+{{--                                            <span style="display:none;" data-id="{{ $item->id }}" title="Khôi phục" class="btn btn-flat btn-warning restoreItem"><i class="fa fa-refresh"></i></span>--}}
+{{--                                        @else--}}
+{{--                                            <span style="display:none;" data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>--}}
+{{--                                            <span  data-id="{{ $item->id }}" title="Khôi phục" class="btn btn-flat btn-warning restoreItem"><i class="fa fa-refresh"></i></span>--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
+{{--                        </table>--}}
+{{--                    </div>--}}
+
+
+
+{{--                    <!-- /.box-body -->--}}
+{{--                    <div class="box-footer clearfix">--}}
+{{--                        <ul class="pagination pagination-sm no-margin pull-right">--}}
+{{--                            {!! $data->links('vendor.pagination.custom2') !!}--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <!-- /.box -->--}}
+{{--            </div>--}}
+            <!-- Bản mẫu số 1 -->
+
+            <!-- Bản mẫu số 2 -->
             <div class="col-xs-12 table-responsive">
                 <div class="box">
                     <div class="box-header with-border">
@@ -30,9 +131,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <table class="table table-striped">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
                             <tr>
-                                <th style="width: 10px">TT</th>
+                                <th style="width: 10px">ID</th>
                                 <th>Hình ảnh</th>
                                 <th>Tên</th>
                                 <th>Danh Mục</th>
@@ -40,11 +142,13 @@
                                 <th>Trạng thái</th>
                                 <th>Hành động</th>
                             </tr>
-                            @foreach($data as $key => $item)
+                            </thead>
+                            <tbody>
+                                @foreach($data as $key => $item)
                                 @php
                                     @endphp
                                 <tr class="item-{{ $item->id }}">
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $item->id }}</td>
                                     <td>
                                         @if($item->image && file_exists(public_path($item->image)))
                                             <img src="{{ asset($item->image) }}" width="100" height="75" alt="">
@@ -70,20 +174,14 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            </tbody>
                         </table>
                     </div>
-
-
-
                     <!-- /.box-body -->
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            {!! $data->links('vendor.pagination.custom2') !!}
-                        </ul>
-                    </div>
                 </div>
                 <!-- /.box -->
             </div>
+            <!-- Bản mẫu số 2 -->
         </div>
     </section>
 @endsection
@@ -169,6 +267,17 @@
                 // sử dụng window.location.href để truyền dữ liệu filter và chuyển trang
                 window.location.href = "{{ route('admin.product.index') }}?filter_type="+filter_type;
             });
+
+            // bắt sự kiện filter table by colum and search
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false
+            })
         });
     </script>
 @endsection
