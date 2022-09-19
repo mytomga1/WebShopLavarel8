@@ -80,4 +80,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () { 
 
     Route::resource('/vendor', \App\Http\Controllers\VendorController::class);
     Route::post('vendor/restore/{vendor}', [\App\Http\Controllers\VendorController::class, 'restore'])->name('vendor.restore');
+
+    Route::resource('/position', \App\Http\Controllers\PositionController::class);
+    Route::post('position/restore/{position}', [\App\Http\Controllers\PositionController::class, 'restore'])->name('position.restore');
 });

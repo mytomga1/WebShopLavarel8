@@ -44,50 +44,57 @@
             <!-- 4 slider nhỏ -area-start -->
             <div class="col-xl-5">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-6">
+                    @foreach($CategoryType1 as $type1)
+                        <div class="col-xl-6 col-lg-6 col-md-6">
                         <div class="banner__item p-relative w-img mb-30">
                             <div class="banner__img b-radius-2">
-                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-10.jpg" alt=""></a>
+                                <a href="{{ route('category', ['category' => $type1->slug ]) }}"><img src="
+                                                                            @if($type1->image && file_exists(public_path($type1->image)))
+                                                                                {{ asset($type1->image) }}
+                                                                            @else
+                                                                                {{ asset('frontend')}}/img/banner/banner-11.jpg }}
+                                                                            @endif
+                                                                            " width="330px" height="200px" title="{{$type1->name}}" alt="{{$type1->name}}"></a>
                             </div>
                             <div class="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Canyon <br> Star Raider</a></h6>
-                                <p>Headphone & Audio</p>
+                                <h6><a href="{{ route('category', ['category' => $type1->slug ]) }}">{{$type1->name}}</a></h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                        <div class="banner__item p-relative w-img mb-30">
-                            <div class="banner__img b-radius-2">
-                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-11.jpg" alt=""></a>
-                            </div>
-                            <div class="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Phone <br> Galaxy S20</a></h6>
-                                <p>Cellphone & Tablets</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                        <div class="banner__item p-relative w-img mb-30">
-                            <div class="banner__img b-radius-2">
-                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-13.jpg" alt=""></a>
-                            </div>
-                            <div class="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Galaxy <br> Buds Plus</a></h6>
-                                <p>Headphone & Audio</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6">
-                        <div class="banner__item p-relative w-img mb-30">
-                            <div class="banner__img b-radius-2">
-                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-12.jpg" alt=""></a>
-                            </div>
-                            <div class="banner__content banner__content-2">
-                                <h6><a href="product-details.html">Chair <br>Swoon Lounge</a></h6>
-                                <p>Headphone & Audio</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+{{--                    <div class="col-xl-6 col-lg-6 col-md-6">--}}
+{{--                        <div class="banner__item p-relative w-img mb-30">--}}
+{{--                            <div class="banner__img b-radius-2">--}}
+{{--                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-11.jpg" alt=""></a>--}}
+{{--                            </div>--}}
+{{--                            <div class="banner__content banner__content-2">--}}
+{{--                                <h6><a href="product-details.html">Phone <br> Galaxy S20</a></h6>--}}
+{{--                                <p>Cellphone & Tablets</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-xl-6 col-lg-6 col-md-6">--}}
+{{--                        <div class="banner__item p-relative w-img mb-30">--}}
+{{--                            <div class="banner__img b-radius-2">--}}
+{{--                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-13.jpg" alt=""></a>--}}
+{{--                            </div>--}}
+{{--                            <div class="banner__content banner__content-2">--}}
+{{--                                <h6><a href="product-details.html">Galaxy <br> Buds Plus</a></h6>--}}
+{{--                                <p>Headphone & Audio</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-xl-6 col-lg-6 col-md-6">--}}
+{{--                        <div class="banner__item p-relative w-img mb-30">--}}
+{{--                            <div class="banner__img b-radius-2">--}}
+{{--                                <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-12.jpg" alt=""></a>--}}
+{{--                            </div>--}}
+{{--                            <div class="banner__content banner__content-2">--}}
+{{--                                <h6><a href="product-details.html">Chair <br>Swoon Lounge</a></h6>--}}
+{{--                                <p>Headphone & Audio</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <!-- 4 slider nhỏ -area-end -->

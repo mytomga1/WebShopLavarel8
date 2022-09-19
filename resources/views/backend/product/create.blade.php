@@ -209,12 +209,12 @@
                 }
                 $('#price').val(price);
             }
-            $('.btnCreate').click(function () {
-                if ($('#name').val() === '') {
-                    $('#name').notify('Bạn nhập chưa nhập tên sản phẩm','error');
-                    document.getElementById('name').scrollIntoView();
-                    return false;
-                }
+                $('.btnCreate').click(function () {
+                    if ($('#name').val() === '') {
+                        $('#name').notify('Bạn nhập chưa nhập tên sản phẩm','error');
+                        document.getElementById('name').scrollIntoView();
+                        return false;
+                    }
                 if ($('#image').val() === '') {
                     $('#image').notify('Bạn nhập chưa chọn ảnh ','error',{ position:"right" });
                     document.getElementById('image').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}

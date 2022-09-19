@@ -71,11 +71,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="position">Vị trí Danh Mục: </label>
-                                <select id="position" name="position" class="form-control">
-                                    <option value="0">-- Chọn Vị trí category --</option>
-                                    @foreach($data as $item)
-                                        <option value="{{$item->position}}">{{$item->position}}</option>
+                                <label for="position">Vị trí danh mục</label>
+                                <select class="form-control" name="position" id="position">
+                                    <option value="0">---Chọn vị trí danh mục---</option>
+                                    @foreach($positions as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -113,6 +113,11 @@
                 if ($('#name').val() === '') {
                     $('#name').notify('Bạn nhập chưa nhập tên danh mục','error',{ position:"right" });
                     document.getElementById('name').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
+                        return false;
+                }
+                if ($('#image').val() === '') {
+                    $('#image').notify('Bạn nhập chưa chọn ảnh ','error',{ position:"right" });
+                    document.getElementById('image').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
                         return false;
                 }
 

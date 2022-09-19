@@ -14,4 +14,10 @@ class Category extends Model
     public function parent(){
         return $this->belongsTo(Category::class, 'parent_id');
     }
+
+    // tạo quan hệ CSDL giữa bảng  danh mục và bảng vị trí
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
 }

@@ -55,9 +55,7 @@
                 <li class="treeview" style="height: auto;">
                     <a href="#">
                         <i class="fa fa-map-o"></i> <span>Banner</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="{{route('admin.banner.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Banner</a></li>
@@ -65,7 +63,19 @@
                     </ul>
                 </li>
 
-                <li><a href="{{route('admin.category.index')}}"><i class="fa fa-list"></i> <span>Quản Lý Danh mục</span></a></li>
+{{--                <li><a href="{{route('admin.category.index')}}"><i class="fa fa-list"></i> <span>Quản Lý Danh mục</span></a></li>--}}
+{{--                <li><a href="{{route('admin.position.index')}}"><i class="fa fa-map-marker"></i> <span>Quản Lý vị trí</span></a></li>--}}
+
+                <li class="treeview" style="height: auto;">
+                    <a href="#">
+                        <i class="fa fa-list"></i> <span>Danh mục</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu" style="display: none;">
+                        <li><a href="{{route('admin.category.index')}}"><i class="fa fa-circle-o"></i> Quản Lý Danh mục</a></li>
+                        <li><a href="{{route('admin.position.index')}}"><i class="fa fa-circle-o"></i> Quản Lý vị trí Danh mục</a></li>
+                    </ul>
+                </li>
 
                 <li class="treeview" style="height: auto;">
                     <a href="#">

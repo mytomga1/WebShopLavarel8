@@ -73,7 +73,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // xác thực dữ liệu - validate
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'password' => 'required|max:255',
+            'role_id' => 'required|max:255',
+        ],[
+            'name.required' => 'Bạn cần phải nhập tên hiển thị',
+            'email' => 'Bạn cần phải nhập email',
+            'password' => 'Bạn cần phải tạo mật khẩu',
+            'role_id' => 'Bạn cần phải chọn vai trò',
+        ]);
 
 
         $User = new User();
@@ -94,13 +105,21 @@ class UserController extends Controller
 
         $User->email = $request->input('email');
         $User->password = bcrypt($request->input('password')); // sử dụng hàm bcrypt() giúp người dùng mã hoá pass sang dạng md5 / sha
-        $User->role_id = $request->input('role_id');
+
+        //Check Role id
+        $is_role = 0;
+        if($request->has('role_id')) { //Kiem tra xem is_active co ton tai khong
+            $is_role = $request->input('role_id');
+        }
+        $User->role_id = $is_role;
+
         //Trang thai
         $is_active = 0;
         if($request->has('is_active')) { //Kiem tra xem is_active co ton tai khong
             $is_active = $request->input('is_active');
         }
         $User->is_active = $is_active;
+
         $User->save();
 
         //Chuyen huong ve trang danh sach
@@ -140,7 +159,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // xác thực dữ liệu - validate
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'role_id' => 'required|max:255',
+        ],[
+            'name.required' => 'Bạn cần phải nhập tên hiển thị',
+            'email' => 'Bạn cần phải nhập email',
+            'role_id' => 'Bạn cần phải chọn vai trò',
+        ]);
+
         $User = User::findOrFail($id);
         $User->name = $request->input('name');
 
@@ -164,7 +193,14 @@ class UserController extends Controller
             $User->password = bcrypt($new_password);
         }
 
-        $User->role_id = $request->input('role_id');
+        //check role
+        $is_role = 0;
+        if($request->has('role_id')) { //Kiem tra xem role_id co ton tai khong
+            $is_role = $request->input('role_id');
+            if ($is_role == null) $is_role=0;
+        }
+        $User->role_id = $is_role;
+        //$User->role_id = $request->input('role_id');
 
         //Trang thai
         $is_active = 0;
@@ -175,7 +211,7 @@ class UserController extends Controller
         $User->save();
 
         //Chuyen huong ve trang danh sach
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.user.index');
 
     }
 

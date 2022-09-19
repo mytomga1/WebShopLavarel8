@@ -26,6 +26,22 @@ class HomeController extends Controller
         // Lấy dữ liệu - Danh mục, có trạng thái là hiển thị
         $this->categories = Category::where(['is_active' => 1])->get();
 
+        // Lấy dữ liệu - Category, có trạng thái là hiển thị 1 và position = 1
+        $CategoryType1 = Category::where(['is_active' => 1])
+            ->where('position', 1)
+            ->orderBy('updated_at')
+            ->limit(4)
+            //->orderBy('id')
+            ->get();
+
+        // Lấy dữ liệu - Category, có trạng thái là hiển thị 1 và position = 3
+        $CategoryType3 = Category::where(['is_active' => 1])
+            ->where('position', 3)
+            ->orderBy('updated_at')
+            ->limit(3)
+            //->orderBy('id')
+            ->get();
+
         // Lấy dữ liệu - Banner, có trạng thái là hiển thị
         $banners = Banner::where(['is_active' => 1])
             // where('type', 5)
@@ -49,6 +65,8 @@ class HomeController extends Controller
 
 
         View::share('categories', $this->categories);
+        View::share('CategoryType1', $CategoryType1);
+        View::share('CategoryType3', $CategoryType3);
         View::share('banners', $banners);
         View::share('vendorFooter', $vendorFooter);
         View::share('articles', $articles);

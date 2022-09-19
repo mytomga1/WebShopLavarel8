@@ -73,7 +73,7 @@
 
                             @if(\Auth::user()->role_id == 1)
                                 <div class="form-group">
-                                    <label>Vai trò</label>
+                                    <label for="role_id">Vai trò</label>
                                     <select class="form-control" name="role_id" id="role_id">
                                         <option value="">-- chọn --</option>
                                         <option {{ $model->role_id == 1 ? 'selected' : '' }} value="1">Administrator</option>
@@ -117,13 +117,25 @@
 
 @section('js')
     <script type="text/javascript">
-
         $( document ).ready(function() {
             CKEDITOR.replace( 'description' );
             $('.btnCreate').click(function () {
+                if ($('#name').val() === '') {
+                    $('#name').notify('Bạn nhập chưa nhập tên hiển thị','error');
+                    document.getElementById('name').scrollIntoView();
+                    return false;
+                }
+                if ($('#email').val() === '') {
+                    $('#email').notify('Bạn nhập chưa nhập email','error');
+                    document.getElementById('email').scrollIntoView();
+                    return false;
+                }
+                if ($('#role_id').val() === '0') {
+                    $('#role_id').notify('Bạn nhập chưa chọn vai trò tài khoản','error',{ position:"right" });
+                    document.getElementById('role_id').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
+                        return false;
+                }
             });
         });
-
-
     </script>
 @endsection

@@ -44,27 +44,27 @@
                         @csrf
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="name">Tên hiển thị: </label>
+                                <label for="name">Tên hiển thị (*): </label>
                                 <input id="name" name="name" type="text" class="form-control" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="avatar">Avatar: </label>
+                                <label for="avatar">Avatar : </label>
                                 <input type="file" name="avatar" id="avatar">
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email: </label>
+                                <label for="email">Email (*): </label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="">
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Mật khẩu: </label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="">
+                                <label for="password">Mật khẩu (*): </label>
+                                <input type="password" class="form-control" id="password" name="password">
                             </div>
 
                             <div class="form-group">
-                                <label for="role_id">Vai trò: </label>
+                                <label for="role_id">Vai trò (*): </label>
                                 <select class="form-control" name="role_id" id="role_id">
                                     <option value="0">-- chọn --</option>
                                     @foreach($role as $item)
@@ -101,6 +101,26 @@
         $( document ).ready(function() {
             CKEDITOR.replace( 'description' );
             $('.btnCreate').click(function () {
+                if ($('#name').val() === '') {
+                    $('#name').notify('Bạn nhập chưa nhập tên hiển thị','error');
+                    document.getElementById('name').scrollIntoView();
+                    return false;
+                }
+                if ($('#email').val() === '') {
+                    $('#email').notify('Bạn nhập chưa nhập email','error');
+                    document.getElementById('email').scrollIntoView();
+                    return false;
+                }
+                if ($('#password').val() === '') {
+                    $('#password').notify('Bạn nhập chưa tạo mật khẩu','error');
+                    document.getElementById('password').scrollIntoView();
+                    return false;
+                }
+                if ($('#role_id').val() === '0') {
+                    $('#role_id').notify('Bạn chưa chọn vai trò','error');
+                    document.getElementById('role_id').scrollIntoView();
+                    return false;
+                }
             });
         });
     </script>

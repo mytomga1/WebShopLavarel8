@@ -143,7 +143,7 @@
                             <div class="col-lg-6">
                                 <div class="features-thum">
                                     <div class="features-product-image w-img">
-                                        <a href="#">
+                                        <a href="{{ route('product', ['product' => $hotPro->slug]) }}">
                                             <img src=" @if($hotPro->image && file_exists(public_path($hotPro->image)))
                                                        {{ asset($hotPro->image) }}
                                                    @else
@@ -169,7 +169,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="product__content product__content-d product__content-d-2">
-                                    <h6><a href="">{{ $hotPro->name }}</a></h6>
+                                    <h6><a href="{{ route('product', ['product' => $hotPro->slug]) }}">{{ $hotPro->name }}</a></h6>
                                     <div class="rating mb-5">
                                         <ul class="rating-d">
                                             <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -1687,42 +1687,28 @@
     <!-- topsell__area-end -->
 
     <!-- banner__area-start -->
+{{--    @include('frontend.layouts.slider2')--}}
     <section class="banner__area light-bg-s pt-40 pb-10">
         <div class="container custom-conatiner">
             <div class="row">
+                @foreach($CategoryType3 as $type3)
                 <div class="col-xl-4 col-lg-4 col-md-12">
                     <div class="banner__item p-relative w-img mb-30">
                         <div class="banner__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-14.jpg" alt=""></a>
+                            <a href="{{ route('category', ['category' => $type3->slug ]) }}"><img src="
+                                                                            @if($type3->image && file_exists(public_path($type3->image)))
+                                                                                {{ asset($type3->image) }}
+                                                                            @else
+                                                                                {{ asset('frontend')}}/img/banner/banner-15.jpg }}
+                                                                            @endif
+                                                                            " width="546.667px" height="200px" title="{{$type3->name}}" alt="{{$type3->name}}"></a>
                         </div>
                         <div class="banner__content banner__content-2">
-                            <h6><a href="product-details.html">Microsoft <br> Surface Laptop 14”</a></h6>
-                            <p class="sm-p">Up To -30%</p>
+                            <h6><a href="{{ route('category', ['category' => $type3->slug ]) }}">{{$type3->name}}</a></h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12">
-                    <div class="banner__item p-relative mb-30 w-img">
-                        <div class="banner__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-15.jpg" alt=""></a>
-                        </div>
-                        <div class="banner__content banner__content-2">
-                            <h6><a href="product-details.html">Cameras <br>Best Sport Edition </a></h6>
-                            <p class="sm-p">Up To -20%</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12">
-                    <div class="banner__item p-relative mb-30 w-img">
-                        <div class="banner__img b-radius-2">
-                            <a href="product-details.html"><img src="{{asset('frontend')}}/img/banner/banner-16.jpg" alt=""></a>
-                        </div>
-                        <div class="banner__content banner__content-2">
-                            <h6><a href="product-details.html">Sneaker <br>Nike Air Max 90 </a></h6>
-                            <p class="sm-p">Up To -60%</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

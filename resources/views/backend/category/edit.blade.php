@@ -60,8 +60,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Vị trí</label>
-                                <input value="{{ $model->position }}" min="0" type="number" class="form-control" id="position" name="position" placeholder="">
+                                <label for="position">Vị trí danh mục</label>
+                                <select class="form-control" name="position" id="position">
+                                    <option value="0">---Chọn vị trí danh mục---</option>
+                                    @foreach($positions  as $item)
+                                        <option @if($model->position == $item->id) selected @endif value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
@@ -100,7 +105,6 @@
                     document.getElementById('name').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
                         return false;
                 }
-
             });
         });
     </script>

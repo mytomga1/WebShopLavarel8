@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use App\Models\Category;
+use App\Models\Position;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use function React\Promise\all;
 
 /**
  * Create: Lê Thành Trung
@@ -69,9 +71,10 @@ class CategoryController extends Controller
     {
         //lấy tất cả dữ liệu từ bản category
         $data = Category::all(); // => Select * form category
+        $positions = Position::all();
 
         // truyền dữ liệu thấy dc qua view create
-        return view('backend.category.create', ['data'=> $data]);
+        return view('backend.category.create', ['data'=> $data], ['positions'=> $positions]);
     }
 
     /**
@@ -125,7 +128,16 @@ class CategoryController extends Controller
         }
 
         $Category->parent_id = $request->input('parent_id');
-        $Category->position = $request->input('position');
+
+        //Check Vi tri
+        $position=0;
+        if($request->has('position')){
+            $position = $request->input('position');
+            if ($position == null) $position=0;
+        }
+        $Category->position = $position;
+        //$Category->position = $request->input('position');
+
         $Category->is_active = $request->input('is_active');
 
         $Category->created_at = date('Y-m-d H:i:s');
@@ -157,11 +169,12 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $model = Category::findOrFail($id);
+        $positions = Position::all();
         //lấy tất cả dữ liệu từ bản category
         $data = Category::all(); // => Select * form category
 
         // sau khi tìm dữ liệu thành công, bắt đầu chuyên dữ liệu đó sang view edit
-        return view('backend.category.edit', ['model' => $model, 'data' => $data]);
+        return view('backend.category.edit', ['model' => $model, 'data' => $data], ['positions'=> $positions]);
     }
 
     /**
@@ -201,7 +214,16 @@ class CategoryController extends Controller
         }
 
         $Category->parent_id = $request->input('parent_id');
-        $Category->position = $request->input('position');
+
+        //Check Vi tri
+        $position=0;
+        if($request->has('position')){
+            $position = $request->input('position');
+            if ($position == null) $position=0;
+        }
+        $Category->position = $position;
+        //$Category->position = $request->input('position');
+
         $Category->is_active = $request->input('is_active');
 
         $Category->updated_at = date('Y-m-d H:i:s');

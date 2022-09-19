@@ -1,79 +1,57 @@
 @extends('backend.layouts.main')
 
 {{--Create: Lê Thành Trung--}}
-{{--Date : 11/7/2022--}}
-{{--categoryController--}}
+{{--Date : 8/8/2022--}}
 
 @section('content')
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            QUẢN LÝ DANH MỤC
-            <small>Preview</small>
+            Danh Sách Vị Trí
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{asset('/admin')}}"><i class="fa fa-dashboard"></i> Trang Chủ</a></li>
-            <li class="active">Quản lý Danh Mục</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
+            <li class="active">Danh Sách Vị Trí</li>
         </ol>
     </section>
-    <!-- end Content Header (Page header) -->
 
     <!-- Main content -->
     <section class="content">
         <div class="row">
             <!-- Bảng ver.1 -->
-{{--            <div class="col-md-12">--}}
+{{--            <div class="col-xs-12 table-responsive">--}}
 {{--                <div class="box">--}}
 {{--                    <div class="box-header with-border">--}}
-{{--                        @if(\Auth::user()->role_id == 1) <!-- kiểm tra tài khoản có phải là admin ko, nếu là admin thì show combobox filter -->--}}
-{{--                            <div class="form-group" style="width: 150px;float: left;margin: 0">--}}
-{{--                                <select class="form-control" id="filter_type" name="filter_type">--}}
-{{--                                    <option {{ $filter_type == 1 ? 'selected' : '' }} value="1">Tất cả</option>--}}
-{{--                                    <option {{ $filter_type == 2 ? 'selected' : '' }} value="2">Đang Sử Dụng</option>--}}
-{{--                                    <option {{ $filter_type == 3 ? 'selected' : '' }} value="3">Thùng rác</option>--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
+{{--                        @if(\Auth::user()->position_id == 1) <!-- kiểm tra tài khoản có phải là admin ko, nếu là admin thì show combobox filter -->--}}
+{{--                        <div class="form-group" style="width: 150px;float: left;margin: 0">--}}
+{{--                            <select class="form-control" id="filter_type" name="filter_type">--}}
+{{--                                <option {{ $filter_type == 1 ? 'selected' : '' }} value="1">Tất cả</option>--}}
+{{--                                <option {{ $filter_type == 2 ? 'selected' : '' }} value="2">Đang Sử Dụng</option>--}}
+{{--                                <option {{ $filter_type == 3 ? 'selected' : '' }} value="3">Thùng rác</option>--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
 {{--                        @endif--}}
-{{--                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>--}}
+{{--                        <a href="{{ route('admin.position.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>--}}
 {{--                    </div>--}}
 {{--                    <!-- /.box-header -->--}}
-{{--                    <div class="box-body no-padding">--}}
-{{--                        <div class="box-header">--}}
-{{--                        </div>--}}
-{{--                        <table class="table table-bordered">--}}
+{{--                    <div class="box-body">--}}
+{{--                        <table class="table table-striped">--}}
 {{--                            <tr>--}}
 {{--                                <th style="width: 10px">TT</th>--}}
-{{--                                <th>Hình ảnh</th>--}}
-{{--                                <th>Tên</th>--}}
-{{--                                <th>Danh mục cha</th>--}}
-{{--                                <th>Trạng thái</th>--}}
-{{--                                <th>Sắp sếp</th>--}}
+{{--                                <th>Vai trò</th>--}}
+{{--                                <th>Mô Tả</th>--}}
+{{--                                <th>Trạng Thái</th>--}}
 {{--                                <th>Hành động</th>--}}
 {{--                            </tr>--}}
 {{--                            @foreach($data as $key => $item)--}}
-{{--                                @php--}}
-{{--                                    @endphp--}}
 {{--                                <tr class="item-{{ $item->id }}">--}}
 {{--                                    <td>{{ $key + 1 }}</td>--}}
-{{--                                    <td>--}}
-{{--                                        @if($item->image && file_exists(public_path($item->image)))--}}
-{{--                                            <img src="{{ asset($item->image) }}" width="100" height="75" alt="">--}}
-{{--                                        @else--}}
-{{--                                            <img src="{{ asset('frontend\Img404.png') }}" width="100" height="75" alt="">--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
 {{--                                    <td>{{ $item->name }}</td>--}}
-{{--                                    <td>--}}
-{{--                                        {{ !empty($item->parent->name) ? $item->parent->name : '' }}--}}
-{{--                                    </td>--}}
+{{--                                    <td>{{ $item->description }}</td>--}}
 {{--                                    <td>--}}
 {{--                                        {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}--}}
 {{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        {{ $item->position }}--}}
-{{--                                    </td>--}}
 {{--                                    <td class="action" >--}}
-{{--                                        <a href="{{ route('admin.category.edit', ['category' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>--}}
+{{--                                        <a href="{{ route('admin.position.edit', ['position' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>--}}
 {{--                                        @if($item->deleted_at == null)--}}
 {{--                                            <span  data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>--}}
 {{--                                            <span style="display:none;" data-id="{{ $item->id }}" title="Khôi phục" class="btn btn-flat btn-warning restoreItem"><i class="fa fa-refresh"></i></span>--}}
@@ -93,14 +71,15 @@
 {{--                        </ul>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
+{{--                <!-- /.box -->--}}
 {{--            </div>--}}
             <!-- Bảng ver.1 -end-->
 
             <!-- Bảng ver.2 -->
-            <div class="col-xs-12 table-responsive">
+            <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        @if(\Auth::user()->role_id == 1) <!-- kiểm tra tài khoản có phải là admin ko, nếu là admin thì show combobox filter -->
+                        @if(\Auth::user()->position_id == 1) <!-- kiểm tra tài khoản có phải là admin ko, nếu là admin thì show combobox filter -->
                         <div class="form-group" style="width: 150px;float: left;margin: 0">
                             <select class="form-control" id="filter_type" name="filter_type">
                                 <option {{ $filter_type == 1 ? 'selected' : '' }} value="1">Tất cả</option>
@@ -109,7 +88,7 @@
                             </select>
                         </div>
                         @endif
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <a href="{{ route('admin.position.create') }}" class="btn btn-primary pull-right"><i class="fa fa-plus" aria-hidden="true"></i></a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -117,39 +96,21 @@
                             <thead>
                             <tr>
                                 <th style="width: 10px">ID</th>
-                                <th>Hình ảnh</th>
-                                <th>Tên</th>
-                                <th>Danh mục cha</th>
-                                <th>Trạng thái</th>
-                                <th>Sắp sếp</th>
+                                <th>Tên Vị trí</th>
+                                <th>Trạng Thái</th>
                                 <th>Hành động</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="table-group-divider table-divider-color">
                                 @foreach($data as $key => $item)
-                                @php
-                                    @endphp
                                 <tr class="item-{{ $item->id }}">
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>
-                                        @if($item->image && file_exists(public_path($item->image)))
-                                            <img src="{{ asset($item->image) }}" width="100" height="75" alt="">
-                                        @else
-                                            <img src="{{ asset('frontend\Img404.png') }}" width="100" height="75" alt="">
-                                        @endif
-                                    </td>
+                                    <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>
-                                        {{ !empty($item->parent->name) ? $item->parent->name : '' }}
-                                    </td>
                                     <td>
                                         {!! $item->is_active == 1 ? '<span class="badge bg-green">ON</span>' : '<span class="badge bg-danger">OFF</span>' !!}
                                     </td>
-                                    <td>
-                                        {{ $item->position }}
-                                    </td>
                                     <td class="action" >
-                                        <a href="{{ route('admin.category.edit', ['category' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
+                                        <a href="{{ route('admin.position.edit', ['position' => $item->id]) }}"><span title="Chỉnh sửa" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>
                                         @if($item->deleted_at == null)
                                             <span  data-id="{{ $item->id }}" title="Xóa" class="btn btn-flat btn-danger deleteItem"><i class="fa fa-trash"></i></span>
                                             <span style="display:none;" data-id="{{ $item->id }}" title="Khôi phục" class="btn btn-flat btn-warning restoreItem"><i class="fa fa-refresh"></i></span>
@@ -168,9 +129,8 @@
                 <!-- /.box -->
             </div>
             <!-- Bảng ver.2 -end-->
-        </div><!-- /.row -->
+        </div>
     </section>
-    <!-- /.content -->
 @endsection
 
 @section('js')
@@ -189,7 +149,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : '/admin/category/'+id,
+                            url : '/admin/position/'+id,
                             type: 'DELETE',
                             data: {},
                             success: function (res) {
@@ -197,7 +157,7 @@
                                     $('.item-'+id).remove();
 
                                     var filter_type = $('#filter_type').val();
-                                    window.location.href = "{{ route('admin.category.index') }}?filter_type="+filter_type;
+                                    window.location.href = "{{ route('admin.position.index') }}?filter_type="+filter_type;
                                 } else {
                                     Swal.fire(
                                         'Thông báo !',
@@ -218,7 +178,7 @@
                 var id = $(this).attr('data-id');
                 Swal.fire({
                     title: 'Bạn có muốn khôi phục ?',
-                    text: "Dữ liệu sẽ được khôi phục lại danh sách danh mục",
+                    text: "Dữ liệu sẽ được khôi phục lại danh sách vai trò",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -227,7 +187,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url : '/admin/category/restore/'+id,
+                            url : '/admin/position/restore/'+id,
                             type: 'POST',
                             data: {},
                             success: function (res) {
@@ -237,11 +197,9 @@
                                         'Khôi phục thành công',
                                         'success'
                                     )
-                                    //$('.restoreItem').remove();
-                                    //$('.deleteItem').show();
 
                                     var filter_type = $('#filter_type').val();
-                                    window.location.href = "{{ route('admin.category.index') }}?filter_type="+filter_type;
+                                    window.location.href = "{{ route('admin.position.index') }}?filter_type="+filter_type;
 
                                 } else {
                                     Swal.fire(
@@ -262,7 +220,7 @@
             $('#filter_type').change(function () {
                 var filter_type = $('#filter_type').val();
                 // sử dụng window.location.href để truyền dữ liệu filter và chuyển trang
-                window.location.href = "{{ route('admin.category.index') }}?filter_type="+filter_type;
+                window.location.href = "{{ route('admin.position.index') }}?filter_type="+filter_type;
             });
 
             // bắt sự kiện filter table by colum and search
