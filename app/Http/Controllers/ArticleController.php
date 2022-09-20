@@ -61,7 +61,7 @@ class ArticleController extends Controller
     public function create()
     {
         //lấy tất cả dữ liệu từ bản article
-        $data = Category::all(); // => Select * form article
+        $data = Category::where('type', 2)->get(); // => Select * form article where type = 2
 
         // truyền dữ liệu thấy dc qua view create
         return view('backend.article.create', ['data'=> $data]);
@@ -159,7 +159,7 @@ class ArticleController extends Controller
         //lấy tất cả dữ liệu từ bản Articles mục đích sử dụng get data vào cb vị trí trong bài viết
         $cbdata = Articles::all();
         //lấy tất cả dữ liệu từ bản category
-        $Categories = Category::all(); // => Select * form category
+        $Categories = Category::where('type', 2)->get(); // => Select * form article where type = 2
 
         // sau khi tìm dữ liệu thành công, bắt đầu chuyên dữ liệu đó sang view edit
         return view('backend.article.edit', ['model' => $model,'cbdata'=>$cbdata , 'Categories' => $Categories]);

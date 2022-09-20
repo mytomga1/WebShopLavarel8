@@ -70,6 +70,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Loại Danh Mục</label>
+                                <select class="form-control" name="type" id="type">
+                                    <option value="0">-- chọn --</option>
+                                    <option @if($model->type == 1) selected @endif value="1">Danh mục Sản Phẩm</option>
+                                    <option @if($model->type == 2) selected @endif value="2">Danh mục Tin Tức</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="is_active">Trạng Thái Kích Hoạt: </label>
                                 <select id="is_active" name="is_active" class="form-control">
                                     <option @if($model->is_active == 0) selected @endif value="0">Tắt</option>

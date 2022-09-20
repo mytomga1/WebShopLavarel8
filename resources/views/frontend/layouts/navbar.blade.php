@@ -24,6 +24,7 @@
                                         @endif
                                     @endforeach
 
+                                    <!-- khu vực mở rộng tab con Best Seller Products thanh nav -->
 {{--                                    <li>--}}
 {{--                                        <a href="product.html">Best Seller Products--}}
 {{--                                            <span class="cat-label">hot!</span>--}}
@@ -78,6 +79,7 @@
 {{--                                            <span class="cat-label green">new!</span>--}}
 {{--                                        </a>--}}
 {{--                                    </li>--}}
+                                    <!-- khu vực mở rộng tab con Best Seller Products  thanh nav end-->
                                 </ul>
                             </nav>
                         </div>
@@ -96,6 +98,7 @@
                                     <a href="{{route('index')}}" class="active">TRANG CHỦ</a>
                                 </li>
 
+                                <!-- khu vực mở rộng tab con Shop  thanh nav end-->
 {{--                                <li class="has-mega"><a href="shop.html">Shop <i class="far fa-angle-down"></i></a>--}}
 {{--                                    <div class="mega-menu">--}}
 {{--                                        <div class="container container-mega">--}}
@@ -170,21 +173,27 @@
 {{--                                        </div>--}}
 {{--                                    </div>--}}
 {{--                                </li>--}}
+                                <!-- khu vực mở rộng tab con thanh nav end-->
+
                                 <li><a href="{{route('articles')}}">Blog</a></li>
                                 <li><a href="{{route('contact')}}">About Us</a></li>
-                                <li>
-                                    <a href="about.html">Pages <i class="far fa-angle-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="my-account.html">My Account</a></li>
-                                        <li><a href="product-details.html">Product Details</a></li>
-                                        <li><a href="faq.html">FAQs pages</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="404.html">404 Error</a></li>
-                                    </ul>
-                                </li>
+
+                                <!-- khu vực mở rộng tab con Pages thanh nav end-->
+{{--                                <li>--}}
+{{--                                    <a href="about.html">Pages <i class="far fa-angle-down"></i></a>--}}
+{{--                                    <ul class="submenu">--}}
+{{--                                        <li><a href="my-account.html">My Account</a></li>--}}
+{{--                                        <li><a href="product-details.html">Product Details</a></li>--}}
+{{--                                        <li><a href="faq.html">FAQs pages</a></li>--}}
+{{--                                        <li><a href="cart.html">Cart</a></li>--}}
+{{--                                        <li><a href="wishlist.html">Wishlist</a></li>--}}
+{{--                                        <li><a href="checkout.html">Checkout</a></li>--}}
+{{--                                        <li><a href="contact.html">Contact Us</a></li>--}}
+{{--                                        <li><a href="404.html">404 Error</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+                                <!-- khu vực mở rộng tab con Pages thanh nav end-->
+
                             </ul>
                         </nav>
                     </div>

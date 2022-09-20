@@ -138,6 +138,8 @@ class CategoryController extends Controller
         $Category->position = $position;
         //$Category->position = $request->input('position');
 
+        $Category->type = $request->input('type');
+
         $Category->is_active = $request->input('is_active');
 
         $Category->created_at = date('Y-m-d H:i:s');
@@ -223,6 +225,8 @@ class CategoryController extends Controller
         }
         $Category->position = $position;
         //$Category->position = $request->input('position');
+
+        $Category->type = $request->input('type');
 
         $Category->is_active = $request->input('is_active');
 

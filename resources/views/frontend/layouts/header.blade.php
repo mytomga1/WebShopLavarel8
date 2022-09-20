@@ -32,6 +32,7 @@
                     <div class="header-inner-end text-md-end">
                         <div class="ovic-menu-wrapper ovic-menu-wrapper-2">
                             <ul>
+                                <li><a href="{{route('cart.list')}}">Giỏ Hàng</a></li>
                                 <li><a href="{{route('contact')}}">Liên Hệ</a></li>
                                 <li><a href="faq.html">FAQs</a></li>
                             </ul>
@@ -72,76 +73,89 @@
                 </div>
                 <!-- thanh search-end -->
 
-                <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8">
+                <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8"><!-- <div class="col-xl-4 col-lg-5 col-md-8 col-sm-8"> -->
                     <div class="header-action">
-                        <div class="block-userlink">
-                            <a class="icon-link icon-link-2" href="my-account.html">
-                                <i class="flaticon-user"></i>
-                                <span class="text">
-                                    <span class="sub">Đăng Nhập </span>
-                                    Tài khoản của tôi </span>
-                            </a>
-                        </div>
-                        <div class="block-wishlist action">
-                            <a class="icon-link icon-link-2" href="wishlist.html">
-                                <i class="flaticon-heart"></i>
-                                <span class="count count-2">0</span>
-                                <span class="text">
-                                    <span class="sub">Favorite</span>
-                                    Danh sách yêu thích </span>
-                            </a>
-                        </div>
-                        <div class="block-cart action">
+
+                        <!-- khu vực icon đăng nhập và wishlist -->
+{{--                        <div class="block-userlink">--}}
+{{--                            <a class="icon-link icon-link-2" href="my-account.html">--}}
+{{--                                <i class="flaticon-user"></i>--}}
+{{--                                <span class="text">--}}
+{{--                                    <span class="sub">Đăng Nhập </span>--}}
+{{--                                    Tài khoản của tôi </span>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                        <div class="block-wishlist action">--}}
+{{--                            <a class="icon-link icon-link-2" href="wishlist.html">--}}
+{{--                                <i class="flaticon-heart"></i>--}}
+{{--                                <span class="count count-2">0</span>--}}
+{{--                                <span class="text">--}}
+{{--                                    <span class="sub">Favorite</span>--}}
+{{--                                    Danh sách yêu thích </span>--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+                        <!-- khu vực icon đăng nhập và wishlist END-->
+
+                        <!-- khu vực icon giỏ hàng -->
+                        <div class="block-cart action" style="margin-left: 300px">
                             <a class="icon-link icon-link-2" href="cart.html">
                                 <i class="flaticon-shopping-bag"></i>
-                                <span class="count count-2">1</span>
+                                <span class="count count-2">{{ count(Cart::getContent()) }}</span>
                                 <span class="text">
-                                    <span class="sub">Giỏ Hàng:</span>
-                                    $00.00 </span>
+                                    <span class="sub">Giỏ Hàng:
+                                    </span>{{ number_format(Cart::getTotal() ,0,",",".") }} VNĐ</span>
                             </a>
                             <div class="cart">
                                 <div class="cart__mini">
                                     <ul>
                                         <li>
                                             <div class="cart__title">
-                                                <h4>Your Cart</h4>
-                                                <span>(1 Item in Cart)</span>
+                                                <h4>Giỏ hàng của bạn</h4><br/>
+                                                <span>Có ({{ count(Cart::getContent()) }} sản phẩm trong giỏ hàng)</span>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="cart__item d-flex justify-content-between align-items-center">
-                                                <div class="cart__inner d-flex">
-                                                    <div class="cart__thumb">
-                                                        <a href="product-details.html">
-                                                            <img src="{{asset('frontend')}}/img/cart/20.jpg" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="cart__details">
-                                                        <h6><a href="product-details.html"> Samsung C49J89: £875, Debenhams Plus  </a></h6>
-                                                        <div class="cart__price">
-                                                            <span>$255.00</span>
+                                        @foreach (Cart::getContent() as $item)
+                                            <li>
+                                                <div class="cart__item d-flex justify-content-between align-items-center">
+                                                    <div class="cart__inner d-flex">
+                                                        <div class="cart__thumb">
+                                                            <a href="product-details.html">
+                                                                <img src="{{ $item->attributes->image }}" height="70px" width="70px" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="cart__details">
+                                                            <h6><a href="product-details.html"> {{ $item->name }} <span>x {{ $item->quantity }}</span>  </a></h6>
+                                                            <div class="cart__price">
+                                                                <span>{{ number_format($item->price*$item->quantity, 0, ".", ",") }} VNĐ</span>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <form action="{{ route('cart.remove') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $item->id }}" name="id">
+
+                                                        <div class="cart__del">
+                                                            <button href="#"><i class="fal fa-times"></i></button>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="cart__del">
-                                                    <a href="#"><i class="fal fa-times"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @endforeach
                                         <li>
                                             <div class="cart__sub d-flex justify-content-between align-items-center">
-                                                <h6>Subtotal</h6>
-                                                <span class="cart__sub-total">$255.00</span>
+                                                <h6>Tổng</h6>
+                                                <span class="cart__sub-total">{{ number_format(Cart::getTotal() ,0,",",".") }} VNĐ</span>
                                             </div>
                                         </li>
                                         <li>
-                                            <a href="cart.html" class="wc-cart mb-10">View cart</a>
+                                            <a href="{{route('cart.list')}}" class="wc-cart mb-10">Chi Tiết</a>
                                             <a href="checkout.html" class="wc-checkout">Checkout</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <!-- khu vực icon giỏ hàng end-->
                     </div>
                 </div>
             </div>

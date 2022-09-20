@@ -24,8 +24,8 @@ class HomeController extends Controller
     {
         $setting = Settings::first();
 
-        // Lấy dữ liệu - Danh mục, có trạng thái là hiển thị
-        $this->categories = Category::where(['is_active' => 1])->get();
+        // Lấy dữ liệu - Danh mục, có trạng thái là hiển thị và type = 1
+        $this->categories = Category::where(['is_active' => 1])->where('type', 1)->get();
 
         // Lấy dữ liệu - Category, có trạng thái là hiển thị 1 và position = 1
         $CategoryType1 = Category::where(['is_active' => 1])
@@ -164,6 +164,13 @@ class HomeController extends Controller
         $total = \Cart::getTotal();
 
         return view('frontend.cart', compact('cartItems', 'total'));
+    }
+
+    public function cartList()
+    {
+        $cartItems = \Cart::getContent();
+        // dd($cartItems);
+        return view('frontend.cart', compact('cartItems'));
     }
 
     //Controller function thêm sản phảm ra khỏi giỏ hàng
