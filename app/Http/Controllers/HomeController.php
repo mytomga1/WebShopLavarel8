@@ -12,6 +12,7 @@ use App\Models\Settings;
 use App\Models\Vendor;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -117,33 +118,42 @@ class HomeController extends Controller
 
         $keyword = $request->input('kwd');
 
-        //$slug = Str::slug($keyword);
+//        $slug = Str::slug($keyword);
 
-        //$sql = "SELECT * FROM products WHERE is_active = 1 AND slug like '%$keyword%'";
+//        $sql = "SELECT * FROM products WHERE is_active = 1 AND slug like '%$keyword%'";
 
-        //$products = Product::where([
-        //['slug', 'like', '%' . $slug . '%'],
-        //['is_active', '=', 1]
-        //])->orderByDesc('id')->paginate(5);
+//        $products = Product::where([
+//        ['slug', 'like', '%' . $slug . '%'],
+//        ['is_active', '=', 1]
+//        ])->orderByDesc('id')->paginate(5);
 
-        //$totalResult = $products->total(); // số lượng kết quả tìm kiếm
+//        $totalResult = $products->total(); // Trả về số lượng kết quả tìm kiếm
 
-        $page = $request->input('page', 1);
-        $paginate = 10;
+       // $all = Product::searchByQuery(['match' => ['name' => $keyword]]);
+       // dd($all);
+        //$totalResult = $all->totalHits();
+        //$totalResult = $totalResult['value'];
 
-        $products = Product::searchByQuery(['match' => ['name' => $keyword]], null, null, $paginate, $page);
-        $totalResult = $products->totalHits();
-        $totalResult = $totalResult['value'];
-        // $offSet = ($page * $paginate) - $paginate;
-        $itemsForCurrentPage = $products->toArray();
-        $products = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, $totalResult, $paginate, $page);
-        $products->setPath('tim-kiem');
+        $page = $request->input('page') ?? 1;
+        $paginate = 4;
+        $offSet = ($page * $paginate) - $paginate;
+
+        if (!empty($keyword)) {
+            $products = Product::searchByQuery(['match' => ['name' => $keyword]], null, null, $paginate, $offSet);
+            $totalResult = $products->totalHits();
+            $totalResult = $totalResult['value'];
+
+            $products = new \Illuminate\Pagination\LengthAwarePaginator($products, $totalResult, $paginate, $page);
+            $products->setPath('tim-kiem');
+        }
+
 
         return view('frontend.search', [
-            'products' => $products,
+            'products' => $products ?? [],
             'totalResult' => $totalResult ?? 0,
             'keyword' => $keyword ? $keyword : ''
         ]);
+
     }
 
     //Controller giỏ hàng
@@ -252,7 +262,21 @@ class HomeController extends Controller
     }
 
     // Tạo 1 hàm category router với mục đích lấy danh sách sản phẩm theo menu danh muc
-    public function category($slug){
+    public function category(Request $request, $slug){
+        $filter_brands = $request->query('thuong-hieu');
+        $branch_ids = [];
+        if ($filter_brands) {
+            $arr_filter_brands = explode(',', $filter_brands); // ['apple', 'xiaomi', 'dell']
+            $arr_brands = Brand::whereIn('slug' , $arr_filter_brands)->get();
+
+            foreach ($arr_brands as $item) {
+                $branch_ids[] = $item->id; // thêm phần tử vào mảng
+            }
+        }
+
+        // THuong hieu
+        $branchs = Brand::all();
+
         $category = Category::where('slug', $slug)->where('is_active', 1)->first();
 
         if ($category == null) {
@@ -281,7 +305,16 @@ class HomeController extends Controller
             ->latest() // lấy dữ liệu mới nhất
             ->paginate(10); // phân trang (1 trang chứa 15 phần tử)
 
-        return view('frontend.productList', ['category' => $category, 'products' => $products]);
+        $query = DB::table('products')->select('*')
+            ->whereIn('category_id', $ids)
+            ->where('is_active', '=', 1);
+
+        // Lọc theo thương hiệu
+        if (!empty($branch_ids)) {
+            $query->whereIn('brand_id', $branch_ids);
+        }
+
+        return view('frontend.productList', ['category' => $category, 'products' => $products, 'branchs' => $branchs,'arr_filter_brands' => json_encode($branch_ids)]);
     }
 
     public function product(Request $request, $slug)
@@ -294,6 +327,8 @@ class HomeController extends Controller
 
         return view('frontend.product-detail', ['product' => $product]);
     }
+
+
 
     // Controller Trang Danh 404
     public function errorPage404(){

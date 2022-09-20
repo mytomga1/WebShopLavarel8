@@ -299,6 +299,8 @@ class ProductController extends Controller
         //Luu
         $product->save();
 
+        Product::addAllToIndex();
+
         //sau khi thêm dữ liệu product vào db thành công chuyển hướng về trang danh sách
         // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang
         return redirect()->route('admin.product.index');

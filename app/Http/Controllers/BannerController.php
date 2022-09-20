@@ -131,8 +131,7 @@ class BannerController extends Controller
 
         $banner->created_at = date('Y-m-d H:i:s');
 
-
-        dd($banner);
+        $banner->save();
 
         //sau khi thêm dữ liệu banner vào db thành công chuyển hướng về trang danh sách
         // hàm redirect() tương tự hàm header() dùng chuyễn hướng trang

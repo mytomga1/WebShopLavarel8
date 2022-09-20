@@ -59,15 +59,12 @@
                     <div class="header__search">
                         <form action="{{route('search')}}" method="get">
                             <div class="header__search-box">
-                                <input name="kwd" class="search-input search-input-2" type="text" placeholder="Nhập sản phẩm...">
-                                <button class="button button-2" type="submit"><i class="far fa-search"></i></button>
+                                <input name="kwd" id="kwd" class="search-input search-input-2" type="text" placeholder="Nhập sản phẩm cần tìm kiếm...">
+                                <button class="button button-2" type=""><i class="far fa-search"></i></button>
                             </div>
                             <div class="header__search-cat">
                                 <select>
                                     <option>Tất cả danh mục</option>
-                                    <option>Best Seller Products</option>
-                                    <option>Top 10 Offers</option>
-                                    <option>New Arrivals</option>
                                 </select>
                             </div>
                         </form>

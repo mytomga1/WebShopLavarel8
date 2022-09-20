@@ -1,6 +1,7 @@
 @extends('frontend.layouts.main')
 
 @section('content')
+
     <main>
         <!-- page-banner-area-start -->
         <div class="page-banner-area page-banner-height-2" data-background="{{asset('frontend')}}/img/banner/page-banner-4.jpg">
