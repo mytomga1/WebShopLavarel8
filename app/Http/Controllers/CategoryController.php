@@ -96,10 +96,12 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10000',
+            'type' => 'required|max:255',
         ],[
             'name.required' => 'Bạn cần phải nhập vào tên danh muc',
             'image.required' => 'Bạn chưa chọn file ảnh',
             'image.image' => 'File ảnh phải có dạng jpeg,png,jpg,gif,svg',
+            'type.required' => 'Bạn cần phải chọn loại danh muc',
         ]);
 
         $Category = new Category();
@@ -188,6 +190,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // xác thực dữ liệu - validate từ phía server (ưu điểm user ko thể tắt validate - nhược điểm gây chậm server)
+        $request->validate([
+            'name' => 'required|max:255',
+            'type' => 'required|max:255',
+        ],[
+            'name.required' => 'Bạn cần phải nhập vào tên danh muc',
+            'type.required' => 'Bạn cần phải chọn loại danh muc',
+        ]);
+
         $Category = Category::findOrFail($id);
         $Category->name = $request->input('name');
 

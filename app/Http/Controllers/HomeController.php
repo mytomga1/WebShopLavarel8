@@ -135,7 +135,7 @@ class HomeController extends Controller
         //$totalResult = $totalResult['value'];
 
         $page = $request->input('page') ?? 1;
-        $paginate = 4;
+        $paginate = 10;
         $offSet = ($page * $paginate) - $paginate;
 
         if (!empty($keyword)) {
@@ -270,8 +270,10 @@ class HomeController extends Controller
 
     // Tạo 1 hàm category router với mục đích lấy danh sách sản phẩm theo menu danh muc
     public function category(Request $request, $slug){
+
         $filter_brands = $request->query('thuong-hieu');
         $branch_ids = [];
+
         if ($filter_brands) {
             $arr_filter_brands = explode(',', $filter_brands); // ['apple', 'xiaomi', 'dell']
             $arr_brands = Brand::whereIn('slug' , $arr_filter_brands)->get();
@@ -304,14 +306,6 @@ class HomeController extends Controller
             }
         }
 
-        // cần viết đệ quy lấy toàn bộ danh mục cha con
-
-        // step 2 : lấy list sản phẩm theo thể loại
-        $products = Product::where('is_active', 1)
-            ->whereIn('category_id' , $ids)
-            ->latest() // lấy dữ liệu mới nhất
-            ->paginate(10); // phân trang (1 trang chứa 15 phần tử)
-
         $query = DB::table('products')->select('*')
             ->whereIn('category_id', $ids)
             ->where('is_active', '=', 1);
@@ -321,7 +315,20 @@ class HomeController extends Controller
             $query->whereIn('brand_id', $branch_ids);
         }
 
-        return view('frontend.productList', ['category' => $category, 'products' => $products, 'branchs' => $branchs,'arr_filter_brands' => json_encode($branch_ids)]);
+        // cần viết đệ quy lấy toàn bộ danh mục cha con
+
+        // step 2 : lấy list sản phẩm theo thể loại
+//        $products = Product::where('is_active', 1)
+//            ->whereIn('category_id' , $ids)
+//            ->latest() // lấy dữ liệu mới nhất
+//            ->paginate(10); // phân trang (1 trang chứa 15 phần tử)
+
+        $list_products = $query->paginate(16);
+
+
+
+
+        return view('frontend.productList', ['category' => $category, 'products' => $list_products, 'branchs' => $branchs,'arr_filter_brands' => json_encode($branch_ids)]);
     }
 
     public function product(Request $request, $slug)

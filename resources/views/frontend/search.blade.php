@@ -371,7 +371,7 @@
                                                 </ul>
                                             </div>
                                             <div class="product__result pl-60">
-                                                <p>Có {{$totalResult}} sản phẩm "{{$keyword}}" đã tìm thấy</p>
+                                                <p>Có {{$totalResult}} sản phẩm liên quan đến [ {{$keyword}} ] đã được tìm thấy</p>
                                             </div>
                                         </div>
                                     </div>

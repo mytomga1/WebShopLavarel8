@@ -119,14 +119,14 @@
 
                         <!-- Time Countdown__area-start -->
                         <div class="offer-time">
-                            <span class="offer-title d-none d-sm-block">Hurry Up! Offer ends in:</span>
+{{--                            <span class="offer-title d-none d-sm-block">Chương trình khuyến mãi:</span>--}}
                             <div class="countdown">
-                                <div class="countdown-inner b-radius-2" data-countdown="" data-date="Mar 02 2022 20:20:22">
+                                <div class="countdown-inner b-radius-2">
                                     <ul class="text-center">
-                                        <li><span data-days="">32</span> Days</li>
-                                        <li><span data-hours="">5</span> Hours</li>
-                                        <li><span data-minutes="">32</span> Mins</li>
-                                        <li><span data-seconds="">27</span> Secs</li>
+                                        <li><p style="color: white">SỐ LƯỢNG CÓ HẠN</p></li>
+{{--                                        <li><span data-hours="">5</span> Hours</li>--}}
+{{--                                        <li><span data-minutes="">32</span> Mins</li>--}}
+{{--                                        <li><span data-seconds="">27</span> Secs</li>--}}
                                     </ul>
                                 </div>
                             </div>

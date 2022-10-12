@@ -21,6 +21,22 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+            <div class="col-md-6">
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-warning"></i> Lỗi !</h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="row">
             <!-- left column -->
             <div class="col-md-12">
                 <!-- general form elements -->
@@ -70,9 +86,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Loại Danh Mục</label>
-                                <select class="form-control" name="type" id="type">
-                                    <option value="0">-- chọn --</option>
+                                <label for="type">Loại Danh Mục</label>
+                                <select class="form-control" name="type" id="type" required>
+                                    <option value="">-- chọn --</option>
                                     <option @if($model->type == 1) selected @endif value="1">Danh mục Sản Phẩm</option>
                                     <option @if($model->type == 2) selected @endif value="2">Danh mục Tin Tức</option>
                                 </select>
@@ -90,7 +106,7 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary btnupdate">Cập Nhật</button>
+                            <button type="submit" class="btn btn-primary btnSave">Lưu lại</button>
                         </div>
                     </form>
                 </div>
@@ -108,11 +124,16 @@
 @section('js')
     <script type="text/javascript">
         $( document ).ready(function() {
-            $('.btnupdate').click(function () {
+            $('.btnSave').click(function () {
                 if ($('#name').val() === '') {
                     $('#name').notify('Bạn nhập chưa nhập tên danh mục','error',{ position:"right" });
                     document.getElementById('name').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
                         return false;
+                }
+                if ($('#type').val() === '') {
+                    $('#type').notify('Bạn chưa chọn Loại danh mục','error');
+                    document.getElementById('vendor_id').scrollIntoView();
+                    return false;
                 }
             });
         });

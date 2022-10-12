@@ -15,7 +15,7 @@
         </div>
         <div class="row">
             @foreach($categories as $category)
-                @if($category->parent_id == 0)
+                @if($category->parent_id == 1)
                     <div class="col-xl-2 col-lg-3 col-md-4">
                         <div class="categories__item p-relative w-img mb-30">
                             <div class="categories__img b-radius-2">
@@ -28,8 +28,8 @@
                                                                             " width="272px" height="140px" title="{{$category->name}}"></a>
                             </div>
                             <div class="categories__content">
-                                <h6><a href="{{ route('category', ['category' => $category->slug ]) }}">{{$category->name}}</a></h6>
-                                <p>(7 Products)</p>
+{{--                                <h6><a href="{{ route('category', ['category' => $category->slug ]) }}">{{$category->name}}</a></h6>--}}
+{{--                                <p>(7 Products)</p>--}}
                             </div>
                         </div>
                     </div>

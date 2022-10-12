@@ -19,16 +19,17 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
+            <li class="header"></li>
             <!-- search form -->
-            <form action="" method="post" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-                </div>
-            </form>
+{{--            <form action="" method="post" class="sidebar-form">--}}
+{{--                <div class="input-group">--}}
+{{--                    <input type="text" name="q" class="form-control" placeholder="Search...">--}}
+{{--                    <span class="input-group-btn">--}}
+{{--                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>--}}
+{{--                </button>--}}
+{{--              </span>--}}
+{{--                </div>--}}
+{{--            </form>--}}
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
@@ -119,30 +120,33 @@
                     </li>
                 @endif
 
-                <li>
-                    <a href="pages/mailbox/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                        <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-                    </a>
-                </li>
+{{--                <li>--}}
+{{--                    <a href="pages/mailbox/mailbox.html">--}}
+{{--                        <i class="fa fa-envelope"></i> <span>Mailbox</span>--}}
+{{--                        <span class="pull-right-container">--}}
+{{--                        <small class="label pull-right bg-yellow">12</small>--}}
+{{--                        <small class="label pull-right bg-green">16</small>--}}
+{{--                        <small class="label pull-right bg-red">5</small>--}}
+{{--                        </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
 
                 <li class="header">Other</li>
 
+                @if(\Auth::user()->role_id == 1)
                 <li class="treeview" style="height: auto;">
                     <a href="#">
                         <i class="fa fa-cog"></i> <span>Quản Lý Hệ Thống</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li><a href="{{route('admin.setting.index')}}"><i class="fa fa-info-circle"></i> Thay đổi Thông Tin</a></li>
                     </ul>
                 </li>
+                @endif
+
                 <li><a href="{{route('admin.contact.index')}}"><i class="fa fa-envelope"></i> <span>Liên Hệ</span></a></li>
 
                 {{--            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>--}}

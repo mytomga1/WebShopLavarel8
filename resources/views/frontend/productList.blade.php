@@ -59,52 +59,57 @@
                         {{--        </div>--}}
                         {{--    </div>--}}
 
-                        <div class="product-widget mb-30 ">
-                            <h5 class="pt-title">Special Offers</h5>
-                            <div class="product__sm mt-20">
-                                <ul>
-                                    <li class="product__sm-item d-flex align-items-center">
-                                        <div class="product__sm-thumb mr-20">
-                                            <a href="product-details.html">
-                                                <img src="{{ asset('frontend') }}/img/product//sm-1.jpg"  alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product__sm-content">
-                                            <h5 class="product__sm-title">
-                                                <a href="product-details.html">Classic Leather Backpack Daypack 2022</a>
-                                            </h5>
-                                            <div class="product__sm-price">
-                                                <span class="price">$300.00</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-widget mb-30 ">
-                            <h5 class="pt-title">Thương hiệu</h5>
-                            <br/>
-                            <div class="product-single-sidebar">
-                                <ul class="thuong-hieu">
-                                    <li>
-                                        <label class="cheker">
-                                            <input class="filter_category" data-text="tat-ca" type="checkbox" name="category_id" value="" checked />
-                                            <span></span>
-                                        </label>
-                                        <a href="javascript:void(0)">Tất cả</a>
-                                    </li>
-                                    @foreach($branchs as $child)
-                                        <li>
-                                            <label class="cheker">
-                                                <input class="filter_category" data-text="{{ $child->slug }}" type="checkbox" name="category_id" value="{{ $child->id }}"/>
-                                                <span></span>
-                                            </label>
-                                            <a href="javascript:void(0)">{{ $child->name }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+                        <!-- khu vực Cho sản phẩm ..... -->
+{{--                        <div class="product-widget mb-30 ">--}}
+{{--                            <h5 class="pt-title">Special Offers</h5>--}}
+{{--                            <div class="product__sm mt-20">--}}
+{{--                                <ul>--}}
+{{--                                    <li class="product__sm-item d-flex align-items-center">--}}
+{{--                                        <div class="product__sm-thumb mr-20">--}}
+{{--                                            <a href="product-details.html">--}}
+{{--                                                <img src="{{ asset('frontend') }}/img/product//sm-1.jpg"  alt="">--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="product__sm-content">--}}
+{{--                                            <h5 class="product__sm-title">--}}
+{{--                                                <a href="product-details.html">Classic Leather Backpack Daypack 2022</a>--}}
+{{--                                            </h5>--}}
+{{--                                            <div class="product__sm-price">--}}
+{{--                                                <span class="price">$300.00</span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                        <!-- khu vực Cho sản phẩm ..... end-->
+                        <!-- khu vực filter brand sản phẩm -->
+{{--                        <div class="product-widget mb-30 ">--}}
+{{--                            <h5 class="pt-title">Thương hiệu</h5>--}}
+{{--                            <br/>--}}
+{{--                            <div class="product-single-sidebar">--}}
+{{--                                <ul class="thuong-hieu">--}}
+{{--                                    <li>--}}
+{{--                                        <label class="cheker">--}}
+{{--                                            <input class="filter_category" data-text="tat-ca" type="checkbox" name="category_id" value="" checked />--}}
+{{--                                            <span></span>--}}
+{{--                                        </label>--}}
+{{--                                        <a href="javascript:void(0)">Tất cả</a>--}}
+{{--                                    </li>--}}
+{{--                                    @foreach($branchs as $child)--}}
+{{--                                        <li>--}}
+{{--                                            <label class="cheker">--}}
+{{--                                                <input class="filter_category" data-text="{{ $child->slug }}" type="checkbox" name="category_id" value="{{ $child->id }}"/>--}}
+{{--                                                <span></span>--}}
+{{--                                            </label>--}}
+{{--                                            <a href="javascript:void(0)">{{ $child->name }}</a>--}}
+{{--                                        </li>--}}
+{{--                                    @endforeach--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                        <!-- khu vực filter brand sản phẩm end -->
+
                     </div>
                     <!-- shopmenu-bên trái-end -->
 
@@ -145,9 +150,9 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="product__result pl-60">
-                                                <p>Showing 1-20 of 29 relults</p>
-                                            </div>
+{{--                                            <div class="product__result pl-60">--}}
+{{--                                                <p>Showing 1-20 of 29 relults</p>--}}
+{{--                                            </div>--}}
                                         </div>
                                     </div>
                                     <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
@@ -264,88 +269,88 @@
                                 </div>
                             </div>
                             <!-- Doi danh sach san pham thanh dang doc -start-->
-                            <div class="tab-pane fade" id="FiveCol" role="tabpanel" aria-labelledby="FiveCol-tab">
-                                @foreach($products as $product)
-                                    <div class="tp-wrapper-2">
-                                        <div class="single-item-pd">
-                                            <div class="row align-items-center">
-                                                <div class="col-xl-9">
-                                                    <div class="single-features-item single-features-item-df b-radius mb-20">
-                                                        <div class="row  g-0 align-items-center">
-                                                            <div class="col-md-4">
-                                                                <div class="features-thum">
-                                                                    <div class="features-product-image w-img">
-                                                                        <a href="product-details.html"><img src="@if($product->image && file_exists(public_path($product->image)))
-                                                                                                                    {{ asset($product->image) }}
-                                                                                                                 @else
-                                                                                                                    {{ asset('frontend\Img404.png') }}
-                                                                                                                 @endif
-                                                                                                                 " width="230px" height="230px" title="{{$product->name}}"></a>
-                                                                    </div>
-                                                                    <div class="product__offer">
-                                                                        <span class="discount">0%</span>
-                                                                    </div>
-                                                                    <div class="product-action">
-                                                                        <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                                                            <i class="fal fa-eye"></i>
-                                                                            <i class="fal fa-eye"></i>
-                                                                        </a>
-                                                                        <a href="#" class="icon-box icon-box-1">
-                                                                            <i class="fal fa-heart"></i>
-                                                                            <i class="fal fa-heart"></i>
-                                                                        </a>
-                                                                        <a href="#" class="icon-box icon-box-1">
-                                                                            <i class="fal fa-shopping-cart"></i>
-                                                                            <i class="fal fa-shopping-cart"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="product__content product__content-d">
-                                                                    <h6><a href="product-details.html">{{ substr($product->name,0,30) }}</a></h6>
-                                                                    <div class="rating mb-5">
-                                                                        <ul class="rating-d">
-                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>
-                                                                        </ul>
-                                                                        <span>(01 review)</span>
-                                                                    </div>
-                                                                    <div class="features-des">
-                                                                        <ul>
-                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Bass and Stereo Sound.</a></li>
-                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.</a></li>
-                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Memory, Storage &amp; SIM: 12GB RAM, 256GB.</a></li>
-                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Androi v10.0 Operating system.</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-3">
-                                                    <div class="product-stock mb-15">
-                                                        <h5>Tình trạng : <span> {{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}</span></h5>
-                                                        <h6>{{ number_format($product->sale,0,",",".") }} đ - <del> {{ number_format($product->price,0,",",".") }} đ</del></h6>
-                                                    </div>
-                                                    <div class="stock-btn ">
-                                                        <button type="submit" href="#" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">
-                                                            Thêm vào giỏ hàng
-                                                        </button>
-                                                        <button type="submit" href="{{ route('product', ['product' => $product->slug]) }}" class="wc-checkout d-flex align-items-center justify-content-center w-100" data-bs-toggle="modal" data-bs-target="#productModalId">
-                                                            Chi tiết
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+{{--                            <div class="tab-pane fade" id="FiveCol" role="tabpanel" aria-labelledby="FiveCol-tab">--}}
+{{--                                @foreach($products as $product)--}}
+{{--                                    <div class="tp-wrapper-2">--}}
+{{--                                        <div class="single-item-pd">--}}
+{{--                                            <div class="row align-items-center">--}}
+{{--                                                <div class="col-xl-9">--}}
+{{--                                                    <div class="single-features-item single-features-item-df b-radius mb-20">--}}
+{{--                                                        <div class="row  g-0 align-items-center">--}}
+{{--                                                            <div class="col-md-4">--}}
+{{--                                                                <div class="features-thum">--}}
+{{--                                                                    <div class="features-product-image w-img">--}}
+{{--                                                                        <a href="product-details.html"><img src="@if($product->image && file_exists(public_path($product->image)))--}}
+{{--                                                                                                                    {{ asset($product->image) }}--}}
+{{--                                                                                                                 @else--}}
+{{--                                                                                                                    {{ asset('frontend\Img404.png') }}--}}
+{{--                                                                                                                 @endif--}}
+{{--                                                                                                                 " width="230px" height="230px" title="{{$product->name}}"></a>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="product__offer">--}}
+{{--                                                                        <span class="discount">0%</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="product-action">--}}
+{{--                                                                        <a href="#" class="icon-box icon-box-1" data-bs-toggle="modal" data-bs-target="#productModalId">--}}
+{{--                                                                            <i class="fal fa-eye"></i>--}}
+{{--                                                                            <i class="fal fa-eye"></i>--}}
+{{--                                                                        </a>--}}
+{{--                                                                        <a href="#" class="icon-box icon-box-1">--}}
+{{--                                                                            <i class="fal fa-heart"></i>--}}
+{{--                                                                            <i class="fal fa-heart"></i>--}}
+{{--                                                                        </a>--}}
+{{--                                                                        <a href="#" class="icon-box icon-box-1">--}}
+{{--                                                                            <i class="fal fa-shopping-cart"></i>--}}
+{{--                                                                            <i class="fal fa-shopping-cart"></i>--}}
+{{--                                                                        </a>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-8">--}}
+{{--                                                                <div class="product__content product__content-d">--}}
+{{--                                                                    <h6><a href="product-details.html">{{ substr($product->name,0,30) }}</a></h6>--}}
+{{--                                                                    <div class="rating mb-5">--}}
+{{--                                                                        <ul class="rating-d">--}}
+{{--                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>--}}
+{{--                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>--}}
+{{--                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>--}}
+{{--                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>--}}
+{{--                                                                            <li><a href="#"><i class="fal fa-star"></i></a></li>--}}
+{{--                                                                        </ul>--}}
+{{--                                                                        <span>(01 review)</span>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="features-des">--}}
+{{--                                                                        <ul>--}}
+{{--                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Bass and Stereo Sound.</a></li>--}}
+{{--                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Display with 3088 x 1440 pixels resolution.</a></li>--}}
+{{--                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Memory, Storage &amp; SIM: 12GB RAM, 256GB.</a></li>--}}
+{{--                                                                            <li><a href="product-details.html"><i class="fas fa-circle"></i> Androi v10.0 Operating system.</a></li>--}}
+{{--                                                                        </ul>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-xl-3">--}}
+{{--                                                    <div class="product-stock mb-15">--}}
+{{--                                                        <h5>Tình trạng : <span> {{ $product->stock > 0 ? 'Còn hàng' : 'Hết hàng' }}</span></h5>--}}
+{{--                                                        <h6>{{ number_format($product->sale,0,",",".") }} đ - <del> {{ number_format($product->price,0,",",".") }} đ</del></h6>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="stock-btn ">--}}
+{{--                                                        <button type="submit" href="#" class="cart-btn d-flex mb-10 align-items-center justify-content-center w-100">--}}
+{{--                                                            Thêm vào giỏ hàng--}}
+{{--                                                        </button>--}}
+{{--                                                        <button type="submit" href="{{ route('product', ['product' => $product->slug]) }}" class="wc-checkout d-flex align-items-center justify-content-center w-100" data-bs-toggle="modal" data-bs-target="#productModalId">--}}
+{{--                                                            Chi tiết--}}
+{{--                                                        </button>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
                             <!-- Doi danh sach san pham thanh dang doc -end-->
                         </div>
                         <!-- Danh Sach product -end-->
@@ -510,6 +515,9 @@
 
 @section('my_javascript')
     <script type="text/javascript">
+        var pathname = window.location.pathname; // danh-muc/dien-thoai , /danh-muc/tablet
+        var urlParams = new URLSearchParams(window.location.search); // khoi tao
+
         $(document).on('click', '.filter_category', function () {
             var slug = $(this).data('text');
             // check nếu là tất cả

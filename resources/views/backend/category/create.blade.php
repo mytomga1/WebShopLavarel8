@@ -81,9 +81,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Loại Danh Mục</label>
-                                <select class="form-control" name="type" id="type">
-                                    <option value="0">-- chọn --</option>
+                                <label for="type">Loại Danh Mục</label>
+                                <select class="form-control" name="type" id="type" required>
+                                    <option value="">-- chọn --</option>
                                     <option value="1">Danh mục Sản Phẩm</option>
                                     <option value="2">Danh mục Tin Tức</option>
                                 </select>
@@ -129,7 +129,11 @@
                     document.getElementById('image').scrollIntoView();{{--sử dụng scrollIntoView để trỏ đến khu bị lỗi--}}
                         return false;
                 }
-
+                if ($('#type').val() === '') {
+                    $('#type').notify('Bạn nhập chưa chọn Loại danh mục','error');
+                    document.getElementById('vendor_id').scrollIntoView();
+                    return false;
+                }
             });
         });
     </script>

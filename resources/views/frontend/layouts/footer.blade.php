@@ -81,7 +81,7 @@
                                     <a href="#"><img src="{{asset('frontend')}}/img/brand/app_android.png" alt=""></a>
                                 </div>
                                 <div class="social-icon social-icon-2">
-                                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.facebook.com/trung.lethanh.9480" class="facebook"><i class="fab fa-facebook-f"></i></a>
                                     <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
                                     <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
                                     <a href="#" class="rss"><i class="fas fa-rss"></i></a>
@@ -132,7 +132,7 @@
                                     <ul>
                                         <li><a href="faq.html">Trung tâm hỗ trợ</a></li>
                                         <li><a href="{{route('contact')}}">Liên hệ</a></li>
-                                        <li><a href="faq.html">Báo cáo</a></li>
+                                        <li><a href="{{route('contact')}}">Báo cáo</a></li>
                                         <li><a href="faq.html">Chính sách & Điều khoản</a></li>
                                     </ul>
                                 </div>
@@ -169,10 +169,10 @@
                                     <a href="{{route('contact')}}">About Us</a>
                                     <a href="{{route('contact')}}l">Giao hàng & Trả hàng</a>
                                     <a href="faq.html">Chính sách bảo mật</a>
-                                    <a href="faq.html">Help</a>
+                                    <a href="{{route('contact')}}">Help</a>
                                     <a href="contact.html">Theo dõi đơn hàng</a>
                                     <a href="{{route('contact')}}">Liên Hệ</a>
-                                    <a href="faq.html">FAQs </a>
+                                    <a href="{{route('contact')}}">FAQs </a>
                                 </p>
                             </div>
                             <div class="payment-image text-center mb-25">
