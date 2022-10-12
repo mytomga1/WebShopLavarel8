@@ -25,12 +25,13 @@ class HomeController extends Controller
         $setting = Settings::first();
 
         // Lấy dữ liệu - Danh mục, có trạng thái là hiển thị và type = 1
-        $this->categories = Category::where(['is_active' => 1])->where('type', 1)->get();
+        $this->categories = Category::where(['is_active' => 1])->where('deleted_at', null)->where('type', 1)->get();
 
         // Lấy dữ liệu - Category, có trạng thái là hiển thị 1 và position = 1
         $CategoryType1 = Category::where(['is_active' => 1])
             ->where('position', 1)
             ->orderBy('updated_at')
+            ->where('deleted_at', null)
             ->limit(4)
             //->orderBy('id')
             ->get();
@@ -38,6 +39,7 @@ class HomeController extends Controller
         // Lấy dữ liệu - Category, có trạng thái là hiển thị 1 và position = 3
         $CategoryType3 = Category::where(['is_active' => 1])
             ->where('position', 3)
+            ->where('deleted_at', null)
             ->orderBy('updated_at')
             ->limit(3)
             //->orderBy('id')
@@ -45,6 +47,7 @@ class HomeController extends Controller
 
         // Lấy dữ liệu - Banner, có trạng thái là hiển thị
         $banners = Banner::where(['is_active' => 1])
+            ->where('deleted_at', null)
             // where('type', 5)
             //->orderBy('created_at')
             ->orderBy('id')
@@ -52,12 +55,14 @@ class HomeController extends Controller
 
         // Lấy dữ liệu - Vendor đỗ vào thanh Vendor footer, có trạng thái là hiển thị
         $vendorFooter = Vendor::where(['is_active' => 1])
+            ->where('deleted_at', null)
             // where('type', 5)
             //->orderBy('created_at')
             ->orderBy('id')
             ->get();
 
         $articles = Articles::where(['is_active' => 1])
+            ->where('deleted_at', null)
             // where('type', 5)
             //->orderBy('created_at')
             ->orderBy('id')
@@ -77,7 +82,7 @@ class HomeController extends Controller
     public function index()
     {
         // khu vuc show sp cua Top Featured Products
-        $hotProduct = Product::where('is_hot', 1)->where('is_active', 1)->limit(2)->orderBy('id', 'desc')->get();
+        $hotProduct = Product::where('is_hot', 1)->where('is_active', 1)->where('deleted_at', null)->limit(2)->orderBy('id', 'desc')->get();
         // $brandsFooter = Brand::where('is_active', 1)->get();
 
         $list = []; // chứa danh sách sản phẩm  theo danh mục
@@ -286,7 +291,7 @@ class HomeController extends Controller
         // THuong hieu
         $branchs = Brand::all();
 
-        $category = Category::where('slug', $slug)->where('is_active', 1)->first();
+        $category = Category::where('slug', $slug)->where('is_active', 1)->where('deleted_at', null)->first();
 
         if ($category == null) {
             return view('frontend.404');
@@ -307,8 +312,10 @@ class HomeController extends Controller
         }
 
         $query = DB::table('products')->select('*')
-            ->whereIn('category_id', $ids)
-            ->where('is_active', '=', 1);
+            ->where('is_active', 1)
+            ->where('deleted_at', null)
+            ->whereIn('category_id', $ids);
+
 
         // Lọc theo thương hiệu
         if (!empty($branch_ids)) {

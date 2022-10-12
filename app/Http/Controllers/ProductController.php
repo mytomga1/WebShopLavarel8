@@ -63,7 +63,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
+        $category = Category::where('type', 1)->get();
         $product = Vendor::all();
         $brand = Brand::all();
 
@@ -191,7 +191,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $category = Category::all()->toArray();
+        $category = Category::where('type', 1)->get()->toArray();
         $vendor = Vendor::all();
         $brand = Brand::all();
         $Ven_Bra = [
